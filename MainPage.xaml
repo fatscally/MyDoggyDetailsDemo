@@ -25,7 +25,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
                     <Label Text="Date of Birth" />
-                    <DatePicker x:Name="DogDob" Date="2020-11-05" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
+                    <DatePicker x:Name="DogDob" Date="2020-10-03" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
             </StackLayout>
             </StackLayout>
             
@@ -35,7 +35,14 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="28"
-                HorizontalOptions="Center" />
+                HorizontalOptions="StartAndExpand" />
+            <Label
+                x:Name="lblDogsAgeInDays"
+                Text="Dog age..."
+                SemanticProperties.Hint="Counts the number of times you click"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="12"
+                HorizontalOptions="Start" />
 
 
 

@@ -14,7 +14,7 @@ namespace MyDoggyDetails.Utilities
         }
 
         private TimeSpan dogsAge;
-        private int TotalDogDays;
+        //private int TotalDogDays;
         private int remainderDays; //the remainder after subtracting years, months etc.
 
         private DateTime dob;
@@ -25,7 +25,7 @@ namespace MyDoggyDetails.Utilities
             {
                 dob = value;
                 dogsAge = DateTime.Today.Subtract(dob);
-                TotalDogDays = dogsAge.Days;
+                totalDogDays = dogsAge.Days;
 
                 CalculateAge();
                 //CalcMonths();
@@ -37,8 +37,8 @@ namespace MyDoggyDetails.Utilities
         /// <returns>Returns and int for every full year</returns>
         private void CalculateAge()
         {
-            years = TotalDogDays / 365;
-            remainderDays = TotalDogDays - (years * 365);   //remove the years
+            years = totalDogDays / 365;
+            remainderDays = totalDogDays - (years * 365);   //remove the years
 
             months = (int)(remainderDays / (365.2425 / 12));
 
@@ -52,30 +52,36 @@ namespace MyDoggyDetails.Utilities
 
         }
 
-        private void CalcMonths()
+        //private void CalcMonths()
+        //{
+        //    //Remove the days for every year
+        //    //remainder = TotalDogDays - (Years * 365);
+        //    //months = (int)(remainder / (365.2425 / 12));
+        //}
+
+
+        //private void CalcWeeks()
+        //{
+        //    //Remove the days for every year
+        //    int remainder = TotalDogDays - (Years * 365);
+
+        //    days = remainder - (months * 30);
+        //}
+        //private void CalcDays()
+        //{
+        //    //Remove the days for every year
+        //    int remainder = TotalDogDays - (Years * 365);
+
+        //    days = remainder - (months * 30);
+        //}
+
+
+        private int totalDogDays;
+
+        public int TotalDogDays
         {
-            //Remove the days for every year
-            //remainder = TotalDogDays - (Years * 365);
-            //months = (int)(remainder / (365.2425 / 12));
+            get { return totalDogDays; }
         }
-
-
-        private void CalcWeeks()
-        {
-            //Remove the days for every year
-            int remainder = TotalDogDays - (Years * 365);
-
-            days = remainder - (months * 30);
-        }
-        private void CalcDays()
-        {
-            //Remove the days for every year
-            int remainder = TotalDogDays - (Years * 365);
-
-            days = remainder - (months * 30);
-        }
-
-
 
 
         private int years;
@@ -116,13 +122,18 @@ namespace MyDoggyDetails.Utilities
 
         public string FormattedAge()
         {
-            StringBuilder sb = new StringBuilder(64);
+            StringBuilder sb = new StringBuilder(32);
 
             if (years > 0) {
                 sb.Append(years.ToString());
                 sb.Append(" year, ");
                 if (years > 1)
-                    sb.Replace(", ","s, ");
+                    sb.Replace("year, ", "years, ");
+            }
+
+            if (days == 0)
+            {
+                sb.Replace(", ", " and ", sb.Length - 2, 2);
             }
 
             if (months > 0)
@@ -130,7 +141,12 @@ namespace MyDoggyDetails.Utilities
                 sb.Append(months.ToString());
                 sb.Append(" month, ");
                 if (months > 1)
-                    sb.Replace(", ", "s, ");
+                    sb.Replace("month, ", "months, ");
+            }
+
+            if (days == 0)
+            {
+                sb.Replace(", ", " and ", sb.Length-2,2);
             }
 
             if (weeks > 0) 
@@ -138,7 +154,7 @@ namespace MyDoggyDetails.Utilities
                 sb.Append(weeks.ToString());
                 sb.Append(" week");
                 if (weeks > 1)
-                    sb.Append("s");
+                    sb.Replace("week", "weeks");
             }
 
             if (days > 0)
@@ -148,10 +164,13 @@ namespace MyDoggyDetails.Utilities
 
                 sb.Append(" and ");
                 sb.Append( days.ToString());
-                sb.Append(" day");
+                sb.Append(" day ");
                 if (days > 1)
-                    sb.Append("s");
-                sb.Append(" "); 
+                    sb.Replace("day ", "days "); 
+            } 
+            else
+            {
+                sb.Append(" ");
             }
 
             sb.Append("old");

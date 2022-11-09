@@ -18,6 +18,7 @@ public partial class MainPage : ContentPage
         AgeCalculator dogCalc = new(DogDob.Date);
 
         lblDogsAge.Text = dogCalc.FormattedAge();
+        lblDogsAgeInDays.Text =  "(" + dogCalc.TotalDogDays.ToString() + " days)";
 
     }
 
