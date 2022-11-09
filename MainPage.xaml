@@ -25,7 +25,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
                     <Label Text="Date of Birth" />
-                    <DatePicker x:Name="DogDob" Date="2022-06-18" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
+                    <DatePicker x:Name="DogDob" Date="2020-11-05" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
             </StackLayout>
             </StackLayout>
             
