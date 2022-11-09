@@ -87,6 +87,7 @@ namespace MyDoggyDetails.Utilities
         private int years;
         public int Years
         {
+            //Note: a year has 365 days.  No leap years.
             get
             {
                 return years;
@@ -96,6 +97,7 @@ namespace MyDoggyDetails.Utilities
         private int months;
         public int Months
         {
+            //Note: A month has 30 days, never 28/29/31
             get
             {
                 return months;
@@ -131,7 +133,7 @@ namespace MyDoggyDetails.Utilities
                     sb.Replace("year, ", "years, ");
             }
 
-            if (days == 0)
+            if (sb.ToString().EndsWith(", ") && days == 0)  //if there are no days we need to remove the comma
             {
                 sb.Replace(", ", " and ", sb.Length - 2, 2);
             }
@@ -144,7 +146,7 @@ namespace MyDoggyDetails.Utilities
                     sb.Replace("month, ", "months, ");
             }
 
-            if (days == 0)
+            if (sb.ToString().EndsWith(", ") && days == 0)  //if there are no days we need to remove the  trailing comma
             {
                 sb.Replace(", ", " and ", sb.Length-2,2);
             }
@@ -161,8 +163,8 @@ namespace MyDoggyDetails.Utilities
             {
                 if(sb.ToString().EndsWith(", "))
                     sb.Replace(", ","",sb.Length-2,2);
-
-                sb.Append(" and ");
+                if(years>0 || months>0 || weeks>0)
+                    sb.Append(" and ");
                 sb.Append( days.ToString());
                 sb.Append(" day ");
                 if (days > 1)
