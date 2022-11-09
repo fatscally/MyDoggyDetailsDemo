@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 
-namespace MyDogsAge;
+namespace MyDoggyDetails;
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

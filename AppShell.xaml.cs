@@ -1,4 +1,4 @@
-﻿namespace MyDogsAge;
+﻿namespace MyDoggyDetails;
 
 public partial class AppShell : Shell
 {

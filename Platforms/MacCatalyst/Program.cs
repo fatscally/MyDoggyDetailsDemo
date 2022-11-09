@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace MyDogsAge;
+namespace MyDoggyDetails;
 
 public class Program
 {

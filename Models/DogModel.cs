@@ -4,10 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyDogsAge.Models
+namespace MyDoggyDetails.Models
 {
-    internal class DogDetails
+    internal enum Genders
     {
+        Male,
+        Female
+    }
+
+    internal enum Breeds
+    {
+        Schnauzer,
+        Greyhound,
+        JackRussel
+    }
+
+    internal class DogModel
+    {
+
+        public Breeds Breed { get; set; }
+
         /// <summary>
         /// Name given to the dog
         /// </summary>
@@ -20,6 +36,7 @@ namespace MyDogsAge.Models
         public string ChipId { get; set; }
 
 
+        public Genders Gender{ get; set; }
 
     }
 }

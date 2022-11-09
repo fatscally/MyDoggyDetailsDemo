@@ -1,8 +1,7 @@
-﻿namespace MyDogsAge;
+﻿namespace MyDoggyDetails;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 
 	public MainPage()
 	{
@@ -14,15 +13,19 @@ public partial class MainPage : ContentPage
 	private void GetDogsAge()
 	{
 
-        var dogsAge = DateTime.Today.Subtract(DogDob.Date);
+        TimeSpan dogsAge = DateTime.Today.Subtract(DogDob.Date);
 
+        int dogDays = dogsAge.Days;
+        int dogYears = dogDays / 365;
 		double dogMonths = (dogsAge.Days / (365.2425 / 12));
-		double dogWeeks = (dogsAge.Days / 7);
+		int dogWeeks = (dogsAge.Days / 7);
+        int dogWeekDays = dogDays - (dogWeeks*7); 
 
-        lblDogsAge.Text = txtDogName.Text + " is; " + Environment.NewLine
-            + dogMonths.ToString("0.0") + " months old"  + Environment.NewLine
-            + dogWeeks.ToString("0.0") + " weeks old" + Environment.NewLine
-            + dogsAge.TotalDays.ToString() + " days old," + Environment.NewLine;
+        lblDogsAge.Text = txtDogName.Text + " is " + Environment.NewLine
+            + dogYears.ToString() + " years" + Environment.NewLine
+            + dogMonths.ToString() + " months old"  + Environment.NewLine
+            + dogWeeks.ToString() + " weeks and " + dogWeekDays.ToString() + " days old" + Environment.NewLine
+            + dogsAge.TotalDays.ToString() + " days old" + Environment.NewLine;
 
     }
 
@@ -30,5 +33,20 @@ public partial class MainPage : ContentPage
 	{
 		GetDogsAge();
     }
+
+    private void DogButton_Clicked(object sender, EventArgs e)
+    {
+		GetDogsAge();
+    }
+
+    private void DogDob_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        GetDogsAge();
+    }
+
+
+
+
+
 }
 
