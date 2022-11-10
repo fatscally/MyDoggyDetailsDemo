@@ -13,7 +13,7 @@ namespace MyDoggyDetails.Utilities
 
         }
 
-        private TimeSpan dogsAge;
+        private TimeSpan tsDogsAge;
         //private int TotalDogDays;
         private int remainderDays; //the remainder after subtracting years, months etc.
 
@@ -24,11 +24,10 @@ namespace MyDoggyDetails.Utilities
             set
             {
                 dob = value;
-                dogsAge = DateTime.Today.Subtract(dob);
-                totalDogDays = dogsAge.Days;
+                tsDogsAge = DateTime.Today.Subtract(dob);
+                totalDogDays = tsDogsAge.Days;
 
                 CalculateAge();
-                //CalcMonths();
 
             }
         }
@@ -42,7 +41,7 @@ namespace MyDoggyDetails.Utilities
 
             months = (int)(remainderDays / (365.2425 / 12));
 
-            remainderDays = remainderDays - (months * 30);  //remove the months
+            remainderDays = (int)(remainderDays - (months * 30.25));  //remove the months
 
             weeks = remainderDays / 7;
             remainderDays= remainderDays - (weeks * 7);
@@ -77,7 +76,9 @@ namespace MyDoggyDetails.Utilities
 
 
         private int totalDogDays;
-
+        /// <summary>
+        /// This is the number of days from dob to today converted from the timespan tsDogsAge.
+        /// </summary>
         public int TotalDogDays
         {
             get { return totalDogDays; }
@@ -122,6 +123,11 @@ namespace MyDoggyDetails.Utilities
             }
         }
 
+
+        /// <summary>
+        /// This takes the age and tries to format it into readable English text.
+        /// </summary>
+        /// <returns>A string like "1 year, 2 months and 4 days old."</returns>
         public string FormattedAge()
         {
             StringBuilder sb = new StringBuilder(32);

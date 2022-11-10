@@ -84,9 +84,21 @@
 		  <PackagePath>\</PackagePath>
 		</MauiIcon>
 		<MauiIcon Include="Resources\AppIcon\appiconxx.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiImage Include="Resources\Images\dog_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\species_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\vet_icon_128.png" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiSplashScreen>
+		<MauiSplashScreen Include="Resources\Splash\splash.psd">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiSplashScreen>
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Raw\Images\*" />
@@ -101,15 +113,50 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon.png" />
+	  <None Remove="Resources\Images\dog_icon_128.png" />
+	  <None Remove="Resources\Images\species_icon_128.png" />
+	  <None Remove="Resources\Images\vet_icon_128.png" />
+	  <None Remove="Resources\Splash\splash.png" />
+	  <None Remove="Resources\Splash\splash.psd" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0-preview1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Components\Breeds\Controllers\" />
+	  <Folder Include="Components\Breeds\Data\" />
+	  <Folder Include="Components\Breeds\ViewModels\" />
+	  <Folder Include="Components\Vets\Controllers\" />
+	  <Folder Include="Components\Vets\Data\" />
+	  <Folder Include="Components\Vets\Models\" />
+	  <Folder Include="Components\Vets\ViewModels\" />
 	  <Folder Include="CustomControls\" />
+	  <Folder Include="Database\" />
+	  <Folder Include="Components\Doggies\Data\" />
+	  <Folder Include="Components\Doggies\Controllers\" />
+	  <Folder Include="Models\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Components\Doggies\Pages\DoggiesPage.xaml.cs">
+	    <DependentUpon>DoggiesPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Components\Breeds\Pages\BreedsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Doggies\Pages\DoggiesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Vets\Pages\VetsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -4,51 +4,6 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MyDoggyDetails.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
 
-            <ListView ItemsSource="{Binding AllDogs}" >
-
-            </ListView>
-
-            <ImageButton
-                Source="schnauzer.png"
-                Clicked="DogButton_Clicked"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="100"
-                HorizontalOptions="Center" VerticalOptions="Start" />
-
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Dog's name:" />
-                    <Entry x:Name="txtDogName" Placeholder="Dog's name?" Text="Nala" FontSize="Large"  WidthRequest="100"/>
-                </StackLayout>
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Date of Birth" />
-                    <DatePicker x:Name="DogDob" Date="2022-11-08" FontSize="Large" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
-                </StackLayout>
-            </StackLayout>
-
-            <StackLayout Orientation="Vertical">
-                <Label
-                x:Name="lblDogsAge"
-                Text="Dog age..."
-                SemanticProperties.Hint="Counts the number of times you click"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="Large"
-                HorizontalOptions="CenterAndExpand" />
-                <Label
-                x:Name="lblDogsAgeInDays"
-                Text="Dog age..."
-                SemanticProperties.Hint="Counts the number of times you click"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="Small"
-                HorizontalOptions="End" />
-            </StackLayout>
-
-
-
-        </VerticalStackLayout>
-    </ScrollView>
 
 </ContentPage>

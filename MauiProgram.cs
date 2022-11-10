@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using MyDoggyDetails.Pages;
+using MyDoggyDetails.ViewModels;
 
 namespace MyDoggyDetails;
 public static class MauiProgram
@@ -12,6 +14,10 @@ public static class MauiProgram
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
         }).UseMauiCommunityToolkit();
+
+        builder.Services.AddSingleton<DoggiesPage>();
+        builder.Services.AddSingleton<DoggiesViewmodel>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

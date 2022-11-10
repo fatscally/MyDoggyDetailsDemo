@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDoggyDetails.Pages.DoggiesPage"
+             xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
+             Title="My Doggies">
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
+
+            <ListView ItemsSource="{Binding AllDogs}" >
+
+            </ListView>
+
+            <ImageButton
+                Source="schnauzer.png"
+                Clicked="DogButton_Clicked"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="100"
+                HorizontalOptions="Center" VerticalOptions="Start" />
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Dog's name:" />
+                    <Entry x:Name="txtDogName" Placeholder="Dog's name?" Text="{Binding SelectedDoggy.GivenName}" FontSize="Large"  WidthRequest="100"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Date of Birth" />
+                    <DatePicker x:Name="DogDob" Date="{Binding SelectedDoggy.DateOfBirth, Mode=TwoWay}" FontSize="Large" HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Label Text="approximately" SemanticProperties.Hint="Counts the number of times you click"
+                SemanticProperties.HeadingLevel="Level1" FontSize="Micro" HorizontalOptions="Start" />
+
+            <StackLayout Orientation="Vertical">
+                <Label
+                x:Name="lblDogsAge"
+                Text="Dog age..."
+                SemanticProperties.Hint="Counts the number of times you click"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand" />
+                <Label
+                x:Name="lblDogsAgeInDays"
+                Text="Dog age..."
+                SemanticProperties.Hint="Counts the number of times you click"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="Small"
+                HorizontalOptions="End" />
+            </StackLayout>
+
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

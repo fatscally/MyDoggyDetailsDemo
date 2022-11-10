@@ -3,12 +3,27 @@
     x:Class="MyDoggyDetails.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MyDoggyDetails"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:local="clr-namespace:MyDoggyDetails.Pages"
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+    
+        <ShellContent
+            Title="My Doggies"
+            Icon="dog_icon_128.png"
+            ContentTemplate="{DataTemplate local:DoggiesPage}"
+            Route="DoggiesPage" />
+        <ShellContent
+            Title="Breeds"
+            Icon="species_icon_128.png"
+            ContentTemplate="{DataTemplate local:BreedsPage}"
+            Route="BreedsPage" />
+        <ShellContent
+            Title="Vets"
+            Icon="vet_icon_128.png"
+            ContentTemplate="{DataTemplate local:VetsPage}"
+            Route="VetsPage" />
+
+    </FlyoutItem>
 
 </Shell>
