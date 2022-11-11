@@ -130,6 +130,9 @@ namespace MyDoggyDetails.Utilities
         /// <returns>A string like "1 year, 2 months and 4 days old."</returns>
         public string FormattedAge()
         {
+
+            if(totalDogDays <= 0) { return string.Empty; }
+
             StringBuilder sb = new StringBuilder(32);
 
             if (years > 0) {

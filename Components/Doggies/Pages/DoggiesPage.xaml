@@ -8,9 +8,18 @@
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
 
-            <ListView ItemsSource="{Binding AllDogs}" >
-
-            </ListView>
+            <CollectionView ItemsSource="{Binding Doggies}" SelectedItem="{Binding SelectedDoggy}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding GivenName}" />
+                            <Label Text="{Binding DateOfBirth}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+         
 
             <ImageButton
                 Source="schnauzer.png"

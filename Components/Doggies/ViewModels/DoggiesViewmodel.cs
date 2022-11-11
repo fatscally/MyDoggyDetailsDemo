@@ -1,6 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
+using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -9,25 +11,26 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public DoggiesViewmodel()
     {
-        SelectedDoggy = new() { GivenName = "Charlie", 
-            DateOfBirth = new DateTime(2020, 08, 07) };
-
+        DoggyRepository repository= new DoggyRepository();
+        Doggies = repository.List();
     }
 
-    //private ObservableCollection<DogModel> doggies;
+    private ObservableCollection<DoggyTableModel> doggies;
 
-    //public ObservableCollection<DogModel> Doggies
-    //{
-    //    get { return doggies; }
-    //    set
-    //    {
-    //        doggies = value;
-    //        SetProperty(ref doggies, value);
-    //    }
-    //}
+    public ObservableCollection<DoggyTableModel> Doggies
+    {
+        get { return doggies; }
+        set
+        {
+            if (value is null) return;
+
+            doggies = value;
+            SetProperty(ref doggies, value);
+        }
+    }
 
     [ObservableProperty]
-    private DogModel selectedDoggy;
+    private Doggy selectedDoggy;
 
 
 
