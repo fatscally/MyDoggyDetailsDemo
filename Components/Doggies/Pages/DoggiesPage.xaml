@@ -4,22 +4,55 @@
              x:Class="MyDoggyDetails.Pages.DoggiesPage"
              xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
              Title="My Doggies">
-    
+
+    <ContentPage.BindingContext>
+        <viewmodels:DoggiesViewmodel/>
+    </ContentPage.BindingContext>
+
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Center">
 
-            <CollectionView ItemsSource="{Binding Doggies}" SelectedItem="{Binding SelectedDoggy}" >
-                <CollectionView.ItemTemplate>
+            <!--<ListView  ItemsSource="{Binding Doggies}" SelectionMode="Single" 
+                       SelectedItem="{Binding SelectedDoggy}" >
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding GivenName}" />
-                            <Label Text="{Binding DateOfBirth}" />
-                        </StackLayout>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.RowSpan="2"
+                           Source="{Binding ImageUrl}"
+                           Aspect="AspectFill"
+                           HeightRequest="60"
+                           WidthRequest="60" />
+                                <Label Grid.Column="1"
+                           Text="{Binding GivenName}"
+                           FontAttributes="Bold" />
+                                <Label Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{Binding DateOfBirth}"
+                           FontAttributes="Italic"
+                           VerticalOptions="End" />
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-                
-            </CollectionView>
-         
+                </ListView.ItemTemplate>
+
+            </ListView>-->
+
+            <Picker x:Name="picker"
+                    Title="Choose a doggy" ItemsSource="{Binding Doggies}" 
+                    SelectedItem="{Binding SelectedDoggy}"
+                    ItemDisplayBinding="{Binding GivenName}">
+               
+            </Picker>
+
 
             <ImageButton
                 Source="schnauzer.png"
@@ -46,14 +79,15 @@
             <StackLayout Orientation="Vertical">
                 <Label
                 x:Name="lblDogsAge"
-                Text="Dog age..."
+                Text="{Binding FormattedAge}"
+                    
                 SemanticProperties.Hint="Counts the number of times you click"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="Large"
                 HorizontalOptions="CenterAndExpand" />
                 <Label
                 x:Name="lblDogsAgeInDays"
-                Text="Dog age..."
+                Text="{Binding TotalDogDays}"
                 SemanticProperties.Hint="Counts the number of times you click"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="Small"

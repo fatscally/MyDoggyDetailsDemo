@@ -1,5 +1,4 @@
-﻿using MyDoggyDetails.Enums;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SQLite;
 
 namespace MyDoggyDetails.Models;
@@ -11,23 +10,31 @@ public partial class DoggyTableModel : BaseModel
 
     //[ObservableProperty]
     //public string colour;
+    
+    
 
     /// <summary>
     /// Name given to the dog
     /// </summary>
     [ObservableProperty]
-    public string givenName;
+    private string givenName;
     /// <summary>
     /// The date of birth recorded
     /// </summary>
     [ObservableProperty]
-    public string dateOfBirth;
+    private DateTime dateOfBirth;
 
     //[ObservableProperty] 
     //public string chipNumber;
 
     //[ObservableProperty] 
     //public Genders sex;
+
+    //[ObservableProperty]
+    //private string formattedAge;
+    //[ObservableProperty]
+    //private string totalDogDays;
+
 
 
 }

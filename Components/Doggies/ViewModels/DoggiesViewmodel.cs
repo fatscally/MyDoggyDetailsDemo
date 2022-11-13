@@ -1,8 +1,11 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
+using MyDoggyDetails.Utilities;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -11,9 +14,26 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public DoggiesViewmodel()
     {
+        MoveDbToProperPlace();
+
         DoggyRepository repository= new DoggyRepository();
-        Doggies = repository.List();
+
+         Doggies = repository.SelectAll();
     }
+
+    private void MoveDbToProperPlace()
+    {
+        var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
+        using (Stream stream = assembly.GetManifestResourceStream("MyDoggyDetails.Database.doggy.db3"))
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                File.WriteAllBytes(DoggyRepository.dbPath, memoryStream.ToArray());
+            }
+        }
+    }
+
 
     private ObservableCollection<DoggyTableModel> doggies;
 
@@ -30,8 +50,28 @@ public partial class DoggiesViewmodel : BaseViewModel
     }
 
     [ObservableProperty]
-    private Doggy selectedDoggy;
+    [NotifyPropertyChangedFor(nameof(FormattedAge))]
+    [NotifyPropertyChangedFor(nameof(TotalDogDays))]
+    private DoggyTableModel selectedDoggy;
 
+    
+    public string FormattedAge
+    {
+        get
+            {
+            if (selectedDoggy == null) return string.Empty;
+                return new AgeCalculator(selectedDoggy.DateOfBirth).FormattedAge();
+            }
+    }
+
+    public string TotalDogDays
+    {
+        get
+        {
+            if (selectedDoggy == null) return string.Empty;
+            return new AgeCalculator(selectedDoggy.DateOfBirth).TotalDogDays.ToString();
+        }
+    }
 
 
 

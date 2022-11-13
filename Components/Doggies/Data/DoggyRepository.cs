@@ -10,15 +10,18 @@ namespace MyDoggyDetails.Data
     {
         private readonly SQLiteConnection conn;
         public static string dbPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Constants.DatabaseFileName);
-        public DoggyRepository() 
+        public DoggyRepository()
         {
             conn = new SQLiteConnection(dbPath);
             //conn.CreateTable<DoggyTableModel>();
         }
 
-        public ObservableCollection<DoggyTableModel> List()
+        public ObservableCollection<DoggyTableModel> SelectAll()
         {
-            return conn.Table<DoggyTableModel>().ToObservableCollection();  
+            var results = conn.Table<DoggyTableModel>().ToObservableCollection();
+            //var results = conn.Query<DoggyTableModel>("select * from MyDoggies").ToObservableCollection();
+
+            return results;
         }
 
     }

@@ -4,10 +4,10 @@ using System.Data;
 
 namespace MyDoggyDetails.Data
 {
-    internal class DoggyData
+    public class DoggyData
     {
         public long Save(DoggyTableModel model)
-        {
+        { 
             if (model.Id <= 0)
                 return Insert(model);
             else
@@ -17,16 +17,16 @@ namespace MyDoggyDetails.Data
         private long Update(DoggyTableModel model)
         {
 
-            string sql = "Update aircraft Set guid = @Guid, name = @Name, logo = @Logo, phone = @Phone, email = @Email WHERE id = @Id";
+            string sql = "Update MyDoggies Set GivenName = @GivenName, DateOfBirth = @DateOfBirth WHERE id = @Id";
 
             return Execute(sql, model);
         }
 
         private long Insert(DoggyTableModel model)
         {
-            string sql = "INSERT INTO aircraft (guid, name, logo, phone, email) Values (@Guid, @Name, @Logo, @Phone, @Email)";
+            string sql = "INSERT INTO MyDoggies (GivenName, DateOfBirth) Values (@GivenName, @DateOfBirth)";
 
-            using (IDbConnection db = new Connection().LocalConnection())
+            using (var db = new Connection().LocalConnection())
             {
                 var affectedRows = db.Execute(sql, model);
 
@@ -36,7 +36,7 @@ namespace MyDoggyDetails.Data
 
         private long Execute(string sql, DoggyTableModel model)
         {
-            using (IDbConnection db = new Connection().LocalConnection())
+            using (var db = new Connection().LocalConnection())
             {
                 var affectedRows = db.Execute(sql, model);
 
@@ -47,14 +47,14 @@ namespace MyDoggyDetails.Data
 
 
 
-        public IEnumerable<DoggyTableModel> SelectAllAircraft()
+        public IEnumerable<DoggyTableModel> SelectAll()
         {
             try
             {
                 IEnumerable<DoggyTableModel> recordset;
-                using (IDbConnection db = new Connection().LocalConnection())
+                using (var db = new Connection().LocalConnection())
                 {
-                    recordset = db.Query<DogModel>("select * from MyDoggies");
+                    recordset = db.Query<DoggyTableModel>("select * from MyDoggies");
                 }
 
                 return recordset;

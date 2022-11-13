@@ -112,10 +112,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Components\Doggies\Data\DoggyData.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Database\doggy.db3" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\dog_icon_128.png" />
