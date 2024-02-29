@@ -1,6 +1,4 @@
-﻿using Dapper;
-using MyDoggyDetails.Models;
-using System.Data;
+﻿using MyDoggyDetails.Models;
 
 namespace MyDoggyDetails.Data
 {

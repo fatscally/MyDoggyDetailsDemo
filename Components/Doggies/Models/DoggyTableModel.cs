@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyDoggyDetails.Enums;
 using SQLite;
 
 namespace MyDoggyDetails.Models;
@@ -6,12 +7,12 @@ namespace MyDoggyDetails.Models;
 [Table("MyDoggies")]
 public partial class DoggyTableModel : BaseModel
 {
-    //public BreedModel Breed { get; set; }
+    public BreedModel Breed { get; set; }
 
-    //[ObservableProperty]
-    //public string colour;
-    
-    
+    [ObservableProperty]
+    public string colour;
+
+
 
     /// <summary>
     /// Name given to the dog
@@ -22,18 +23,20 @@ public partial class DoggyTableModel : BaseModel
     /// The date of birth recorded
     /// </summary>
     [ObservableProperty]
-    private DateTime dateOfBirth;
+    private string dateOfBirth;
 
-    //[ObservableProperty] 
-    //public string chipNumber;
+    [ObservableProperty]
+    public string chipNumber;
 
-    //[ObservableProperty] 
-    //public Genders sex;
 
-    //[ObservableProperty]
-    //private string formattedAge;
-    //[ObservableProperty]
-    //private string totalDogDays;
+    //should be Genders enum but sqlite doesn't like the enum
+    [ObservableProperty]
+    public int sex;
+
+    [ObservableProperty]
+    private string formattedAge;
+    [ObservableProperty]
+    private string totalDogDays;
 
 
 

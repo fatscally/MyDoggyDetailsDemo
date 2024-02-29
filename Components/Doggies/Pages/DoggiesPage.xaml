@@ -46,26 +46,22 @@
 
             </ListView>-->
 
-            <Picker x:Name="picker"
-                    Title="Choose a doggy" ItemsSource="{Binding Doggies}" 
-                    SelectedItem="{Binding SelectedDoggy}"
-                    ItemDisplayBinding="{Binding GivenName}">
-               
-            </Picker>
-
-
             <ImageButton
                 Source="schnauzer.png"
                 Clicked="DogButton_Clicked"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="100"
                 HorizontalOptions="Center" VerticalOptions="Start" />
 
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                
                 <StackLayout Orientation="Vertical">
                     <Label Text="Dog's name:" />
-                    <Entry x:Name="txtDogName" Placeholder="Dog's name?" Text="{Binding SelectedDoggy.GivenName}" FontSize="Large"  WidthRequest="100"/>
+                    <Picker x:Name="picker"
+                    Title="Choose a doggy" ItemsSource="{Binding Doggies}" 
+                    SelectedItem="{Binding SelectedDoggy}"
+                    ItemDisplayBinding="{Binding GivenName}"
+                     FontSize="Large" />
                 </StackLayout>
                 <StackLayout Orientation="Vertical">
                     <Label Text="Date of Birth" />
@@ -73,29 +69,18 @@
                 </StackLayout>
             </StackLayout>
 
-            <Label Text="approximately" SemanticProperties.Hint="Counts the number of times you click"
-                SemanticProperties.HeadingLevel="Level1" FontSize="Micro" HorizontalOptions="Start" />
 
             <StackLayout Orientation="Vertical">
-                <Label
-                x:Name="lblDogsAge"
-                Text="{Binding FormattedAge}"
-                    
-                SemanticProperties.Hint="Counts the number of times you click"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="Large"
-                HorizontalOptions="CenterAndExpand" />
-                <Label
-                x:Name="lblDogsAgeInDays"
-                Text="{Binding TotalDogDays}"
-                SemanticProperties.Hint="Counts the number of times you click"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="Small"
-                HorizontalOptions="End" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="{Binding TotalDogDays}" FontSize="Small" HorizontalOptions="End" />
+                    <Label Text=" days" FontSize="Small" HorizontalOptions="End" />
+                </StackLayout>
+                
+                <Label Text="{Binding FormattedAge}" FontSize="Medium" HorizontalOptions="CenterAndExpand" />
+                <Label Text="approximately" FontSize="Micro" HorizontalOptions="End" />
             </StackLayout>
 
-
-
         </VerticalStackLayout>
+        
     </ScrollView>
 </ContentPage>

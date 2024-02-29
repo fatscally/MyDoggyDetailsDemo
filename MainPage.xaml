@@ -4,6 +4,10 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MyDoggyDetails.MainPage">
 
-
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Ray was here"></Label>
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>
