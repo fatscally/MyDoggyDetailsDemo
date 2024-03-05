@@ -1,36 +1,36 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
+using MyDoggyDetails.Pages;
 using MyDoggyDetails.Utilities;
 using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
+
+[QueryProperty("DogId", "DogId")]
+
+
+
 public partial class DoggiesViewmodel : BaseViewModel
 {
 
+    [ObservableProperty]
+    int dogId;
+    partial void OnDogIdChanged(int value)
+    {
+        SelectedDoggy = Doggies.FirstOrDefault(x => x.Id == value);
+    }
+
     public DoggiesViewmodel()
     {
-        //MoveDbToProperPlace();
 
         DoggyRepository repository= new DoggyRepository();
 
          Doggies = repository.SelectAll();
     }
-
-    //private void MoveDbToProperPlace()
-    //{
-    //    var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
-    //    using (Stream stream = assembly.GetManifestResourceStream("MyDoggyDetails.Database.doggy.db3"))
-    //    {
-    //        using (MemoryStream memoryStream = new MemoryStream())
-    //        {
-    //            stream.CopyTo(memoryStream);
-    //            File.WriteAllBytes(DoggyRepository.dbPath, memoryStream.ToArray());
-    //        }
-    //    }
-    //}
 
 
     private ObservableCollection<DoggyTableModel> doggies;
@@ -71,6 +71,10 @@ public partial class DoggiesViewmodel : BaseViewModel
         }
     }
 
-
+    [RelayCommand]
+    async Task GoToDogDetailsPage(int workerId)
+    {
+        await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={DogId}");
+    }
 
 }

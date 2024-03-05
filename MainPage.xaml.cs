@@ -1,7 +1,4 @@
-﻿using MyDoggyDetails.Data;
-using System.Reflection;
-
-namespace MyDoggyDetails;
+﻿namespace MyDoggyDetails;
 
 public partial class MainPage : ContentPage
 {

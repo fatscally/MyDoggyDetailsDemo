@@ -18,6 +18,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<DoggiesPage>();
         builder.Services.AddSingleton<DoggiesViewmodel>();
 
+        builder.Services.AddTransient<DogDetailsPage>();
+
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

@@ -9,6 +9,9 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 
+        Routing.RegisterRoute(nameof(Pages.DogDetailsPage), typeof(Pages.DogDetailsPage));
+
+
         MoveDbToProperPlace();
 
 
