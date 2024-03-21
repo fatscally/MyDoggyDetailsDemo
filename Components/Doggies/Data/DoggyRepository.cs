@@ -6,22 +6,46 @@ using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.Data
 {
-    public class DoggyRepository
+    public static class DoggyRepository
     {
-        private readonly SQLiteConnection conn;
+        private static readonly SQLiteConnection conn;
         public static string dbPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Constants.DatabaseFileName);
-        public DoggyRepository()
+        static DoggyRepository()
         {
             conn = new SQLiteConnection(dbPath);
-            //conn.CreateTable<DoggyTableModel>();
         }
 
-        public ObservableCollection<DoggyTableModel> SelectAll()
+        public static int Save(DoggyTableModel model)
+        {
+            if (model.Id == 0)
+            {
+                return Insert(model);
+            } else
+            {
+                return Update(model);
+            }
+        }
+
+        public static ObservableCollection<DoggyTableModel> SelectAll()
         {
             var results = conn.Table<DoggyTableModel>().ToObservableCollection();
-            //var results = conn.Query<DoggyTableModel>("select * from MyDoggies").ToObservableCollection();
 
             return results;
+        }
+
+        public static int Insert(DoggyTableModel model)
+        {
+                return conn.Insert(model);
+        }
+
+        public static int Update(DoggyTableModel model)
+        {
+                return conn.Update(model);
+        }   
+
+        public static int Delete(DoggyTableModel model)
+        {
+            return conn.Delete(model);
         }
 
     }

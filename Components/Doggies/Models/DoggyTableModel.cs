@@ -1,13 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MyDoggyDetails.Enums;
 using SQLite;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyDoggyDetails.Models;
 
 [Table("MyDoggies")]
 public partial class DoggyTableModel : BaseModel
 {
-    public BreedModel Breed { get; set; }
+
+    [Key]
+    [ObservableProperty]
+    private int id;
+
+
+    //public BreedModel Breed { get; set; }
 
     [ObservableProperty]
     public string colour;

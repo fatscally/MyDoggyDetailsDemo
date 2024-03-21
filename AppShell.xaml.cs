@@ -17,6 +17,11 @@ public partial class AppShell : Shell
 
     }
 
+
+
+    /// <summary>
+    /// If using the visually built DB (not the scripts)
+    /// </summary>
     private void MoveDbToProperPlace()
     {
 
@@ -35,5 +40,19 @@ public partial class AppShell : Shell
 
     }
 
+    /// <summary>
+    /// Create doggy.db3 from Sql Scripts
+    /// </summary>
+    private void CreateDB()
+    {
+        if (File.Exists(DoggyRepository.dbPath)) return;
+    }
+
+    /// <summary>
+    /// Insert test data into doggy.db3
+    /// </summary>
+    private void InsertMetaDataToDb() 
+    { 
+    }
 
 }

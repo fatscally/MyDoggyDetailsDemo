@@ -1,0 +1,77 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Vets" (
+	"Id"	INTEGER NOT NULL DEFAULT 1000,
+	"Name"	TEXT NOT NULL,
+	"Address1"	TEXT,
+	"Address2"	TEXT,
+	"Address3"	TEXT,
+	"CountryId"	INTEGER,
+	"Phone"	TEXT,
+	"Email"	TEXT,
+	"GpsLocation"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "MyDoggie_Vaccinations" (
+	"DogId"	INTEGER NOT NULL,
+	"VacId"	INTEGER NOT NULL,
+	"DateOfVac"	TEXT NOT NULL,
+	"VacLot"	TEXT,
+	"VacExpiry"	TEXT,
+	"VetId"	INTEGER,
+	"CloudId"	TEXT
+);
+CREATE TABLE IF NOT EXISTS "MyDoggies" (
+	"Id"	INTEGER NOT NULL UNIQUE,
+	"GivenName"	TEXT NOT NULL,
+	"DateOfBirth"	TEXT,
+	"Sex"	INTEGER,
+	"Colour"	TEXT,
+	"BreedId"	INTEGER,
+	"Mix1BreedId"	INTEGER,
+	"Mix2BreedId"	INTEGER,
+	"ChipNumber"	TEXT,
+	"ChipInsertedDate"	TEXT,
+	"ChipImplanterName"	TEXT,
+	"ChipImplanterId"	TEXT,
+	"NextVacDate"	TEXT,
+	"CloudId"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT),
+	FOREIGN KEY("BreedId") REFERENCES "Breeds"("Id")
+);
+CREATE TABLE IF NOT EXISTS "Photos" (
+	"Id"	INTEGER NOT NULL UNIQUE,
+	"DoggieId"	INTEGER NOT NULL,
+	"Photo"	BLOB NOT NULL,
+	"CloudId"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Breeds" (
+	"Id"	INTEGER NOT NULL DEFAULT 100 UNIQUE,
+	"Name"	TEXT NOT NULL,
+	"Size"	INTEGER,
+	"Description"	TEXT,
+	"imgPup"	BLOB,
+	"imgAdult"	BLOB,
+	"CloudId"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Documents" (
+	"Id"	INTEGER NOT NULL DEFAULT 1000 UNIQUE,
+	"Name"	TEXT NOT NULL,
+	"Description"	TEXT,
+	"Document"	BLOB,
+	"CloudId"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Vaccinations" (
+	"Id"	INTEGER NOT NULL DEFAULT 100 UNIQUE,
+	"Name"	TEXT NOT NULL,
+	"CloudId"	TEXT,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+CREATE TABLE IF NOT EXISTS "Settings" (
+	"Key"	BLOB,
+	"Value"	BLOB,
+	"CloudId"	TEXT
+);
+COMMIT;

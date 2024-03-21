@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
@@ -26,10 +25,7 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public DoggiesViewmodel()
     {
-
-        DoggyRepository repository= new DoggyRepository();
-
-         Doggies = repository.SelectAll();
+        Doggies = DoggyRepository.SelectAll();
     }
 
 
@@ -74,7 +70,18 @@ public partial class DoggiesViewmodel : BaseViewModel
     [RelayCommand]
     async Task GoToDogDetailsPage(int workerId)
     {
-        await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={DogId}");
+        await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
+    }
+
+    [RelayCommand]
+    public void SaveDogDetails()
+    {
+        DoggyRepository.Save(selectedDoggy);
+    }
+
+    public void Entry_TextChanged()
+    {
+        DoggyRepository.Save(SelectedDoggy);
     }
 
 }

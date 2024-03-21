@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDoggyDetails.Pages.DogDetailsPage"
+             xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels"
              Title="DogDetailsPage">
 
     <ContentPage.BindingContext>
@@ -10,11 +11,20 @@
     
     
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding GivenName}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            SemanticProperties.HeadingLevel="Level1"
-            />
+        <Label Text="Name:"/>
+        <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" TextChanged="Entry_TextChanged" />
+        <Label Text="ChipNumber:"/>
+        <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Label Text="Breed:"/>
+        <Entry Text="{Binding SelectedDoggy.Breed}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Label Text="Colour:"/>
+        <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Label Text="DateOfBirth:"/>
+        <Entry Text="{Binding SelectedDoggy.DateOfBirth}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Label Text="Gender:"/>
+        <Entry Text="{Binding SelectedDoggy.Sex}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+
+        <Button Text="Save" Command="{Binding SaveDogDetailsCommand}"/>
+
     </VerticalStackLayout>
 </ContentPage>
