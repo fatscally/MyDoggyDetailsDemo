@@ -16,7 +16,7 @@
         <Label Text="ChipNumber:"/>
         <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" TextChanged="Entry_TextChanged"/>
         <Label Text="Breed:"/>
-        <Entry Text="{Binding SelectedDoggy.Breed}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.}" FontSize="Large" TextChanged="Entry_TextChanged"/>
         <Label Text="Colour:"/>
         <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" TextChanged="Entry_TextChanged"/>
         <Label Text="DateOfBirth:"/>

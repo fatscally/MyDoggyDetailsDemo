@@ -1,4 +1,5 @@
 ﻿using MyDoggyDetails.Data;
+using MyDoggyDetails.Models;
 using System.Reflection;
 
 namespace MyDoggyDetails;
@@ -11,9 +12,8 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(Pages.DogDetailsPage), typeof(Pages.DogDetailsPage));
 
-
-        MoveDbToProperPlace();
-
+        CreateDB();
+        //MoveDbToProperPlace();
 
     }
 
@@ -25,8 +25,10 @@ public partial class AppShell : Shell
     private void MoveDbToProperPlace()
     {
 
-
-        if (File.Exists(DoggyRepository.dbPath)) return;
+        //This does not work - it will always return true?!?.
+        //So comment this out on first run to install the database
+        if (File.Exists(DoggyRepository.dbPath))
+            return;
 
         var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
         using (Stream stream = assembly.GetManifestResourceStream("MyDoggyDetails.Database.doggy.db3"))
@@ -45,7 +47,9 @@ public partial class AppShell : Shell
     /// </summary>
     private void CreateDB()
     {
-        if (File.Exists(DoggyRepository.dbPath)) return;
+        //if (File.Exists(DoggyRepository.dbPath)) return;
+        DoggyRepository.CreateDatabase();
+
     }
 
     /// <summary>

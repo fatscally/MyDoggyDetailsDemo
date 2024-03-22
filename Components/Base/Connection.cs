@@ -1,52 +1,27 @@
-﻿using SQLite;
-using System.Data;
+﻿using MyDoggyDetails.Components.Base;
+using SQLite;
 
 namespace MyDoggyDetails.Data;
 
 public class Connection
 {
 
-    string pathToDatabase;
-    string databaseName = "doggy.db3";
-    string db;
+    public static string dbPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Constants.DatabaseFileName);
 
 
     private SQLiteConnection _localConnection;
 
 
-    public Connection()
-    {
-        pathToDatabase = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        databaseName = "doggy.db3";
-
-        db = Path.Combine(pathToDatabase, databaseName);
-    }
 
     public SQLiteConnection LocalConnection()
     {
 
         if (_localConnection == null)
-            _localConnection = new SQLiteConnection("Data Source = " + db);
+            _localConnection = new SQLiteConnection(dbPath);
 
-        try
-        {
-            //if (_localConnection.State != ConnectionState.Open)
-            //{
-            //    _localConnection = new SQLiteConnection("Data Source = " + db);
-            //    _localConnection.Open();
-            //}
+         
+        return _localConnection;
 
-            return _localConnection;
-
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-        finally
-        {
-
-        }
 
     }
 }

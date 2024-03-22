@@ -1,24 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using SQLite;
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyDoggyDetails.Models;
 
-[Table("MyDoggies")]
-public partial class DoggyTableModel : BaseModel
+[SQLite.Table("MyDoggies")]
+[ObservableRecipient]
+public partial class DoggyTableModel : BaseTableModel
 {
 
-    [Key]
+
     [ObservableProperty]
+    [property: PrimaryKey]
+    [property: AutoIncrement]
     private int id;
 
 
-    //public BreedModel Breed { get; set; }
+    [NotMapped]
+    public BreedTableModel Breed { get; set; }
+    
+    [ObservableProperty]
+    private int breedId;
 
     [ObservableProperty]
     public string colour;
-
-
 
     /// <summary>
     /// Name given to the dog

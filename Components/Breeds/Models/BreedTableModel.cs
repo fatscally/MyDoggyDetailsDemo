@@ -1,10 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 
 
 namespace MyDoggyDetails.Models;
 
-public partial class BreedModel : BaseModel
+[Table("Breeds")]
+[ObservableObject]
+public partial class BreedTableModel 
 {
+    [ObservableProperty]
+    [property: PrimaryKey]
+    [property: AutoIncrement]
+    private int id;
+
     [ObservableProperty]
     private string name;
     [ObservableProperty]
@@ -15,4 +23,7 @@ public partial class BreedModel : BaseModel
     private string imgPup;
     [ObservableProperty]
     private string imgAdult;
+
+    //[ObservableProperty]
+    //private List<DoggyTableModel> doggies;
 }

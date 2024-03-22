@@ -1,16 +1,19 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 
 namespace MyDoggyDetails.Models;
 
 [INotifyPropertyChanged]
-public abstract partial class BaseModel
+public abstract partial class BaseTableModel
 {
-    
+    //Certain functionality cannot see this (Id) variable so it 
+    //has to be put in every class until further investigation.
+    //It seems the Dapper ORM is not finding it.
+
     //[ObservableProperty]
-    //[Key]
+    //[property: PrimaryKey]
+    //[property: AutoIncrement]
     //private int id;
 
     [ObservableProperty]

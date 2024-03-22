@@ -25,23 +25,13 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public DoggiesViewmodel()
     {
-        Doggies = DoggyRepository.SelectAll();
+        Doggies = DoggyRepository.SelectAllDoggies();
     }
 
-
+    [ObservableProperty]
     private ObservableCollection<DoggyTableModel> doggies;
 
-    public ObservableCollection<DoggyTableModel> Doggies
-    {
-        get { return doggies; }
-        set
-        {
-            if (value is null) return;
 
-            doggies = value;
-            SetProperty(ref doggies, value);
-        }
-    }
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(FormattedAge))]
@@ -81,7 +71,7 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public void Entry_TextChanged()
     {
-        DoggyRepository.Save(SelectedDoggy);
+        DoggyData.Save(SelectedDoggy);
     }
 
 }
