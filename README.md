@@ -1,6 +1,7 @@
 # My Doggy Details
 ### This is a small fun application written in .Net MAUI left opensource for employers to review.
 #### In practice it is an application to keep track of your pet dog's details.  Future features will allow sharing of details comprehensively, find dog parks and dog friendly locations, find vets, dog-sitters and other relevant services in "your" area.
+_Mar '24, please note that this code is in it's infancy and is very much a work in progress and far from a final product._
 
 Development started casually in March 2024.
 So far, on the client side it uses these components:
@@ -26,6 +27,11 @@ A planned web side application will follow in due course consisting of
 + Angular 
 + C# API and backend. 
 + SQL SERVER 
-
+The web side will demonstrate the following:
++ Ability to efficiently work with Register365 ControlPanel
++ Knowledge of FTP for uploading files.
++ Mapping of files and directories.
++ iis
++ 
 
 My [LinkedIn Profile](https://www.linkedin.com/in/raymond-b-76779866/) 
