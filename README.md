@@ -12,19 +12,19 @@ So far, on the client side it uses these components:
 + Dapper 2.0.1
 + sql-net-pcl 1.8
 
-This code demonstrates numerous competencies:
-Use of Visual Studio 2022 (Version 17.9.4)
-MVVM design pattern.
-Binding.
-Deoendency Injection.
-SQLITE database used as local datastore.
-Normalized database design.
-Entity Framework Code First style creation of Sqlite database using light weight Dapper.
-Release of the application to the Google Play and Apple stores.
+This code demonstrates numerous competencies (now and planned):
++ Use of Visual Studio 2022 (Version 17.9.4)
++ MVVM design pattern.
++ Binding.
++ Deoendency Injection.
++ SQLITE database used as local datastore.
++ Normalized database design.
++ Entity Framework Code First style creation of Sqlite database using light weight Dapper.
++ Release of the application to the Google Play and Apple stores.
 
-A web side application will follow in due course consisting of 
+A planned web side application will follow in due course consisting of 
 + Angular 
-+ C# API 
++ C# API and backend. 
 + SQL SERVER 
 
 
