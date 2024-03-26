@@ -132,8 +132,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Components\Breeds\Controllers\" />
-	  <Folder Include="Components\Breeds\Data\" />
-	  <Folder Include="Components\Breeds\ViewModels\" />
 	  <Folder Include="Components\Vets\Controllers\" />
 	  <Folder Include="Components\Vets\Data\" />
 	  <Folder Include="Components\Vets\Models\" />

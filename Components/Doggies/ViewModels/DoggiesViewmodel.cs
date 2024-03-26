@@ -16,6 +16,8 @@ namespace MyDoggyDetails.ViewModels;
 public partial class DoggiesViewmodel : BaseViewModel
 {
 
+    
+
     [ObservableProperty]
     int dogId;
     partial void OnDogIdChanged(int value)
@@ -25,12 +27,14 @@ public partial class DoggiesViewmodel : BaseViewModel
 
     public DoggiesViewmodel()
     {
-        Doggies = DoggyRepository.SelectAllDoggies();
+        Doggies = new DoggyRepository().SelectAllDoggies();
     }
 
     [ObservableProperty]
     private ObservableCollection<DoggyTableModel> doggies;
 
+
+    public BreedTableModel Breed { get; set; }
 
 
     [ObservableProperty]
@@ -63,10 +67,16 @@ public partial class DoggiesViewmodel : BaseViewModel
         await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
     }
 
+    //[RelayCommand]
+    //private void GoToDogDetailsPage(int workerId)
+    //{
+    //     Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
+    //}
+
     [RelayCommand]
     public void SaveDogDetails()
     {
-        DoggyRepository.Save(selectedDoggy);
+        new DoggyRepository().Save(selectedDoggy);
     }
 
     public void Entry_TextChanged()

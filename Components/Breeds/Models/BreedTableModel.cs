@@ -5,8 +5,7 @@ using SQLite;
 namespace MyDoggyDetails.Models;
 
 [Table("Breeds")]
-[ObservableObject]
-public partial class BreedTableModel 
+public partial class BreedTableModel : BaseTableModel
 {
     [ObservableProperty]
     [property: PrimaryKey]

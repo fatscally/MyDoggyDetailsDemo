@@ -22,33 +22,32 @@ public partial class AppShell : Shell
     /// <summary>
     /// If using the visually built DB (not the scripts)
     /// </summary>
-    private void MoveDbToProperPlace()
-    {
+    //private void MoveDbToProperPlace()
+    //{
 
-        //This does not work - it will always return true?!?.
-        //So comment this out on first run to install the database
-        if (File.Exists(DoggyRepository.dbPath))
-            return;
+    //    //This does not work - it will always return true?!?.
+    //    //So comment this out on first run to install the database
+    //    if (File.Exists(DoggyRepository.dbPath))
+    //        return;
 
-        var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
-        using (Stream stream = assembly.GetManifestResourceStream("MyDoggyDetails.Database.doggy.db3"))
-        {
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                File.WriteAllBytes(DoggyRepository.dbPath, memoryStream.ToArray());
-            }
-        }
+    //    var assembly = IntrospectionExtensions.GetTypeInfo(typeof(App)).Assembly;
+    //    using (Stream stream = assembly.GetManifestResourceStream("MyDoggyDetails.Database.doggy.db3"))
+    //    {
+    //        using (MemoryStream memoryStream = new MemoryStream())
+    //        {
+    //            stream.CopyTo(memoryStream);
+    //            File.WriteAllBytes(DoggyRepository.dbPath, memoryStream.ToArray());
+    //        }
+    //    }
 
-    }
+    //}
 
     /// <summary>
     /// Create doggy.db3 from Sql Scripts
     /// </summary>
     private void CreateDB()
     {
-        //if (File.Exists(DoggyRepository.dbPath)) return;
-        DoggyRepository.CreateDatabase();
+        new DoggyRepository().CreateDatabase();
 
     }
 

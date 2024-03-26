@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace MyDoggyDetails.Models;
 
@@ -8,18 +8,9 @@ namespace MyDoggyDetails.Models;
 public partial class DoggyTableModel : BaseTableModel
 {
 
-
-    [ObservableProperty]
-    [property: PrimaryKey]
-    [property: AutoIncrement]
-    private int id;
-
-
-    [NotMapped]
-    public BreedTableModel Breed { get; set; }
-    
     [ObservableProperty]
     private int breedId;
+    
 
     [ObservableProperty]
     public string colour;

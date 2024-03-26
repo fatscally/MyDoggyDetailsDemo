@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDoggyDetails.Pages.DogDetailsPage"
              xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels"
-             Title="DogDetailsPage">
+             Title="Dog Details Page"
+             Disappearing="ContentPage_Disappearing">
 
     <ContentPage.BindingContext>
         <viewmodels:DoggiesViewmodel/>
@@ -12,19 +13,19 @@
     
     <VerticalStackLayout>
         <Label Text="Name:"/>
-        <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" TextChanged="Entry_TextChanged" />
-        <Label Text="ChipNumber:"/>
-        <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" />
+        <Label Text="Chip Number:"/>
+        <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" />
         <Label Text="Breed:"/>
-        <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.BreedId}" FontSize="Large" />
         <Label Text="Colour:"/>
-        <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" TextChanged="Entry_TextChanged"/>
-        <Label Text="DateOfBirth:"/>
-        <Entry Text="{Binding SelectedDoggy.DateOfBirth}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" />
+        <Label Text="Date Of Birth:"/>
+        <Entry Text="{Binding SelectedDoggy.DateOfBirth}" FontSize="Large" />
         <Label Text="Gender:"/>
-        <Entry Text="{Binding SelectedDoggy.Sex}" FontSize="Large" TextChanged="Entry_TextChanged"/>
+        <Entry Text="{Binding SelectedDoggy.Sex}" FontSize="Large"/>
 
         <Button Text="Save" Command="{Binding SaveDogDetailsCommand}"/>
-
     </VerticalStackLayout>
+    
 </ContentPage>
