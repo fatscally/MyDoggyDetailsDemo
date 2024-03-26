@@ -1,6 +1,6 @@
 # My Doggy Details
 ### This is a small fun application written in .Net MAUI left opensource for employers to review.
-#### In practice it is an application to keep track of your pet dog's details.  Future features will allow sharing of details comprehensively, find dog parks and dog friendly locations, find vets, dog-sitters and other relevant services in "your" area.
+#### In practice it is an application to keep track of your pet dog's age and details.  Future features will allow sharing of details comprehensively, find dog parks and dog friendly locations, find vets, create "Lost Dog Alerts", find dog-sitters and other relevant services in "your" area.
 
 Development started casually in March 2024.
 So far, on the client side it uses these components:
