@@ -4,6 +4,7 @@
 
 Development started casually in March 2024.
 So far, on the client side it uses these components:
++ Visual Studio 2022
 + C# 12 (many of it's latest coding features)
 + .Net Core 8.0
 + MVVM
