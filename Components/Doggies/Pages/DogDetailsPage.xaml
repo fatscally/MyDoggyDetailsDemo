@@ -7,7 +7,7 @@
              Disappearing="ContentPage_Disappearing">
 
     <ContentPage.BindingContext>
-        <viewmodels:DoggiesViewmodel/>
+        <viewmodels:DogDetailsViewmodel/>
     </ContentPage.BindingContext>
     
     

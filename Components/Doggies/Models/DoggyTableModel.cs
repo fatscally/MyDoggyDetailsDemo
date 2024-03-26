@@ -30,7 +30,7 @@ public partial class DoggyTableModel : BaseTableModel
     public string chipNumber;
 
 
-    //should be Genders enum but sqlite doesn't like the enum
+    //should be Genders enum but sqlite doesn't like the enum afaik
     [ObservableProperty]
     public int sex;
 

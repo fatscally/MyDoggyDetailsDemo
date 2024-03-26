@@ -16,7 +16,7 @@ public partial class DogDetailsPage : ContentPage
 
     private void ContentPage_Disappearing(object sender, EventArgs e)
     {
-        DoggiesViewmodel viewmodel = this.BindingContext as DoggiesViewmodel;
+        DogDetailsViewmodel viewmodel = this.BindingContext as DogDetailsViewmodel;
         viewmodel.SaveDogDetailsCommand.Execute(null);
     }
 }

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDoggyDetails.Pages.DoggiesPage"
              xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
-             Title="My Doggies">
+             Title="My Doggies"
+             Appearing="ContentPage_Appearing">
 
     <ContentPage.BindingContext>
         <viewmodels:DoggiesViewmodel/>
@@ -53,7 +54,6 @@
 
             <ImageButton
                 Source="schnauzer.png"
-                Clicked="DogButton_Clicked"
                 HeightRequest="100"
                 HorizontalOptions="Center" VerticalOptions="Start" />
 
@@ -70,7 +70,7 @@
                 <StackLayout Orientation="Vertical">
                     <Label Text="Date of Birth" />
                     <DatePicker x:Name="DogDob" Date="{Binding SelectedDoggy.DateOfBirth, Mode=TwoWay}" FontSize="Large" 
-                                HorizontalOptions="Center" DateSelected="DogDob_DateSelected"/>
+                                HorizontalOptions="Center" />
                 </StackLayout>
                 <ImageButton Source="dog_icon_128.png" WidthRequest="30" 
                              HeightRequest="30" 

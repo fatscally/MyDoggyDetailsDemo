@@ -8,24 +8,27 @@ using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
-
-[QueryProperty("DogId", "DogId")]
+//passed in from MyDoggiesPage
+//[QueryProperty("DogId", "DogId")]
 
 
 
 public partial class DoggiesViewmodel : BaseViewModel
 {
 
-    
+    //[ObservableProperty]
+    //int dogId;
+    //partial void OnDogIdChanged(int value)
+    //{
+    //    SelectedDoggy = Doggies.FirstOrDefault(x => x.Id == value);
+    //}
 
-    [ObservableProperty]
-    int dogId;
-    partial void OnDogIdChanged(int value)
+     public DoggiesViewmodel()
     {
-        SelectedDoggy = Doggies.FirstOrDefault(x => x.Id == value);
+       LoadUpDoggies();
     }
 
-    public DoggiesViewmodel()
+    internal void LoadUpDoggies()
     {
         Doggies = new DoggyRepository().SelectAllDoggies();
     }
@@ -42,14 +45,32 @@ public partial class DoggiesViewmodel : BaseViewModel
     [NotifyPropertyChangedFor(nameof(TotalDogDays))]
     private DoggyTableModel selectedDoggy;
 
+    public int UpdateDoggies
+    {
+        get
+        {
+            Doggies.FirstOrDefault(x => x.Id == selectedDoggy.Id);
+            return 0;
+        }
+    }
     
+    //partial void OnSelectedDoggyChanged(DoggyTableModel value)
+    //{
+    //    Doggies = new DoggyRepository().SelectAllDoggies();
+
+    //}
+
+
+  
+
+
     public string FormattedAge
     {
         get
-            {
+        {
             if (selectedDoggy == null) return string.Empty;
-                return new AgeCalculator(selectedDoggy.DateOfBirth.ToDateTime()).FormattedAge();
-            }
+            return new AgeCalculator(selectedDoggy.DateOfBirth.ToDateTime()).FormattedAge();
+        }
     }
 
     public string TotalDogDays
@@ -65,13 +86,9 @@ public partial class DoggiesViewmodel : BaseViewModel
     async Task GoToDogDetailsPage(int workerId)
     {
         await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
+        //await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}");
     }
 
-    //[RelayCommand]
-    //private void GoToDogDetailsPage(int workerId)
-    //{
-    //     Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
-    //}
 
     [RelayCommand]
     public void SaveDogDetails()
