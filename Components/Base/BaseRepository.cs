@@ -1,4 +1,4 @@
-﻿using MyDoggyDetails.Components.Base;
+﻿using MyDoggyDetails.Base;
 using SQLite;
 
 

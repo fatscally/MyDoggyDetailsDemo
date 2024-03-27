@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
              x:Class="MyDoggyDetails.Pages.BreedsPage"
              Title="BreedsPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:PokemonViewmodel/>
+    </ContentPage.BindingContext>
+    
     <VerticalStackLayout>
         <Label 
-            Text="This is the Breeds page"
+            Text="No dog API available yet so I am using the Pokemon API"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+
+        <ListView ItemsSource="{Binding PokemonDetails}"
+                  HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.RowSpan="2" 
+                                   Source="{Binding Sprites.front_default}" 
+                                   Aspect="AspectFill"
+                                   HeightRequest="60"
+                                   WidthRequest="60" />
+                            <Label Grid.Column="1" 
+                                   Text="{Binding Name}"
+                                   FontAttributes="Bold" FontSize="Large" />
+                            <Label Grid.Row="1" 
+                                   Grid.Column="1" 
+                                   Text="{Binding Details}"
+                                   VerticalOptions="End" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Label Text="mr.raymond.brennan@outlook.com"  TextColor="AliceBlue" BackgroundColor="#2196F3" FontSize="Medium" HorizontalTextAlignment="Center" Padding="30,10,30,10"/>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <!--   <Button Text="Refresh Catalog" BackgroundColor="Pink" Padding="30,10,30,10" 
+                    Command="{Binding RefreshFromWeb_CommandClick}" />-->
+
+            <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
+                    Command="{Binding GetPokemonFromWebCommand}" />
+        </StackLayout>
+
     </VerticalStackLayout>
 </ContentPage>
