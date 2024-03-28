@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SQLite;
+using System.Text.Json.Serialization;
 
 
 namespace MyDoggyDetails.Models;
@@ -7,13 +8,17 @@ namespace MyDoggyDetails.Models;
 [Table("Breeds")]
 public partial class BreedTableModel : BaseTableModel
 {
-    [ObservableProperty]
-    [property: PrimaryKey]
-    [property: AutoIncrement]
-    private int id;
+
 
     [ObservableProperty]
+    [JsonPropertyName("name")]
     private string name;
+
+    [ObservableProperty]
+    [JsonPropertyName("subbreed")]
+    private string subBreed;
+
+
     [ObservableProperty]
     private string size;
     [ObservableProperty]

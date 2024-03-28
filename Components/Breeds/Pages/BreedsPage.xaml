@@ -6,18 +6,17 @@
              Title="BreedsPage">
 
     <ContentPage.BindingContext>
-        <viewmodels:PokemonViewmodel/>
+        <viewmodels:BreedsViewmodel/>
     </ContentPage.BindingContext>
-    
+
     <VerticalStackLayout>
         <Label 
-            Text="No dog API available yet so I am using the Pokemon API"
+            Text="Using The Dog API"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
 
-        <ListView ItemsSource="{Binding PokemonDetails}"
-                  HasUnevenRows="true">
+        <ListView ItemsSource="{Binding Breeds}" HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -31,16 +30,16 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="2" 
-                                   Source="{Binding Sprites.front_default}" 
+                                   Source="{Binding image.url}" 
                                    Aspect="AspectFill"
                                    HeightRequest="60"
                                    WidthRequest="60" />
                             <Label Grid.Column="1" 
-                                   Text="{Binding Name}"
+                                   Text="{Binding name}"
                                    FontAttributes="Bold" FontSize="Large" />
                             <Label Grid.Row="1" 
                                    Grid.Column="1" 
-                                   Text="{Binding Details}"
+                                   Text="{Binding breed_group}"
                                    VerticalOptions="End" />
                         </Grid>
                     </ViewCell>
@@ -56,7 +55,7 @@
                     Command="{Binding RefreshFromWeb_CommandClick}" />-->
 
             <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
-                    Command="{Binding GetPokemonFromWebCommand}" />
+                    Command="{Binding GetFromWebCommand}" />
         </StackLayout>
 
     </VerticalStackLayout>

@@ -13,7 +13,7 @@ internal partial class PokemonViewmodel : BaseViewModel
     public int TotalOnlineCount;
 
     [RelayCommand]
-    public void GetPokemonFromWeb()
+    public void GetFromWeb()
     {
          GetPokemonDetails();
     }
@@ -47,7 +47,7 @@ internal partial class PokemonViewmodel : BaseViewModel
             pokDet = data.GetPokemonDetailAsync(p.Url).Result;
             pokDet.IsDirty = true;
 
-            PokemonDetails.Add(pokDet);
+            WebResults.Add(pokDet);
 
             Counter += 1;
             GetButtonText = "Getting " + Counter.ToString() + " of " + TotalOnlineCount.ToString() + " Pokemon";
@@ -97,40 +97,12 @@ internal partial class PokemonViewmodel : BaseViewModel
     [ObservableProperty]
     private PokemonForm selectedPokemonForm;
 
-    //public PokemonForm SelectedPokemonForm
-    //{
-    //    get { return selectedPokemonForm; }
-    //    set { selectedPokemonForm = value; }
-    //}
-
-
     [ObservableProperty]
     private PokemonHeader pokemonHeaders;
 
-    //public PokemonHeader PokemonHeaders
-    //{
-    //    get { return pokemonheaders; }
-    //    set
-    //    {
-    //        pokemonheaders = value;
-    //        NotifyPropertyChanged("PokemonHeaders");
-    //    }
-    //}
-
     [ObservableProperty]
-    private ObservableCollection<PokemonDetail> pokemonDetails = new ObservableCollection<PokemonDetail>();
+    private ObservableCollection<PokemonDetail> webResults = new ObservableCollection<PokemonDetail>();
 
-    //public ObservableCollection<PokemonDetail> PokemonDetails
-    //{
-    //    get { return pokemonDetails; }
-    //    set
-    //    {
-
-    //        pokemonDetails = value;
-
-    //        NotifyPropertyChanged("PokemonDetails");
-    //    }
-    //}
 
 
 }
