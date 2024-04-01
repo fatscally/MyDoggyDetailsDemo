@@ -112,6 +112,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="API\Pokemon\**" />
+	  <EmbeddedResource Remove="API\Pokemon\**" />
+	  <MauiCss Remove="API\Pokemon\**" />
+	  <MauiXaml Remove="API\Pokemon\**" />
+	  <None Remove="API\Pokemon\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Components\Breeds\ViewModels\PokemonViewmodel.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Database\doggy.db3" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\dog_icon_128.png" />
