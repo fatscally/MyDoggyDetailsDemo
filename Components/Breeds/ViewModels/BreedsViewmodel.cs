@@ -13,23 +13,33 @@ internal partial class BreedsViewmodel : BaseViewModel
 {
     public int TotalOnlineCount;
 
+    public BreedsViewmodel()
+    {
+         Breeds = new BreedsRepository().SelectAllBreeds();
+    }
+
     [RelayCommand]
-    public void GetFromWeb()
+    public void GetBreedsFromWeb()
     {
         GetButtonText = "clicked...";
         GetBreeds();
     }
 
+    [RelayCommand]
+    public void SaveBreedsToDb()
+    {
+        SaveAsync();
+    }
+
+    async void SaveAsync()
+    {
+        await new BreedsRepository().InsertList(Breeds.ToList());
+    }
+
     [ObservableProperty]
     private ObservableCollection<BreedModel> breeds;
 
-    //[ObservableProperty]
-    //private BreedModel[] breed;
 
-    public BreedsViewmodel()
-    {
-        //breeds = new BreedsRepository().SelectAllBreeds();
-    }
 
     [ObservableProperty]
     public string getButtonText;
@@ -41,11 +51,11 @@ internal partial class BreedsViewmodel : BaseViewModel
 
         GetButtonText = "Fetching Breeds";
 
-        DogItemManager http = new DogItemManager(new DogsRestService());
+        DogItemManager http = new(new DogsRestService());
 
         Breeds = http.GetAllBreeds().Result.ToObservableCollection<BreedModel>();
 
-        GetButtonText = "Found " + Breeds.Count() + " breeds";
+        GetButtonText = "Found " + Breeds.Count + " breeds";
 
     }
 
@@ -57,11 +67,6 @@ internal partial class BreedsViewmodel : BaseViewModel
     private int counter = 0;
 
 
-    [ObservableProperty]
-    private PokemonForm selectedPokemonForm;
-
-    [ObservableProperty]
-    private PokemonHeader pokemonHeaders;
 
     [ObservableProperty]
     private ObservableCollection<BreedModel> webResults = new();

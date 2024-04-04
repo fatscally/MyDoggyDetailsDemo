@@ -1,37 +1,121 @@
-﻿namespace MyDoggyDetails.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SQLite;
 
-public class BreedModel
+namespace MyDoggyDetails.Models;
+
+[Table("Breeds")]
+public partial class BreedModel : ObservableObject
 {
-    public BreedWeight weight { get; set; }
-    public BreedHeight height { get; set; }
-    public int id { get; set; }
-    public string name { get; set; }
-    public string bred_for { get; set; }
-    public string breed_group { get; set; }
-    public string life_span { get; set; }
-    public string temperament { get; set; }
-    public string reference_image_id { get; set; }
-    public BreedImage image { get; set; }
+    [ObservableProperty]
+    private int id;
+    [ObservableProperty]
+    private string name;
+    [ObservableProperty]
+    private string bred_for;
+    [ObservableProperty]
+    private string breed_group;
+    [ObservableProperty]
+    private string life_span;
+    [ObservableProperty]
+    private string temperament;
+    [ObservableProperty]
+    private string reference_image_id;
+
+
+    [ObservableProperty]
+    private string imperial_weight;
+    [ObservableProperty]
+    private string metric_weight;
+
+    [ObservableProperty]
+    private string imperial_height;
+    [ObservableProperty]
+    private string metric_height;
+
+    [ObservableProperty]
+    private string image_id;
+    [ObservableProperty]
+    private int image_width;
+    [ObservableProperty]
+    private int image_height;
+    [ObservableProperty]
+    private string image_url;
+
+
+    //remappting the json for database simplicity.
+    private BreedImage image;
+    [Ignore]
+    public BreedImage Image
+    {
+        get { return image; }
+        set { 
+            image = value;
+            Image_id = image.Id;
+            Image_width = image.Width;
+            Image_height = image.Height;
+            Image_url = image.Url;
+        }
+    }
+
+    //remappting the json for database simplicity.
+    private BreedWeight weight;
+    [Ignore]
+    public BreedWeight Weight
+    {
+        get { return weight; }
+        set { 
+            weight = value;
+            Imperial_weight = weight.Imperial;
+            Metric_weight = weight.Metric;
+        }
+    }
+
+    //remappting the json for database simplicity.
+    private BreedHeight height;
+    [Ignore]
+    public BreedHeight Height
+    {
+        get { return height; }
+        set { 
+            height = value;
+            Imperial_height = height.Imperial;
+            Metric_height = height.Metric;
+        }
+    }
+
+
+
 }
 
-public class BreedWeight
+
+//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+public partial class BreedWeight : ObservableObject
 {
-    public string imperial { get; set; }
-    public string metric { get; set; }
+    [ObservableProperty]
+    private string imperial;
+    [ObservableProperty]
+    private string metric;
 }
 
-public class BreedHeight
+//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+public partial class BreedHeight : ObservableObject
 {
-    public string imperial { get; set; }
-    public string metric { get; set; }
+    [ObservableProperty]
+    private string imperial;
+    [ObservableProperty]
+    private string metric;
 }
-
-public class BreedImage
+//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+public partial class BreedImage : ObservableObject
 {
-    public string id { get; set; }
-    public int width { get; set; }
-    public int height { get; set; }
-    public string url { get; set; }
+    [ObservableProperty]
+    private string id;
+    [ObservableProperty]
+    private int width;
+    [ObservableProperty]
+    private int height;
+    [ObservableProperty]
+    private string url;
 }
 
 

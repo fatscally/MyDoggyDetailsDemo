@@ -30,16 +30,16 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="2" 
-                                   Source="{Binding image.url}" 
+                                   Source="{Binding Image_url}" 
                                    Aspect="AspectFill"
                                    HeightRequest="60"
                                    WidthRequest="60" />
                             <Label Grid.Column="1" 
-                                   Text="{Binding name}"
+                                   Text="{Binding Name}"
                                    FontAttributes="Bold" FontSize="Large" />
                             <Label Grid.Row="1" 
                                    Grid.Column="1" 
-                                   Text="{Binding breed_group}"
+                                   Text="{Binding Temperament}"
                                    VerticalOptions="End" />
                         </Grid>
                     </ViewCell>
@@ -55,7 +55,11 @@
                     Command="{Binding RefreshFromWeb_CommandClick}" />-->
 
             <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
-                    Command="{Binding GetFromWebCommand}" />
+                    Command="{Binding GetBreedsFromWebCommand}" />
+
+
+            <Button Text="SAVE" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
+                    Command="{Binding SaveBreedsToDbCommand}" />
         </StackLayout>
 
     </VerticalStackLayout>

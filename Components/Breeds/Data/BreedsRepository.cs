@@ -6,9 +6,17 @@ namespace MyDoggyDetails.Data;
 
 internal class BreedsRepository : BaseRepository
 {
-    internal ObservableCollection<BreedTableModel> SelectAllBreeds()
+    internal async Task InsertList(List<BreedModel> breedModels)
     {
-        var results = conn.Table<BreedTableModel>().ToObservableCollection();
+        foreach (var model in breedModels)
+        {
+            _ = Insert(model);
+        }
+    }
+
+    internal ObservableCollection<BreedModel> SelectAllBreeds()
+    {
+        var results = conn.Table<BreedModel>().ToObservableCollection();
 
         return results;
     }

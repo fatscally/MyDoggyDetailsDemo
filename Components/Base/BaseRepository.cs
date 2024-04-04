@@ -17,6 +17,8 @@ internal class BaseRepository
     }
 
 
+
+
     internal long Insert( object model)
     {
         return conn.Insert(model);

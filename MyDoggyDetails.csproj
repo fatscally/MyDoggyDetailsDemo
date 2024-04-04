@@ -120,6 +120,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Components\Breeds\Models\BreedTableModel.cs" />
 	  <Compile Remove="Components\Breeds\ViewModels\PokemonViewmodel.cs" />
 	</ItemGroup>
 

@@ -9,7 +9,6 @@ namespace MyDoggyDetails.Models;
 public partial class BreedTableModel : BaseTableModel
 {
 
-
     [ObservableProperty]
     [JsonPropertyName("name")]
     private string name;
@@ -28,6 +27,5 @@ public partial class BreedTableModel : BaseTableModel
     [ObservableProperty]
     private string imgAdult;
 
-    //[ObservableProperty]
-    //private List<DoggyTableModel> doggies;
+
 }

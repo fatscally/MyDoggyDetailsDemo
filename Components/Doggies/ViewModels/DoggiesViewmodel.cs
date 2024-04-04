@@ -37,7 +37,7 @@ public partial class DoggiesViewmodel : BaseViewModel
     private ObservableCollection<DoggyTableModel> doggies;
 
 
-    public BreedTableModel Breed { get; set; }
+    public BreedModel Breed { get; set; }
 
 
     [ObservableProperty]
