@@ -48,18 +48,6 @@ public partial class BreedModel : BaseTableModel
     [ObservableProperty]
     private byte[] localIcon;
 
-    //private Image imgStream = new();
-
-    //[Ignore]
-    //public Image ImgStream
-    //{
-    //    get => imgStream;
-    //    set => SetProperty(ref imgStream, value);
-    //}
-
-
-
-
 
 
 

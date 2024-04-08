@@ -16,12 +16,6 @@ namespace MyDoggyDetails.ViewModels;
 public partial class DoggiesViewmodel : BaseViewModel
 {
 
-    //[ObservableProperty]
-    //int dogId;
-    //partial void OnDogIdChanged(int value)
-    //{
-    //    SelectedDoggy = Doggies.FirstOrDefault(x => x.Id == value);
-    //}
 
      public DoggiesViewmodel()
     {
@@ -54,14 +48,7 @@ public partial class DoggiesViewmodel : BaseViewModel
         }
     }
     
-    //partial void OnSelectedDoggyChanged(DoggyTableModel value)
-    //{
-    //    Doggies = new DoggyRepository().SelectAllDoggies();
 
-    //}
-
-
-  
 
 
     public string FormattedAge
@@ -86,7 +73,6 @@ public partial class DoggiesViewmodel : BaseViewModel
     async Task GoToDogDetailsPage(int workerId)
     {
         await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}?DogId={SelectedDoggy.Id}");
-        //await Shell.Current.GoToAsync($"{nameof(DogDetailsPage)}");
     }
 
 

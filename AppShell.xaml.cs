@@ -11,6 +11,7 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
         Routing.RegisterRoute(nameof(Pages.DogDetailsPage), typeof(Pages.DogDetailsPage));
+        Routing.RegisterRoute(nameof(Pages.BreedDetailPage), typeof(Pages.BreedDetailPage));
 
         CreateDB();
         //MoveDbToProperPlace();

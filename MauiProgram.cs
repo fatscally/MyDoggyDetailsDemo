@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using MyDoggyDetails.Pages;
 using MyDoggyDetails.ViewModels;
 
@@ -18,7 +18,10 @@ public static class MauiProgram
         builder.Services.AddSingleton<DoggiesPage>();
         builder.Services.AddSingleton<DoggiesViewmodel>();
 
+
         builder.Services.AddTransient<DogDetailsPage>();
+
+        builder.Services.AddTransient<BreedDetailPage>();
 
 
 #if DEBUG

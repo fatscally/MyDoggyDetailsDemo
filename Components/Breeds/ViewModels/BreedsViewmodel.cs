@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.API;
+using MyDoggyDetails.Pages;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
 using MyDoggyDetails.Utilities.Pictures;
@@ -9,6 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
+[QueryProperty("DogId", "DogId")]
 
 internal partial class BreedsViewmodel : BaseViewModel
 {
@@ -18,6 +20,9 @@ internal partial class BreedsViewmodel : BaseViewModel
 
     [ObservableProperty]
     private ObservableCollection<BreedModel> breeds;
+
+    [ObservableProperty]
+    private BreedModel selectedBreed;
 
 
 
@@ -142,6 +147,14 @@ internal partial class BreedsViewmodel : BaseViewModel
 
     [ObservableProperty]
     private ObservableCollection<BreedModel> webResults = new();
+
+
+
+    [RelayCommand]
+    async Task GoToBreedDetailsPage(int workerId)
+    {
+        await Shell.Current.GoToAsync($"{nameof(BreedDetailPage)}?DogId={SelectedBreed.Id}");
+    }
 
 
 

@@ -24,7 +24,11 @@
             HorizontalOptions="Center" />
 
 
-        <ListView ItemsSource="{Binding Breeds}" BackgroundColor="{Binding BackgroundBrush }" HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570">
+        <ListView ItemsSource="{Binding Breeds}" BackgroundColor="{Binding BackgroundBrush }" 
+                  SelectedItem="{Binding SelectedBreed}"
+                  HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570"
+                  ItemTapped="ListView_ItemTapped"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

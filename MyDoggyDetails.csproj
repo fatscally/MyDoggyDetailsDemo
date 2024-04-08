@@ -166,6 +166,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\Breeds\Pages\BreedDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\Breeds\Pages\BreedsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
