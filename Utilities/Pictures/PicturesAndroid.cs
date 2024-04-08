@@ -58,7 +58,7 @@ public class PicturesAndroid : IDoggyPictures
         return byteArray;
     }
 
-    //ANDROID: Working OK. :)
+    //ANDROID: Working OK. :)  Produced about 10% smaller file over Resize for my needs.
     //WINDOWS: Using a small image DownsizeImage results in a 10x larger file! Disaster!! :(
     public byte[] DownsizeImage(byte[] imgBytes, int new_width, int new_height)
     {

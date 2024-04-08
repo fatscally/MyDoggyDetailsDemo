@@ -44,22 +44,7 @@ public partial class BreedModel : ObservableObject
     private string image_url;
     [ObservableProperty]
     private byte[] localImage;
-    partial void OnLocalImageChanged(byte[] value)
-    {
-        IDoggyPictures pictures = null;
 
-                #if (ANDROID)
-                        pictures = new PicturesAndroid();
-                #elif (WINDOWS)
-
-                #elif (__IOS__)
-
-                #endif
-
-        LocalIcon = pictures.ResizeImage(LocalImage, 60, 60);
-        LocalIcon = pictures.DownsizeImage(LocalImage, 60, 60);
-
-    }
 
     [ObservableProperty]
     private byte[] localIcon;

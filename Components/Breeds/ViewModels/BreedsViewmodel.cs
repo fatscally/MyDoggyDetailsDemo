@@ -4,9 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.API;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
-using System.Collections.ObjectModel;
-using MyDoggyDetails.Utilities;
 using MyDoggyDetails.Utilities.Pictures;
+using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -78,6 +77,12 @@ internal partial class BreedsViewmodel : BaseViewModel
         {
 
                 b.LocalImage = pictures.DownloadImageFromWeb(new Uri(b.Image_url)).Result;
+
+
+            //if (b.LocalIcon != null) return;
+
+            //LocalIcon = pictures.ResizeImage(LocalImage, 60, 60);
+                b.LocalIcon = pictures.DownsizeImage(b.LocalImage, 60, 60);
 
             i++;
         }

@@ -188,4 +188,6 @@
 	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>
