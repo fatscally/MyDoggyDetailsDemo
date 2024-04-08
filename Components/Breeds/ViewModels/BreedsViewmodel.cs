@@ -58,7 +58,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     [RelayCommand]
     public void GetBreedsFromWeb()
     {
-        GetButtonText = "clicked...";
+        Task.Run(() => GetButtonText = "clicked...");
         GetBreedsFromAPI();
     }
 
@@ -112,12 +112,8 @@ internal partial class BreedsViewmodel : BaseViewModel
     private async void GetBreedsFromDb()
     {
         Task<ObservableCollection<BreedModel>> getBreedsFromDb = new BreedsRepository().SelectAllBreeds();
-        //Breeds = new BreedsRepository().SelectAllBreeds();
         Breeds = await getBreedsFromDb;
 
-        //Task<string> getStringTask = client.GetStringAsync("https://learn.microsoft.com/dotnet");
-
-        //string contents = await getStringTask;
     }
 
     private void GetBreedsFromAPI()
