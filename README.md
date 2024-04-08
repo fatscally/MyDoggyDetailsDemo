@@ -32,5 +32,6 @@ My [LinkedIn Profile](https://www.linkedin.com/in/raymond-b-76779866/)
 
 
 APRIL 2022
-Added Connected to The Dog API to download infos and pictures.
+Added Connected to The Dog API to download infos and pictures - needs to be paged(if possible and made async).
 Created a picture Downsize function to create icons.
+Dogs from The Dog API are saved locally but are very slow - needs to be paged and made async
