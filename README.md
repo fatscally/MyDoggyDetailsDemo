@@ -6,27 +6,31 @@ Development started casually in March 2024.
 So far, on the client side it uses these components:
 + Visual Studio 2022
 + C# 12 (many of it's latest coding features)
-+ XAML
 + .Net Core 8.0
-+ MVVM
 + CommunityToolkit.Maui 3.0
 + Dapper 2.0.1
 + sql-net-pcl 1.8
-
-This code demonstrates numerous competencies (now and planned):
-+ Use of Visual Studio 2022 (Version 17.9.4)
 + MVVM design pattern.
++ XAML.
 + Binding.
-+ Deoendency Injection.
++ Dependency Injection.
++ Interfaces (correct purposeful use of).
++ Async Task based programming.
 + SQLITE database used as local datastore.
 + Normalized database design.
 + Entity Framework Code First style creation of Sqlite database using light weight Dapper.
 + Release of the application to the Google Play and Apple stores.
++ Conditional compilation.
 
 A planned web side application will follow in due course consisting of 
 + Angular 
 + C# API and backend. 
-+ SQL SERVER 
++ SQL SERVER database
 
 
 My [LinkedIn Profile](https://www.linkedin.com/in/raymond-b-76779866/) 
+
+
+APRIL 2022
+Added Connected to The Dog API to download infos and pictures.
+Created a picture Downsize function to create icons.
