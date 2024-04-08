@@ -5,6 +5,8 @@ using MyDoggyDetails.API;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
 using System.Collections.ObjectModel;
+using MyDoggyDetails.Utilities;
+using MyDoggyDetails.Utilities.Pictures;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -13,9 +15,38 @@ internal partial class BreedsViewmodel : BaseViewModel
 {
     public int TotalOnlineCount;
 
+    IDoggyPictures pictures;
+
     public BreedsViewmodel()
     {
-         Breeds = new BreedsRepository().SelectAllBreeds();
+
+            #if (ANDROID)
+                    pictures = new PicturesAndroid();
+
+            #elif (WINDOWS)
+
+            #elif (__IOS__)
+
+            #endif
+
+
+        Breeds = new BreedsRepository().SelectAllBreeds();
+        Online();
+    }
+
+    [ObservableProperty]
+    private Brush backgroundBrush = Brush.White;
+
+
+    private void Online()
+    {
+        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+        if (accessType == NetworkAccess.Internet)
+        {
+                BackgroundBrush = Brush.Green;
+        }
+        else { BackgroundBrush = Brush.Gray; }
     }
 
     [RelayCommand]
@@ -31,6 +62,29 @@ internal partial class BreedsViewmodel : BaseViewModel
         SaveAsync();
     }
 
+    [RelayCommand]
+    public async void DownloadImage()
+    {
+
+        GetImagesForBreeds();
+
+    }
+
+    private async Task GetImagesForBreeds()
+    {
+        int i = 0;
+
+        foreach(BreedModel b in Breeds)
+        {
+
+                b.LocalImage = pictures.DownloadImageFromWeb(new Uri(b.Image_url)).Result;
+
+            i++;
+        }
+
+        GetButtonText = $"{i}";
+    }
+
     async void SaveAsync()
     {
         await new BreedsRepository().InsertList(Breeds.ToList());
@@ -42,20 +96,22 @@ internal partial class BreedsViewmodel : BaseViewModel
 
 
     [ObservableProperty]
-    public string getButtonText;
+    public string getButtonText = "Get API";
 
 
 
     private void GetBreeds()
     {
 
-        GetButtonText = "Fetching Breeds";
+        Task.Run( ()=> GetButtonText = "Fetching Breeds...");
+
+        Breeds.Clear();
 
         DogItemManager http = new(new DogsRestService());
 
         Breeds = http.GetAllBreeds().Result.ToObservableCollection<BreedModel>();
 
-        GetButtonText = "Found " + Breeds.Count + " breeds";
+        Task.Run(() => GetButtonText = "Found " + Breeds.Count + " breeds");
 
     }
 

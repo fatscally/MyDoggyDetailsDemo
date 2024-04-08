@@ -41,7 +41,7 @@ internal class DoggyRepository : BaseRepository
     {
         CreateTableResult createTableResult;
        
-
+   
         createTableResult = conn.CreateTable<BreedModel>();
 
 

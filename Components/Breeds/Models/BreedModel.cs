@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyDoggyDetails.Utilities.Pictures;
 using SQLite;
+
 
 namespace MyDoggyDetails.Models;
 
@@ -40,9 +42,45 @@ public partial class BreedModel : ObservableObject
     private int image_height;
     [ObservableProperty]
     private string image_url;
+    [ObservableProperty]
+    private byte[] localImage;
+    partial void OnLocalImageChanged(byte[] value)
+    {
+        IDoggyPictures pictures = null;
+
+                #if (ANDROID)
+                        pictures = new PicturesAndroid();
+                #elif (WINDOWS)
+
+                #elif (__IOS__)
+
+                #endif
+
+        LocalIcon = pictures.ResizeImage(LocalImage, 60, 60);
+        LocalIcon = pictures.DownsizeImage(LocalImage, 60, 60);
+
+    }
+
+    [ObservableProperty]
+    private byte[] localIcon;
+
+    private Image imgStream = new();
+
+    [Ignore]
+    public Image ImgStream
+    {
+        get => imgStream;
+        set => SetProperty(ref imgStream, value);
+    }
 
 
-    //remappting the json for database simplicity.
+
+
+
+
+
+    //extra classes needed for the webapi
+    //remapping the json for database simplicity.
     private BreedImage image;
     [Ignore]
     public BreedImage Image
@@ -88,7 +126,7 @@ public partial class BreedModel : ObservableObject
 }
 
 
-//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+//Used by the DogAPI but creates headaches for me using SQLite-Net-PCL
 public partial class BreedWeight : ObservableObject
 {
     [ObservableProperty]
@@ -97,7 +135,7 @@ public partial class BreedWeight : ObservableObject
     private string metric;
 }
 
-//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+//Used by the DogAPI but creates headaches for me using SQLite-Net-PCL
 public partial class BreedHeight : ObservableObject
 {
     [ObservableProperty]
@@ -105,7 +143,7 @@ public partial class BreedHeight : ObservableObject
     [ObservableProperty]
     private string metric;
 }
-//Used by the DogAPI but create headaches for me using SQLite-Net-PCL
+//Used by the DogAPI but creates headaches for me using SQLite-Net-PCL
 public partial class BreedImage : ObservableObject
 {
     [ObservableProperty]

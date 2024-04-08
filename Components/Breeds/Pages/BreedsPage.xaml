@@ -2,12 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MyDoggyDetails.Pages.BreedsPage"
-             Title="BreedsPage">
+             BackgroundColor="{Binding BackgroundBrush}"
+             Title="Dog Breeds">
 
     <ContentPage.BindingContext>
         <viewmodels:BreedsViewmodel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <VerticalStackLayout>
         <Label 
@@ -16,7 +24,7 @@
             HorizontalOptions="Center" />
 
 
-        <ListView ItemsSource="{Binding Breeds}" HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570">
+        <ListView ItemsSource="{Binding Breeds}" BackgroundColor="{Binding BackgroundBrush }" HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -30,7 +38,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Grid.RowSpan="2" 
-                                   Source="{Binding Image_url}" 
+                                   Source="{Binding LocalIcon, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
                                    Aspect="AspectFill"
                                    HeightRequest="60"
                                    WidthRequest="60" />
@@ -57,9 +65,12 @@
             <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
                     Command="{Binding GetBreedsFromWebCommand}" />
 
-
             <Button Text="SAVE" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
                     Command="{Binding SaveBreedsToDbCommand}" />
+
+            <Button Text="Download img" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
+                    Command="{Binding DownloadImageCommand}" />
+            
         </StackLayout>
 
     </VerticalStackLayout>
