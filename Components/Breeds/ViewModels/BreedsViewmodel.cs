@@ -16,6 +16,12 @@ internal partial class BreedsViewmodel : BaseViewModel
 
     IDoggyPictures pictures;
 
+    [ObservableProperty]
+    private ObservableCollection<BreedModel> breeds;
+
+
+
+
     public BreedsViewmodel()
     {
 
@@ -28,8 +34,9 @@ internal partial class BreedsViewmodel : BaseViewModel
 
             #endif
 
+        GetBreedsFromDb();
 
-        Breeds = new BreedsRepository().SelectAllBreeds();
+
         Online();
     }
 
@@ -52,7 +59,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     public void GetBreedsFromWeb()
     {
         GetButtonText = "clicked...";
-        GetBreeds();
+        GetBreedsFromAPI();
     }
 
     [RelayCommand]
@@ -76,13 +83,13 @@ internal partial class BreedsViewmodel : BaseViewModel
         foreach(BreedModel b in Breeds)
         {
 
-                b.LocalImage = pictures.DownloadImageFromWeb(new Uri(b.Image_url)).Result;
+                Task<byte[]> downloadimage = pictures.DownloadImageFromWeb(new Uri(b.Image_url));
 
+                b.LocalImage = await downloadimage;
 
-            //if (b.LocalIcon != null) return;
-
-            //LocalIcon = pictures.ResizeImage(LocalImage, 60, 60);
                 b.LocalIcon = pictures.DownsizeImage(b.LocalImage, 60, 60);
+
+                await new BreedsRepository().SaveBreed(b);
 
             i++;
         }
@@ -95,8 +102,6 @@ internal partial class BreedsViewmodel : BaseViewModel
         await new BreedsRepository().InsertList(Breeds.ToList());
     }
 
-    [ObservableProperty]
-    private ObservableCollection<BreedModel> breeds;
 
 
 
@@ -104,8 +109,18 @@ internal partial class BreedsViewmodel : BaseViewModel
     public string getButtonText = "Get API";
 
 
+    private async void GetBreedsFromDb()
+    {
+        Task<ObservableCollection<BreedModel>> getBreedsFromDb = new BreedsRepository().SelectAllBreeds();
+        //Breeds = new BreedsRepository().SelectAllBreeds();
+        Breeds = await getBreedsFromDb;
 
-    private void GetBreeds()
+        //Task<string> getStringTask = client.GetStringAsync("https://learn.microsoft.com/dotnet");
+
+        //string contents = await getStringTask;
+    }
+
+    private void GetBreedsFromAPI()
     {
 
         Task.Run( ()=> GetButtonText = "Fetching Breeds...");

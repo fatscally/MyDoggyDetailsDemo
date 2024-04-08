@@ -10,11 +10,27 @@ internal class BreedsRepository : BaseRepository
     {
         foreach (var model in breedModels)
         {
+            SaveBreed(model);
+        }            
+     }
+
+    internal async Task SaveBreed(BreedModel model)
+    {
+        BreedModel bm = (from b in conn.Table<BreedModel>()
+                         where b.Id == model.Id
+                         select b).FirstOrDefault();
+        if (bm != null)
+
+            _ = Update(model);
+        else
             _ = Insert(model);
-        }
     }
 
-    internal ObservableCollection<BreedModel> SelectAllBreeds()
+
+
+
+
+    internal async Task<ObservableCollection<BreedModel>> SelectAllBreeds()
     {
         var results = conn.Table<BreedModel>().ToObservableCollection();
 

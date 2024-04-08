@@ -4,8 +4,7 @@ using SQLite;
 
 namespace MyDoggyDetails.Models;
 
-[INotifyPropertyChanged]
-public abstract partial class BaseTableModel
+public abstract partial class BaseTableModel : ObservableObject
 {
 
     [ObservableProperty]

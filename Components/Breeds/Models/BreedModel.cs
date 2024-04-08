@@ -1,15 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MyDoggyDetails.Utilities.Pictures;
 using SQLite;
 
 
 namespace MyDoggyDetails.Models;
 
 [Table("Breeds")]
-public partial class BreedModel : ObservableObject
+public partial class BreedModel : BaseTableModel
 {
-    [ObservableProperty]
-    private int id;
+    //[ObservableProperty]
+    //private int id;
     [ObservableProperty]
     private string name;
     [ObservableProperty]
@@ -49,14 +48,14 @@ public partial class BreedModel : ObservableObject
     [ObservableProperty]
     private byte[] localIcon;
 
-    private Image imgStream = new();
+    //private Image imgStream = new();
 
-    [Ignore]
-    public Image ImgStream
-    {
-        get => imgStream;
-        set => SetProperty(ref imgStream, value);
-    }
+    //[Ignore]
+    //public Image ImgStream
+    //{
+    //    get => imgStream;
+    //    set => SetProperty(ref imgStream, value);
+    //}
 
 
 
