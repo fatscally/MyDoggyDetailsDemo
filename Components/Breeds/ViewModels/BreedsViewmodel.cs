@@ -24,23 +24,29 @@ internal partial class BreedsViewmodel : BaseViewModel
     [ObservableProperty]
     private BreedModel selectedBreed;
 
-
+    [ObservableProperty]
+    int dogId;
+    partial void OnDogIdChanged(int value)
+    {
+        GetBreedById(value);
+       
+    }
 
 
     public BreedsViewmodel()
     {
 
-            #if (ANDROID)
+#if (ANDROID)
                     pictures = new PicturesAndroid();
 
-            #elif (WINDOWS)
+#elif (WINDOWS)
 
-            #elif (__IOS__)
+#elif (__IOS__)
 
-            #endif
+#endif
 
-        GetBreedsFromDb();
 
+            GetBreedsFromDb();
 
         Online();
     }
@@ -113,6 +119,13 @@ internal partial class BreedsViewmodel : BaseViewModel
     [ObservableProperty]
     public string getButtonText = "Get API";
 
+
+    private async void GetBreedById(int id)
+    {
+        Task<BreedModel> getBreedsById = new BreedsRepository().SelectBreedById(id);
+        SelectedBreed = await getBreedsById;
+
+    }
 
     private async void GetBreedsFromDb()
     {

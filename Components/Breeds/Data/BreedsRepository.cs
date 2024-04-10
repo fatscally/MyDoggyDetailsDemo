@@ -6,6 +6,8 @@ namespace MyDoggyDetails.Data;
 
 internal class BreedsRepository : BaseRepository
 {
+
+
     internal async Task InsertList(List<BreedModel> breedModels)
     {
         foreach (var model in breedModels)
@@ -13,6 +15,8 @@ internal class BreedsRepository : BaseRepository
             SaveBreed(model);
         }            
      }
+
+
 
     internal async Task SaveBreed(BreedModel model)
     {
@@ -28,11 +32,17 @@ internal class BreedsRepository : BaseRepository
 
 
 
-
-
     internal async Task<ObservableCollection<BreedModel>> SelectAllBreeds()
     {
         var results = conn.Table<BreedModel>().ToObservableCollection();
+
+        return results;
+    }
+
+
+    internal async Task<BreedModel> SelectBreedById(int id)
+    {
+        BreedModel results = conn.Table<BreedModel>().FirstOrDefault(b => b.Id == id);
 
         return results;
     }
