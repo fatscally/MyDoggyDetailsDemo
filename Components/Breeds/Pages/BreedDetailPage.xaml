@@ -19,21 +19,40 @@
 
     <VerticalStackLayout>
 
+        <!--<Image  HorizontalOptions="StartAndExpand"
+                Source="{Binding SelectedBreed.Image_url, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
+                Aspect="AspectFill"  MaximumWidthRequest="400"/>-->
+
+        
         <Image  HorizontalOptions="StartAndExpand"
-                Source="{Binding SelectedBreed.LocalImage, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
-                Aspect="AspectFill"  MaximumWidthRequest="400"/>
+               Source="{Binding SelectedBreed.Image_url}" 
+               Aspect="AspectFill"  MaximumWidthRequest="400"/>
+
+        <Label  Text="{Binding SelectedBreed.LocalImagePath}" Padding="20,20,0,0"/>
+
 
         <Label  Text="Temperament: " Padding="20,20,0,0"/>
         <Label  Text="{Binding SelectedBreed.Temperament}" Padding="20,0,0,0"/>
 
 
-        <HorizontalStackLayout Padding="20" >
+        <HorizontalStackLayout Padding="20, 20, 0, 0" >
             <Label Text="Heigh range: " />
             <Label Text="{Binding SelectedBreed.Imperial_height}" />
+            <Label Text=" ins." />
             <Label Padding="30,0,0,0" Text="Weight range: " />
             <Label Text="{Binding SelectedBreed.Imperial_weight}" />
+            <Label Text=" lbs" />
         </HorizontalStackLayout>
-        
+
+        <HorizontalStackLayout Padding="20, 0, 0, 0" >
+            <Label Text="Heigh range: " />
+            <Label Text="{Binding SelectedBreed.Metric_height}" />
+            <Label Text=" cms." />
+            <Label Padding="30,0,0,0" Text="Weight range: " />
+            <Label Text="{Binding SelectedBreed.Metric_weight}" />
+            <Label Text=" kgs" />
+        </HorizontalStackLayout>
+
         <HorizontalStackLayout Padding="20" >
             <Label Text="Breed Group: " />
             <Label Text="{Binding SelectedBreed.Breed_group}" />

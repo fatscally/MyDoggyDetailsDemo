@@ -45,10 +45,10 @@ public class PicturesAndroid : IDoggyPictures
         byte[] byteArray = null;
         HttpClient client = new();
         Stream stream = await client.GetStreamAsync(uri).ConfigureAwait(false);
-
-
-        BinaryReader reader = new BinaryReader(stream);
-        byteArray = reader.ReadBytes(1470000);
+        
+            BinaryReader reader = new BinaryReader(stream);
+        
+            byteArray = reader.ReadBytes(1470000);
 
 
         stream.Flush();
@@ -57,6 +57,7 @@ public class PicturesAndroid : IDoggyPictures
 
         return byteArray;
     }
+
 
     //ANDROID: Working OK. :)  Produced about 10% smaller file over Resize for my needs.
     //WINDOWS: Using a small image DownsizeImage results in a 10x larger file! Disaster!! :(

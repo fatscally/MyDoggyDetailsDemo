@@ -39,11 +39,17 @@ public partial class BreedModel : BaseTableModel
     private int image_width;
     [ObservableProperty]
     private int image_height;
+
+
     [ObservableProperty]
     private string image_url;
-    [ObservableProperty]
-    private byte[] localImage;
 
+
+    //[ObservableProperty]
+    //private byte[] localImage;
+
+    [ObservableProperty]
+    private string localImagePath;
 
     [ObservableProperty]
     private byte[] localIcon;

@@ -23,6 +23,7 @@ internal partial class BreedDetailsViewmodel : BaseViewModel
         GetBreedById(value);
     }
 
+    
 
     public BreedDetailsViewmodel()
     {

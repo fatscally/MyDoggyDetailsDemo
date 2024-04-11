@@ -7,6 +7,7 @@ using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
 using MyDoggyDetails.Utilities.Pictures;
 using System.Collections.ObjectModel;
+using MyDoggyDetails.Utilities;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -29,7 +30,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     partial void OnDogIdChanged(int value)
     {
         GetBreedById(value);
-       
+
     }
 
 
@@ -46,7 +47,7 @@ internal partial class BreedsViewmodel : BaseViewModel
 #endif
 
 
-            GetBreedsFromDb();
+        GetBreedsFromDb();
 
         Online();
     }
@@ -61,7 +62,7 @@ internal partial class BreedsViewmodel : BaseViewModel
 
         if (accessType == NetworkAccess.Internet)
         {
-                BackgroundBrush = Brush.Green;
+            BackgroundBrush = Brush.Green;
         }
         else { BackgroundBrush = Brush.Gray; }
     }
@@ -91,16 +92,22 @@ internal partial class BreedsViewmodel : BaseViewModel
     {
         int i = 0;
 
-        foreach(BreedModel b in Breeds)
+        
+        foreach (BreedModel b in Breeds)
         {
 
-                Task<byte[]> downloadimage = pictures.DownloadImageFromWeb(new Uri(b.Image_url));
+            Task<byte[]> downloadimage = pictures.DownloadImageFromWeb(new Uri(b.Image_url));
 
-                b.LocalImage = await downloadimage;
+            byte[] imgBytes = await downloadimage;
 
-                b.LocalIcon = pictures.DownsizeImage(b.LocalImage, 60, 60);
+            await File.WriteAllBytesAsync(Connection.photosPath, imgBytes);
 
-                await new BreedsRepository().SaveBreed(b);
+            //b.LocalImage = await downloadimage;
+            b.LocalImagePath = Path.Combine(Connection.photosPath, Path.GetFileName(b.Image_url)); 
+
+            b.LocalIcon = pictures.DownsizeImage(imgBytes, 60, 60);
+
+            await new BreedsRepository().SaveBreed(b);
 
             i++;
         }
@@ -137,7 +144,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     private void GetBreedsFromAPI()
     {
 
-        Task.Run( ()=> GetButtonText = "Fetching Breeds...");
+        Task.Run(() => GetButtonText = "Fetching Breeds...");
 
         Breeds.Clear();
 
@@ -150,7 +157,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     }
 
 
-   
+
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(GetButtonText))]
