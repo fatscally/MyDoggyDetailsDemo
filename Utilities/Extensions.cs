@@ -64,33 +64,7 @@
 
         }
 
-        /// <summary>
-        /// Pass in the full path and return only the filename.
-        /// </summary>
-        /// <param name="path">c:\myfolder\myfile.txt</param>
-        /// <returns>myfile.txt</returns>
-        public static string GetFileNameFromPath(this string path)
-        {
 
-            try
-            {
-
-                int idx = path.LastIndexOf("\\", StringComparison.Ordinal);
-
-            string pathOut = path.Substring(idx + 1); 
-
-            return pathOut;
-            }
-            catch (Exception ex)
-            {
-     
-
-                throw;
-            }
-            //return a substring starting from last forward slash position
-
-
-        }
 
 
     }

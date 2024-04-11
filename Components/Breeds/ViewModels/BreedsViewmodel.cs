@@ -2,12 +2,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.API;
-using MyDoggyDetails.Pages;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
+using MyDoggyDetails.Pages;
 using MyDoggyDetails.Utilities.Pictures;
 using System.Collections.ObjectModel;
-using MyDoggyDetails.Utilities;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -20,7 +19,10 @@ internal partial class BreedsViewmodel : BaseViewModel
     IDoggyPictures pictures;
 
     [ObservableProperty]
-    private ObservableCollection<BreedModel> breeds;
+    private string feedbackMessage = "Using Dog API";
+
+    [ObservableProperty]
+    private ObservableCollection<BreedModel> breeds = new();
 
     [ObservableProperty]
     private BreedModel selectedBreed;
@@ -33,12 +35,15 @@ internal partial class BreedsViewmodel : BaseViewModel
 
     }
 
+    [ObservableProperty]
+    private Brush backgroundBrush = Brush.White;
+
 
     public BreedsViewmodel()
     {
 
 #if (ANDROID)
-                    pictures = new PicturesAndroid();
+                                pictures = new PicturesAndroid();
 
 #elif (WINDOWS)
 
@@ -47,14 +52,34 @@ internal partial class BreedsViewmodel : BaseViewModel
 #endif
 
 
-        GetBreedsFromDb();
+        var t = Task.Run(() => GetBreedsFromDb());
 
-        Online();
+        if (Breeds.Count == 0)
+        {
+            _ = Task.Run(() => GetBreedsFromAPI());
+            _ = Task.Run(() => GetImagesForBreeds());
+        }
+
+    }
+    private async void GetBreedsFromDb()
+    {
+        await Task.Run(() => HourglassRunning = true);
+        await Task.Run(() => FeedbackMessage = "Loading from My Doggies database... ");
+
+        Task<ObservableCollection<BreedModel>> getBreedsFromDb = new BreedsRepository().SelectAllBreeds();
+        Breeds = await getBreedsFromDb;
+        await Task.Run(() => HourglassRunning = false);
+        await Task.Run(() => FeedbackMessage = "Loaded " + Breeds.Count + " doggies.");
+
     }
 
     [ObservableProperty]
-    private Brush backgroundBrush = Brush.White;
+    private bool hourglassRunning;
+    partial void OnHourglassRunningChanged(bool value) { HourglassVisible = HourglassRunning; }
 
+
+    [ObservableProperty]
+    private bool hourglassVisible;
 
     private void Online()
     {
@@ -81,10 +106,10 @@ internal partial class BreedsViewmodel : BaseViewModel
     }
 
     [RelayCommand]
-    public async void DownloadImage()
+    public void DownloadImage()
     {
 
-        GetImagesForBreeds();
+        _ = Task.Run(() => GetImagesForBreeds());
 
     }
 
@@ -92,7 +117,8 @@ internal partial class BreedsViewmodel : BaseViewModel
     {
         int i = 0;
 
-        
+        await Task.Run(() => HourglassRunning = true);
+
         foreach (BreedModel b in Breeds)
         {
 
@@ -103,14 +129,18 @@ internal partial class BreedsViewmodel : BaseViewModel
             await File.WriteAllBytesAsync(Connection.photosPath, imgBytes);
 
             //b.LocalImage = await downloadimage;
-            b.LocalImagePath = Path.Combine(Connection.photosPath, Path.GetFileName(b.Image_url)); 
+            b.LocalImagePath = Path.Combine(Connection.photosPath, Path.GetFileName(b.Image_url));
 
             b.LocalIcon = pictures.DownsizeImage(imgBytes, 60, 60);
 
             await new BreedsRepository().SaveBreed(b);
 
             i++;
+
+            await Task.Run(() => FeedbackMessage = "downloading images from Dog API... " + i.ToString());
+
         }
+        await Task.Run(() => HourglassRunning = false);
 
         GetButtonText = $"{i}";
     }
@@ -134,17 +164,14 @@ internal partial class BreedsViewmodel : BaseViewModel
 
     }
 
-    private async void GetBreedsFromDb()
-    {
-        Task<ObservableCollection<BreedModel>> getBreedsFromDb = new BreedsRepository().SelectAllBreeds();
-        Breeds = await getBreedsFromDb;
 
-    }
 
-    private void GetBreedsFromAPI()
+    private async void GetBreedsFromAPI()
     {
 
-        Task.Run(() => GetButtonText = "Fetching Breeds...");
+        await Task.Run(() => FeedbackMessage = "Downloading from The Dog API... ");
+        await Task.Run(() => HourglassRunning = true);
+
 
         Breeds.Clear();
 
@@ -152,7 +179,9 @@ internal partial class BreedsViewmodel : BaseViewModel
 
         Breeds = http.GetAllBreeds().Result.ToObservableCollection<BreedModel>();
 
-        Task.Run(() => GetButtonText = "Found " + Breeds.Count + " breeds");
+        await Task.Run(() => FeedbackMessage = "Found " + Breeds.Count + " breeds");
+
+        await Task.Run(() => HourglassRunning = false);
 
     }
 

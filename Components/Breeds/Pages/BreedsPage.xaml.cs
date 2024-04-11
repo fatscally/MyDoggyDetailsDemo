@@ -9,9 +9,5 @@ public partial class BreedsPage : ContentPage
 		InitializeComponent();
 	}
 
-    private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
-    {
-        BreedsViewmodel viewmodel = this.BindingContext as BreedsViewmodel;
-        viewmodel.GoToBreedDetailsPageCommand.Execute(viewmodel.SelectedBreed.Id);
-    }
+
 }

@@ -23,10 +23,14 @@
                 Source="{Binding SelectedBreed.Image_url, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
                 Aspect="AspectFill"  MaximumWidthRequest="400"/>-->
 
-        
-        <Image  HorizontalOptions="StartAndExpand"
-               Source="{Binding SelectedBreed.Image_url}" 
-               Aspect="AspectFill"  MaximumWidthRequest="400"/>
+
+        <Image HorizontalOptions="StartAndExpand"
+               Aspect="AspectFill"  MaximumWidthRequest="400">
+            <Image.Source>
+                <UriImageSource Uri="{Binding SelectedBreed.Image_url}"
+                                CacheValidity="10:00:00:00" />
+            </Image.Source>
+        </Image>
 
         <Label  Text="{Binding SelectedBreed.LocalImagePath}" Padding="20,20,0,0"/>
 

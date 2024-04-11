@@ -19,45 +19,51 @@
 
     <VerticalStackLayout>
         <Label 
-            Text="Using The Dog API"
+            Text="{Binding FeedbackMessage}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
 
-        <ListView ItemsSource="{Binding Breeds}" BackgroundColor="{Binding BackgroundBrush }" 
-                  SelectedItem="{Binding SelectedBreed}"
-                  HasUnevenRows="true" VerticalScrollBarVisibility="Always" MaximumHeightRequest="570"
-                  ItemTapped="ListView_ItemTapped"
-                  >
-            <ListView.ItemTemplate>
+        <ActivityIndicator IsRunning="{Binding HourglassRunning}" IsVisible="{Binding HourglassVisible}" />
+
+
+
+        <CollectionView ItemsSource="{Binding Breeds}" 
+                        VerticalScrollBarVisibility="Always" 
+                        MaximumHeightRequest="560"
+                        SelectedItem="{Binding SelectedBreed}"
+                        SelectionMode="Single"
+                        SelectionChangedCommandParameter="{Binding SelectedBreed.Id}"
+                        SelectionChangedCommand="{Binding GoToBreedDetailsPageCommand}">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Grid.RowSpan="2" 
-                                   Source="{Binding LocalIcon, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
-                                   Aspect="AspectFill"
-                                   HeightRequest="60"
-                                   WidthRequest="60" />
-                            <Label Grid.Column="1" 
-                                   Text="{Binding Name}"
-                                   FontAttributes="Bold" FontSize="Large" />
-                            <Label Grid.Row="1" 
-                                   Grid.Column="1" 
-                                   Text="{Binding Temperament}"
-                                   VerticalOptions="End" />
-                        </Grid>
-                    </ViewCell>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.RowSpan="2"
+                               Source="{Binding LocalIcon, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                               Aspect="AspectFill"
+                               HeightRequest="60"
+                               WidthRequest="60" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Name}"
+                               FontAttributes="Bold" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="{Binding Temperament}"
+                               FontAttributes="Italic"
+                               VerticalOptions="End" />
+                    </Grid>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
 
         <Label Text="mr.raymond.brennan@outlook.com"  TextColor="AliceBlue" BackgroundColor="#2196F3" FontSize="Medium" HorizontalTextAlignment="Center" Padding="30,10,30,10"/>
@@ -74,7 +80,7 @@
 
             <Button Text="Download img" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
                     Command="{Binding DownloadImageCommand}" />
-            
+
         </StackLayout>
 
     </VerticalStackLayout>
