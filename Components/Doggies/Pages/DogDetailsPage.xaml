@@ -9,11 +9,32 @@
     <ContentPage.BindingContext>
         <viewmodels:DogDetailsViewmodel/>
     </ContentPage.BindingContext>
-    
-    
-    <VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary Source="../../Dictionaries/CheckBoxSlider.xaml" />
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="10">
         <Label Text="Name:"/>
         <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" />
+
+        <Switch IsToggled="True" HorizontalOptions="Start">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="Pink" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="Blue" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Switch>
+
         <Label Text="Chip Number:"/>
         <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" />
         <Label Text="Breed:"/>
@@ -27,5 +48,5 @@
 
         <Button Text="Save" Command="{Binding SaveDogDetailsCommand}"/>
     </VerticalStackLayout>
-    
+
 </ContentPage>

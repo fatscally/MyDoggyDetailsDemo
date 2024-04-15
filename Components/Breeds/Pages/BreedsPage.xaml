@@ -17,25 +17,26 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding GetBreedsFromWebCommand}">
+        
     <VerticalStackLayout>
-        <Label 
-            Text="{Binding FeedbackMessage}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <HorizontalStackLayout>
+            <Label  Text="{Binding FeedbackMessage}" HorizontalOptions="Center"  Padding="5"/>
+        </HorizontalStackLayout>
 
 
-        <ActivityIndicator IsRunning="{Binding HourglassRunning}" IsVisible="{Binding HourglassVisible}" />
-
-
-
-        <CollectionView ItemsSource="{Binding Breeds}" 
+            <CollectionView ItemsSource="{Binding Breeds}" 
                         VerticalScrollBarVisibility="Always" 
                         MaximumHeightRequest="560"
                         SelectedItem="{Binding SelectedBreed}"
                         SelectionMode="Single"
                         SelectionChangedCommandParameter="{Binding SelectedBreed.Id}"
                         SelectionChangedCommand="{Binding GoToBreedDetailsPageCommand}">
+                  
             <CollectionView.ItemTemplate>
+              
+                
                 <DataTemplate>
                     <Grid Padding="10">
                         <Grid.RowDefinitions>
@@ -47,19 +48,25 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.RowSpan="2"
-                               Source="{Binding LocalIcon, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+
+
+                            <Image Grid.RowSpan="2"
+                               Source="{Binding LocalIcon, Mode=OneWay, 
+                                        Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                               
                                Aspect="AspectFill"
                                HeightRequest="60"
                                WidthRequest="60" />
-                        <Label Grid.Column="1"
+
+                        <HorizontalStackLayout HorizontalOptions="Start" Grid.Column="1" >
+                            <Label Grid.Row="1" Padding="10,0,10,0"
+                               Grid.Column="1" 
+                               Text="{Binding Id}"/>
+
+                            <Label Grid.Column="1"
                                Text="{Binding Name}"
                                FontAttributes="Bold" />
-                        <Label Grid.Row="1"
-                               Grid.Column="1"
-                               Text="{Binding Temperament}"
-                               FontAttributes="Italic"
-                               VerticalOptions="End" />
+                        </HorizontalStackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
@@ -73,15 +80,19 @@
                     Command="{Binding RefreshFromWeb_CommandClick}" />-->
 
             <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
-                    Command="{Binding GetBreedsFromWebCommand}" />
+                    Command="{Binding GetBreedsFromWebCommand}" IsVisible="false" />
 
             <Button Text="SAVE" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
-                    Command="{Binding SaveBreedsToDbCommand}" />
+                    Command="{Binding SaveBreedsToDbCommand}" IsVisible="false"/>
 
             <Button Text="Download img" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
-                    Command="{Binding DownloadImageCommand}" />
+                    Command="{Binding DownloadImageCommand}" IsVisible="false"/>
 
         </StackLayout>
 
     </VerticalStackLayout>
+
+    </RefreshView>
+    
+    
 </ContentPage>

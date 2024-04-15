@@ -7,8 +7,25 @@ namespace MyDoggyDetails.Models;
 [Table("Breeds")]
 public partial class BreedModel : BaseTableModel
 {
-    //[ObservableProperty]
-    //private int id;
+
+
+    [ObservableProperty]
+    [property: PrimaryKey]
+    private int id;
+
+    ////private int id;
+
+    //[property: PrimaryKey]
+    //public int Id
+    //{
+    //    get { return id; }
+    //    set
+    //    {
+    //        id = value;
+
+    //    }
+    //}
+
     [ObservableProperty]
     private string name;
     [ObservableProperty]

@@ -1,14 +1,8 @@
-﻿using MyDoggyDetails.Base;
-using MyDoggyDetails.Models;
+﻿using MyDoggyDetails.Models;
 using System.Diagnostics;
 using System.Text.Json;
 
-
-
-
 namespace MyDoggyDetails.API;
-
-
 
 public class DogsRestService
 {
@@ -36,9 +30,6 @@ public class DogsRestService
     public async Task<BreedModel[]> GetAllBreedsAsync()
     {
 
-
-        //Uri uri = new Uri(string.Format("https://dog.ceo/api/breeds/list/all", string.Empty));
-
         Uri uri = new Uri(string.Format("https://api.thedogapi.com/v1/breeds", string.Empty));
 
         try
@@ -62,7 +53,6 @@ public class DogsRestService
 
         return Breeds;
     }
-
 
 
 }

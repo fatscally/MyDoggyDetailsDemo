@@ -19,10 +19,12 @@ internal partial class BreedsViewmodel : BaseViewModel
     IDoggyPictures pictures;
 
     [ObservableProperty]
-    private string feedbackMessage = "Using Dog API";
+    private string feedbackMessage = "Using Local Doggie Database";
 
     [ObservableProperty]
     private ObservableCollection<BreedModel> breeds = new();
+
+
 
     [ObservableProperty]
     private BreedModel selectedBreed;
@@ -52,25 +54,30 @@ internal partial class BreedsViewmodel : BaseViewModel
 #endif
 
 
-        var t = Task.Run(() => GetBreedsFromDb());
+        Task.Run(() => LoadUpBreeds());
+
+    }
+
+
+    private async void LoadUpBreeds()
+    {
+        GetBreedsFromDb();
 
         if (Breeds.Count == 0)
         {
-            _ = Task.Run(() => GetBreedsFromAPI());
-            _ = Task.Run(() => GetImagesForBreeds());
+            FeedbackMessage = "0 dogs found in local database. Pull down to refresh.";
         }
 
     }
+
+
     private async void GetBreedsFromDb()
     {
-        await Task.Run(() => HourglassRunning = true);
-        await Task.Run(() => FeedbackMessage = "Loading from My Doggies database... ");
-
-        Task<ObservableCollection<BreedModel>> getBreedsFromDb = new BreedsRepository().SelectAllBreeds();
-        Breeds = await getBreedsFromDb;
-        await Task.Run(() => HourglassRunning = false);
-        await Task.Run(() => FeedbackMessage = "Loaded " + Breeds.Count + " doggies.");
-
+        Breeds = new BreedsRepository().SelectAllBreeds();
+    }
+    partial void OnBreedsChanged(ObservableCollection<BreedModel> value)
+    {
+        _ = GetImagesForBreedsFromAPI();
     }
 
     [ObservableProperty]
@@ -95,8 +102,15 @@ internal partial class BreedsViewmodel : BaseViewModel
     [RelayCommand]
     public void GetBreedsFromWeb()
     {
-        Task.Run(() => GetButtonText = "clicked...");
+        FeedbackMessage = "Refreshing content from API...";
+
         GetBreedsFromAPI();
+
+        _ = GetImagesForBreedsFromAPI();
+
+        SaveBreedsToDb();
+
+        IsRefreshing = false;
     }
 
     [RelayCommand]
@@ -106,21 +120,58 @@ internal partial class BreedsViewmodel : BaseViewModel
     }
 
     [RelayCommand]
-    public void DownloadImage()
+    public void DownloadImages()
     {
 
-        _ = Task.Run(() => GetImagesForBreeds());
+        _ = GetImagesForBreedsFromAPI();
 
     }
 
-    private async Task GetImagesForBreeds()
+
+
+    [ObservableProperty]
+    private bool isRefreshing;
+
+    private bool waitingForApi;
+
+
+
+    private async void GetBreedById(int id)
+    {
+        Task<BreedModel> getBreedsById = new BreedsRepository().SelectBreedById(id);
+        SelectedBreed = await getBreedsById;
+
+    }
+
+    private async void GetBreedsFromAPI()
+    {
+        waitingForApi = true;
+
+        await Task.Run(() => FeedbackMessage = "Downloading from The Dog API... ");
+
+        Breeds.Clear();
+
+        DogItemManager http = new(new DogsRestService());
+
+
+        Breeds = http.GetAllBreeds().Result.ToObservableCollection<BreedModel>();
+
+
+        await Task.Run(() => FeedbackMessage = "Found " + Breeds.Count + " breeds");
+        
+        waitingForApi = false;
+
+    }
+
+    private async Task GetImagesForBreedsFromAPI()
     {
         int i = 0;
 
-        await Task.Run(() => HourglassRunning = true);
+
 
         foreach (BreedModel b in Breeds)
         {
+            if (b.LocalIcon != null) continue;
 
             Task<byte[]> downloadimage = pictures.DownloadImageFromWeb(new Uri(b.Image_url));
 
@@ -140,10 +191,11 @@ internal partial class BreedsViewmodel : BaseViewModel
             await Task.Run(() => FeedbackMessage = "downloading images from Dog API... " + i.ToString());
 
         }
-        await Task.Run(() => HourglassRunning = false);
+
 
         GetButtonText = $"{i}";
     }
+
 
     async void SaveAsync()
     {
@@ -151,39 +203,6 @@ internal partial class BreedsViewmodel : BaseViewModel
     }
 
 
-
-
-    [ObservableProperty]
-    public string getButtonText = "Get API";
-
-
-    private async void GetBreedById(int id)
-    {
-        Task<BreedModel> getBreedsById = new BreedsRepository().SelectBreedById(id);
-        SelectedBreed = await getBreedsById;
-
-    }
-
-
-
-    private async void GetBreedsFromAPI()
-    {
-
-        await Task.Run(() => FeedbackMessage = "Downloading from The Dog API... ");
-        await Task.Run(() => HourglassRunning = true);
-
-
-        Breeds.Clear();
-
-        DogItemManager http = new(new DogsRestService());
-
-        Breeds = http.GetAllBreeds().Result.ToObservableCollection<BreedModel>();
-
-        await Task.Run(() => FeedbackMessage = "Found " + Breeds.Count + " breeds");
-
-        await Task.Run(() => HourglassRunning = false);
-
-    }
 
 
 
@@ -205,6 +224,8 @@ internal partial class BreedsViewmodel : BaseViewModel
         await Shell.Current.GoToAsync($"{nameof(BreedDetailPage)}?DogId={SelectedBreed.Id}");
     }
 
+    [ObservableProperty]
+    public string getButtonText = "Get API";
 
 
 }

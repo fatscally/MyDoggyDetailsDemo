@@ -27,7 +27,7 @@ public partial class DogDetailsViewmodel : BaseViewModel
     [RelayCommand]
     public void SaveDogDetails()
     {
-        new DoggyRepository().Save(selectedDoggy);
+        new DoggyRepository().Save(SelectedDoggy);
     }
 
 }

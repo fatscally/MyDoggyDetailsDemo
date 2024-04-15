@@ -32,7 +32,8 @@
             </Image.Source>
         </Image>
 
-        <Label  Text="{Binding SelectedBreed.LocalImagePath}" Padding="20,20,0,0"/>
+        <Label  Text="{Binding SelectedBreed.Id}" Padding="20,20,0,0"/>
+
 
 
         <Label  Text="Temperament: " Padding="20,20,0,0"/>

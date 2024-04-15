@@ -32,7 +32,7 @@ internal class BreedsRepository : BaseRepository
 
 
 
-    internal async Task<ObservableCollection<BreedModel>> SelectAllBreeds()
+    internal ObservableCollection<BreedModel> SelectAllBreeds()
     {
         var results = conn.Table<BreedModel>().ToObservableCollection();
 
