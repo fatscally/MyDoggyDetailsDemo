@@ -10,9 +10,7 @@
         <viewmodels:DogDetailsViewmodel/>
     </ContentPage.BindingContext>
 
-    <ContentPage.Resources>
-        <ResourceDictionary Source="../../Dictionaries/CheckBoxSlider.xaml" />
-    </ContentPage.Resources>
+
 
     <VerticalStackLayout Padding="10">
         <Label Text="Name:"/>
