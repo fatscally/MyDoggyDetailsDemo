@@ -14,6 +14,9 @@ public partial class DogDetailsViewmodel : BaseViewModel
 {
 
     [ObservableProperty]
+    private string datePickerMaxDate = DateTime.Today.ToString();
+
+    [ObservableProperty]
     int dogId;
     partial void OnDogIdChanged(int value)
     {

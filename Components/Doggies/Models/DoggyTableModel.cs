@@ -45,7 +45,8 @@ public partial class DoggyTableModel : BaseTableModel
             Gender = Genders.Female;
     }
 
-
+    [ObservableProperty]
+    private string joinedFamilyDate;
 
     //[ObservableProperty]
     //private string formattedAge;

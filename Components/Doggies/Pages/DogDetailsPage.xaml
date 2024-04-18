@@ -24,11 +24,20 @@
         <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.BreedId}" FontSize="Large" />
         <Label Text="Colour:" />
         <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" />
-        <Label Text="Date Of Birth:"/>
-        <DatePicker MinimumDate="01/01/1970" FontSize="Large"
-            MaximumDate="{Binding MaxDate}"
-            Date="{Binding SelectedDoggy.DateOfBirth}" />
-
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <VerticalStackLayout HorizontalOptions="StartAndExpand">
+                <Label Text="Date Of Birth:"/>
+                <DatePicker MinimumDate="01/01/1970" FontSize="Large"
+                            MaximumDate="{Binding DatePickerMaxDate}"
+                            Date="{Binding SelectedDoggy.DateOfBirth}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout HorizontalOptions="EndAndExpand">
+                <Label Text="Joined our family:"/>
+                <DatePicker MinimumDate="01/01/1970" FontSize="Large"
+                            MaximumDate="{Binding DatePickerMaxDate}"
+                            Date="{Binding SelectedDoggy.JoinedFamilyDate}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
 
         <Label Text="Gender:"/>
 
@@ -39,7 +48,7 @@
                 <Label.Triggers>
                     <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference styleSwitch}, Path=IsToggled}" Value="true">
                         <Setter Property="FontAttributes" Value="Bold" />
-                            <Setter Property="FontSize" Value="Large" />
+                        <Setter Property="FontSize" Value="Large" />
                         <Setter Property="TextColor" Value="CornflowerBlue" />
                     </DataTrigger>
                 </Label.Triggers>
