@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MyDoggyDetails.Enums;
 
 
 namespace MyDoggyDetails.Models;
@@ -30,9 +31,21 @@ public partial class DoggyTableModel : BaseTableModel
     public string chipNumber;
 
 
-    //should be Genders enum but sqlite doesn't like the enum afaik
+
     [ObservableProperty]
-    public int sex;
+    private Genders gender;
+
+    [ObservableProperty]
+    public bool sex;
+    partial void OnSexChanged(bool value)
+    {
+        if (value)
+            Gender = Genders.Male;
+        else
+            Gender = Genders.Female;
+    }
+
+
 
     [ObservableProperty]
     private string formattedAge;

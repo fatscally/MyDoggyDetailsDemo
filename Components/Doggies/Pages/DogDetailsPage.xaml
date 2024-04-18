@@ -16,33 +16,39 @@
         <Label Text="Name:"/>
         <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" />
 
-        <Switch IsToggled="True" HorizontalOptions="Start">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="On">
-                        <VisualState.Setters>
-                            <Setter Property="ThumbColor" Value="Pink" />
-                        </VisualState.Setters>
-                    </VisualState>
-                    <VisualState x:Name="Off">
-                        <VisualState.Setters>
-                            <Setter Property="ThumbColor" Value="Blue" />
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-        </Switch>
+
 
         <Label Text="Chip Number:"/>
         <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" />
         <Label Text="Breed:"/>
         <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.BreedId}" FontSize="Large" />
-        <Label Text="Colour:"/>
+        <Label Text="Colour:"
         <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" />
         <Label Text="Date Of Birth:"/>
         <Entry Text="{Binding SelectedDoggy.DateOfBirth}" FontSize="Large" />
+
+
         <Label Text="Gender:"/>
-        <Entry Text="{Binding SelectedDoggy.Sex}" FontSize="Large"/>
+
+        <HorizontalStackLayout HorizontalOptions="Start">
+
+
+            <Label Text="{Binding SelectedDoggy.Gender}" FontSize="Large" TextColor="Pink" FontAttributes="Bold" HorizontalOptions="Start" MinimumWidthRequest="100">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference styleSwitch}, Path=IsToggled}" Value="true">
+                        <Setter Property="FontAttributes" Value="Bold" />
+                            <Setter Property="FontSize" Value="Large" />
+                        <Setter Property="TextColor" Value="CornflowerBlue" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <Switch x:Name="styleSwitch" IsToggled="{Binding SelectedDoggy.Sex, Mode=TwoWay}" VerticalOptions="Start">
+
+            </Switch>
+
+        </HorizontalStackLayout>
+
 
         <Button Text="Save" Command="{Binding SaveDogDetailsCommand}"/>
     </VerticalStackLayout>

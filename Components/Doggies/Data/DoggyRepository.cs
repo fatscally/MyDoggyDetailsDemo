@@ -56,9 +56,9 @@ internal class DoggyRepository : BaseRepository
     internal void InsertDoggyMetadata()
     {
         //base.Insert(model)
-        Insert(new DoggyTableModel { GivenName = "Nala", DateOfBirth = "2022-06-18 00:00:00", Sex = 1, ChipNumber = "abc123" });
-        Insert(new DoggyTableModel { GivenName = "Tiko", DateOfBirth = "2021-10-18 00:00:00", Sex = 0, ChipNumber = "abc123" });
-        Insert(new DoggyTableModel { GivenName = "Fido", DateOfBirth = "2020-01-01 00:00:00", Sex = 0, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { GivenName = "Nala", DateOfBirth = "2022-06-18 00:00:00", Sex = false, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { GivenName = "Tiko", DateOfBirth = "2021-10-18 00:00:00", Sex = true, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { GivenName = "Fido", DateOfBirth = "2020-01-01 00:00:00", Sex = true, ChipNumber = "abc123" });
     }
 
 

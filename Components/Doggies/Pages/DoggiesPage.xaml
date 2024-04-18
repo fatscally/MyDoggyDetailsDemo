@@ -76,10 +76,14 @@
                              HeightRequest="30" 
                              Command="{Binding GoToDogDetailsPageCommand}" 
                              CommandParameter="{Binding SelectedDoggy.Id}"/>
+                
+                
             </StackLayout>
 
+            <Label Text="{Binding SelectedDoggy.Sex}" FontSize="Large" HorizontalOptions="Start"/>
 
             <StackLayout Orientation="Vertical">
+                    
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label Text="{Binding TotalDogDays}" FontSize="Small" HorizontalOptions="End" />
                     <Label Text=" days" FontSize="Small" HorizontalOptions="End" />
@@ -87,6 +91,8 @@
 
                 <Label Text="{Binding FormattedAge}" FontSize="Medium" HorizontalOptions="CenterAndExpand" />
                 <Label Text="approximately" FontSize="Micro" HorizontalOptions="End" />
+    
+
             </StackLayout>
 
         </VerticalStackLayout>
