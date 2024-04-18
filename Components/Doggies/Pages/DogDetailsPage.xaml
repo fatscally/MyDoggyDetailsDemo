@@ -22,10 +22,12 @@
         <Entry Text="{Binding SelectedDoggy.ChipNumber}" FontSize="Large" />
         <Label Text="Breed:"/>
         <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.BreedId}" FontSize="Large" />
-        <Label Text="Colour:"
+        <Label Text="Colour:" />
         <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" />
         <Label Text="Date Of Birth:"/>
-        <Entry Text="{Binding SelectedDoggy.DateOfBirth}" FontSize="Large" />
+        <DatePicker MinimumDate="01/01/1970" FontSize="Large"
+            MaximumDate="{Binding MaxDate}"
+            Date="{Binding SelectedDoggy.DateOfBirth}" />
 
 
         <Label Text="Gender:"/>

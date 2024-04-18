@@ -47,10 +47,10 @@ public partial class DoggyTableModel : BaseTableModel
 
 
 
-    [ObservableProperty]
-    private string formattedAge;
-    [ObservableProperty]
-    private string totalDogDays;
+    //[ObservableProperty]
+    //private string formattedAge;
+    //[ObservableProperty]
+    //private string totalDogDays;
 
 
 
