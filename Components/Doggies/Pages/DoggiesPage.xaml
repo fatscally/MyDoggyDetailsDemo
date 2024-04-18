@@ -72,7 +72,7 @@
                     <DatePicker x:Name="DogDob" Date="{Binding SelectedDoggy.DateOfBirth, Mode=TwoWay}" FontSize="Large" 
                                 HorizontalOptions="Center" />
                 </StackLayout>
-                <ImageButton Source="dog_icon_128.png" WidthRequest="30" 
+                <ImageButton Source="edit.png" WidthRequest="30" 
                              HeightRequest="30" 
                              Command="{Binding GoToDogDetailsPageCommand}" 
                              CommandParameter="{Binding SelectedDoggy.Id}"/>

@@ -84,7 +84,16 @@
 		  <PackagePath>\</PackagePath>
 		</MauiIcon>
 		<MauiIcon Include="Resources\AppIcon\appiconxx.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiImage Include="Resources\Images\info_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiIcon Include="Resources\Images\male_blue_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiIcon>
 		<MauiImage Include="Resources\Images\dog_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\female_pink_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\species_icon_128.png">
@@ -128,6 +137,9 @@
 	  <None Remove="Database\doggy.db3" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\dog_icon_128.png" />
+	  <None Remove="Resources\Images\female_pink_icon_128.png" />
+	  <None Remove="Resources\Images\info_icon_128.png" />
+	  <None Remove="Resources\Images\male_blue_icon_128.png" />
 	  <None Remove="Resources\Images\species_icon_128.png" />
 	  <None Remove="Resources\Images\vet_icon_128.png" />
 	  <None Remove="Resources\Splash\splash.png" />
@@ -165,6 +177,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\About\Pages\AboutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\Breeds\Pages\BreedDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
