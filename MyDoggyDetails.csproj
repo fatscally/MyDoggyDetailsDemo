@@ -196,6 +196,9 @@
 	  <Compile Update="Components\Doggies\Pages\DoggiesPage.xaml.cs">
 	    <DependentUpon>DoggiesPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Components\Doggies\Pages\MedicalRecordsPage.xaml.cs">
+	    <DependentUpon>MedicalRecordsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -215,6 +218,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\Doggies\Pages\DoggiesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Doggies\Pages\MedicalRecordDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Doggies\Pages\MedicalRecordsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\Maps\Parks\Pages\ParksPage.xaml">
