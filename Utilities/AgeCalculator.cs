@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using static Microsoft.Maui.ApplicationModel.Permissions;
 
 namespace MyDoggyDetails.Utilities
 {
@@ -188,6 +187,31 @@ namespace MyDoggyDetails.Utilities
 
             return sb.ToString();
         }
+
+        /// <summary>
+        /// This takes the age and tries to format it into readable English text.
+        /// </summary>
+        /// <returns>A string like "1yr, 2m."</returns>
+        public string FormattedAgeShort()
+        {
+
+            if (totalDogDays <= 0) { return string.Empty; }
+
+            StringBuilder sb = new StringBuilder(32);
+
+
+                sb.Append(years.ToString());
+                sb.Append("yr,");
+
+
+                sb.Append(months.ToString());
+                sb.Append("m.");
+
+
+
+            return sb.ToString();
+        }
+
 
     }
 }

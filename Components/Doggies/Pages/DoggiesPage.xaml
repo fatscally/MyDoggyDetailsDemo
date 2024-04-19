@@ -13,38 +13,36 @@
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="StartAndExpand">
 
-            <ListView  ItemsSource="{Binding Doggies}" SelectionMode="Single" 
-                       SelectedItem="{Binding SelectedDoggy}" HeightRequest="150" 
-                       VerticalOptions="Start">
+
+            <ImageButton Source="schnauzer.png"
+                HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Start" />
+
+
+            <Label Text="My Doggies:" />
+            <ListView  ItemsSource="{Binding Doggies}"  SelectionMode="Single"  SelectedItem="{Binding SelectedDoggy}"  HeightRequest="150" >
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Grid Padding="10">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="100" />
-                                    <RowDefinition Height="100" />
+                                    <RowDefinition Height="200" />
+
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20" />
+                                    <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="60" />
                                 </Grid.ColumnDefinitions>
-                                <Image Grid.RowSpan="2"
-                                   Source="dog_icon_128.png"
-                                   Aspect="AspectFill"
-                                   HeightRequest="60"
-                                   WidthRequest="60" />
-                                <Label Text="{Binding Id}" />
-                                <Label Grid.Column="1" Text="{Binding GivenName}" FontAttributes="Bold" VerticalOptions="Start" />
-                                <Label Grid.Row="1"
-                                       Grid.Column="1"
-                                       Text="{Binding DateOfBirth}"
-                                       FontAttributes="Italic"
-                                        />
-                                <!--<ImageButton Source="edit.png" WidthRequest="20" 
-                                     HeightRequest="20" 
-                                     Command="{Binding GoToDogDetailsPageCommand}" 
-                                     CommandParameter="{Binding SelectedDoggy.Id}"/>-->
+
+                                <Label Text="{Binding Id}" Grid.Column="0" />
+                                <Image Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Start"
+                                   Source="dog_icon_128.png"    Aspect="AspectFill"  HeightRequest="30"  WidthRequest="30" />
+
+                                <Label Grid.Column="2" Text="{Binding GivenName}" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Grid.Column="3" Text="{Binding FormattedAgeShort}" FontAttributes="Italic"   />
+
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -52,15 +50,17 @@
 
             </ListView>
 
-            <ImageButton
-                Source="schnauzer.png"
-                HeightRequest="100"
-                HorizontalOptions="Center" VerticalOptions="Start" />
+
+
+            <ImageButton Source="add_new_dog_icon_128.png" WidthRequest="45" HeightRequest="45" HorizontalOptions="End"
+                         Command="{Binding GoToDogDetailsPageCommand}" CommandParameter="{Binding SelectedDoggy.Id}"/>
+
+
 
 
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
                 <StackLayout Orientation="Vertical">
-                    <Label Text="Dog's name:" />
+                    
                     <Picker x:Name="picker"
                     Title="Choose a doggy" ItemsSource="{Binding Doggies}" 
                     SelectedItem="{Binding SelectedDoggy}"
@@ -72,18 +72,17 @@
                     <DatePicker x:Name="DogDob" Date="{Binding SelectedDoggy.DateOfBirth, Mode=TwoWay}" FontSize="Large" 
                                 HorizontalOptions="Center" />
                 </StackLayout>
-                <ImageButton Source="edit.png" WidthRequest="30" 
-                             HeightRequest="30" 
+                <ImageButton Source="edit.png" WidthRequest="30" HeightRequest="30" 
                              Command="{Binding GoToDogDetailsPageCommand}" 
                              CommandParameter="{Binding SelectedDoggy.Id}"/>
-                
-                
+
+
             </StackLayout>
 
             <Label Text="{Binding SelectedDoggy.Sex}" FontSize="Large" HorizontalOptions="Start"/>
 
             <StackLayout Orientation="Vertical">
-                    
+
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label Text="{Binding TotalDogDays}" FontSize="Small" HorizontalOptions="End" />
                     <Label Text=" days" FontSize="Small" HorizontalOptions="End" />
@@ -91,7 +90,7 @@
 
                 <Label Text="{Binding FormattedAge}" FontSize="Medium" HorizontalOptions="CenterAndExpand" />
                 <Label Text="approximately" FontSize="Micro" HorizontalOptions="End" />
-    
+
 
             </StackLayout>
 

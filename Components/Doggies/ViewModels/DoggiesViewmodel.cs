@@ -43,7 +43,7 @@ public partial class DoggiesViewmodel : BaseViewModel
     {
         get
         {
-            Doggies.FirstOrDefault(x => x.Id == selectedDoggy.Id);
+            Doggies.FirstOrDefault(x => x.Id == SelectedDoggy.Id);
             return 0;
         }
     }
@@ -55,8 +55,8 @@ public partial class DoggiesViewmodel : BaseViewModel
     {
         get
         {
-            if (selectedDoggy == null) return string.Empty;
-            return new AgeCalculator(selectedDoggy.DateOfBirth.ToDateTime()).FormattedAge();
+            if (SelectedDoggy == null) return string.Empty;
+            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).FormattedAge();
         }
     }
 
@@ -64,8 +64,17 @@ public partial class DoggiesViewmodel : BaseViewModel
     {
         get
         {
-            if (selectedDoggy == null) return string.Empty;
-            return new AgeCalculator(selectedDoggy.DateOfBirth.ToDateTime()).TotalDogDays.ToString();
+            if (SelectedDoggy == null) return string.Empty;
+            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).TotalDogDays.ToString();
+        }
+    }
+
+    public string FormattedAgeShort
+    {
+        get
+        {
+            if (SelectedDoggy == null) return string.Empty;
+            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).FormattedAgeShort();
         }
     }
 
@@ -79,7 +88,7 @@ public partial class DoggiesViewmodel : BaseViewModel
     [RelayCommand]
     public void SaveDogDetails()
     {
-        new DoggyRepository().Save(selectedDoggy);
+        new DoggyRepository().Save(SelectedDoggy);
     }
 
     public void Entry_TextChanged()

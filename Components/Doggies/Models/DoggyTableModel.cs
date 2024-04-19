@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MyDoggyDetails.Enums;
+using MyDoggyDetails.Utilities;
+using SQLite;
 
 
 namespace MyDoggyDetails.Models;
@@ -48,11 +50,31 @@ public partial class DoggyTableModel : BaseTableModel
     [ObservableProperty]
     private string joinedFamilyDate;
 
-    //[ObservableProperty]
-    //private string formattedAge;
-    //[ObservableProperty]
-    //private string totalDogDays;
+    [Ignore]
+    public string FormattedAge
+    {
+        get
+        {
+            return new AgeCalculator(DateOfBirth.ToDateTime()).FormattedAge();
+        }
+    }
 
+    [Ignore]
+    public string TotalDogDays
+    {
+        get
+        {
+            return new AgeCalculator(DateOfBirth.ToDateTime()).TotalDogDays.ToString();
+        }
+    }
 
+    [Ignore]
+    public string FormattedAgeShort
+    {
+        get
+        {
+            return new AgeCalculator(DateOfBirth.ToDateTime()).FormattedAgeShort();
+        }
+    }
 
 }
