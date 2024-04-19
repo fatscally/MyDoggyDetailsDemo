@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
              x:Class="MyDoggyDetails.Pages.AboutPage"
              Title="About My Doggy Details">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+    <ContentPage.BindingContext>
+        <viewmodels:AboutViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <VerticalStackLayout Padding="10">
+
+        <HorizontalStackLayout>
+            <Label Text="App name:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Name }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Package:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Package }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Version:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Version }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Build:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Build }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Author:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Author }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Email:" HorizontalOptions="Start" WidthRequest="80"/>
+            <Label Text="{Binding Email }" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

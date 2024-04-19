@@ -96,8 +96,20 @@
 		<MauiImage Include="Resources\Images\female_pink_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Include="Resources\Images\parks_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\restaurant_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Include="Resources\Images\species_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\vendors_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\vets_icon_128.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vet_icon_128.png" />
 
@@ -140,7 +152,11 @@
 	  <None Remove="Resources\Images\female_pink_icon_128.png" />
 	  <None Remove="Resources\Images\info_icon_128.png" />
 	  <None Remove="Resources\Images\male_blue_icon_128.png" />
+	  <None Remove="Resources\Images\parks_icon_128.png" />
+	  <None Remove="Resources\Images\restaurant_icon_128.png" />
 	  <None Remove="Resources\Images\species_icon_128.png" />
+	  <None Remove="Resources\Images\vendors_icon_128.png" />
+	  <None Remove="Resources\Images\vets_icon_128.png" />
 	  <None Remove="Resources\Images\vet_icon_128.png" />
 	  <None Remove="Resources\Splash\splash.png" />
 	  <None Remove="Resources\Splash\splash.psd" />
@@ -155,10 +171,16 @@
 
 	<ItemGroup>
 	  <Folder Include="Components\Breeds\Controllers\" />
-	  <Folder Include="Components\Vets\Controllers\" />
-	  <Folder Include="Components\Vets\Data\" />
-	  <Folder Include="Components\Vets\Models\" />
-	  <Folder Include="Components\Vets\ViewModels\" />
+	  <Folder Include="Components\Maps\Parks\Models\" />
+	  <Folder Include="Components\Maps\Parks\ViewModels\" />
+	  <Folder Include="Components\Maps\Restaurants\Models\" />
+	  <Folder Include="Components\Maps\Restaurants\ViewModels\" />
+	  <Folder Include="Components\Maps\Vendors\Models\" />
+	  <Folder Include="Components\Maps\Vendors\ViewModels\" />
+	  <Folder Include="Components\Maps\Vets\Controllers\" />
+	  <Folder Include="Components\Maps\Vets\Data\" />
+	  <Folder Include="Components\Maps\Vets\Models\" />
+	  <Folder Include="Components\Maps\Vets\ViewModels\" />
 	  <Folder Include="CustomControls\" />
 	  <Folder Include="Components\Doggies\Controllers\" />
 	  <Folder Include="Models\" />
@@ -195,7 +217,16 @@
 	  <MauiXaml Update="Components\Doggies\Pages\DoggiesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Vets\Pages\VetsPage.xaml">
+	  <MauiXaml Update="Components\Maps\Parks\Pages\ParksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Maps\Restaurants\Pages\RestaurantsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Maps\Vendors\Pages\VendorsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Maps\Vets\Pages\VetsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
