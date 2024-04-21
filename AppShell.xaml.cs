@@ -1,6 +1,4 @@
 ﻿using MyDoggyDetails.Data;
-using MyDoggyDetails.Models;
-using System.Reflection;
 
 namespace MyDoggyDetails;
 

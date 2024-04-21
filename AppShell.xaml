@@ -18,6 +18,12 @@
             Icon="species_icon_128.png"
             ContentTemplate="{DataTemplate local:BreedsPage}"
             Route="BreedsPage" />
+        <ShellContent
+            Title="Promotions"
+            Icon="promotions_icon_128.png"
+            ContentTemplate="{DataTemplate local:PromotionsPage}"
+            IsVisible="false"
+            Route="PromotionsPage" />
 
     </FlyoutItem>
 

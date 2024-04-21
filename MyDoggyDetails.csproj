@@ -105,6 +105,9 @@
 		<MauiImage Include="Resources\Images\parks_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Include="Resources\Images\promotions_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Include="Resources\Images\restaurant_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -161,6 +164,7 @@
 	  <None Remove="Resources\Images\info_icon_128.png" />
 	  <None Remove="Resources\Images\male_blue_icon_128.png" />
 	  <None Remove="Resources\Images\parks_icon_128.png" />
+	  <None Remove="Resources\Images\promotions_icon_128.png" />
 	  <None Remove="Resources\Images\restaurant_icon_128.png" />
 	  <None Remove="Resources\Images\species_icon_128.png" />
 	  <None Remove="Resources\Images\vendors_icon_128.png" />
@@ -244,6 +248,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\Maps\Vets\Pages\VetsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Promotions\Pages\PromotionsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
