@@ -1,4 +1,5 @@
-﻿using MyDoggyDetails.Models;
+﻿using MyDoggyDetails.Base;
+using MyDoggyDetails.Models;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -17,7 +18,7 @@ public class DogsRestService
     public DogsRestService()
     {
         client = new HttpClient();
-        client.DefaultRequestHeaders.Add("x-api-key", "live_s746KZfbN7igVSlp80oJjREPiuX8DKRYtrcjodG2kebROT6diXysDyaTP48Ztvq5");
+        client.DefaultRequestHeaders.Add("x-api-key", APIKeys.DogAPIKey );  //API Key has not been added to GitHub, get your own.
 
         serializerOptions = new JsonSerializerOptions
         {

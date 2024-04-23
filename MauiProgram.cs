@@ -13,7 +13,9 @@ public static class MauiProgram
         {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-        }).UseMauiCommunityToolkit();
+        })
+            .UseMauiCommunityToolkit()
+            .UseMauiMaps();
 
         builder.Services.AddSingleton<DoggiesPage>();
         builder.Services.AddSingleton<DoggiesViewmodel>();

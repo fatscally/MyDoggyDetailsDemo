@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.ComponentModel;
 using SQLite;
 
 namespace MyDoggyDetails.Models;
@@ -23,3 +22,5 @@ public abstract partial class BaseTableModel : ObservableObject
 
 
 }
+
+

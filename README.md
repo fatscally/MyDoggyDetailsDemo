@@ -8,6 +8,9 @@ So far, on the client side it uses these components:
 + C# 12 (many of it's latest coding features)
 + .Net Core 8.0
 + CommunityToolkit.Maui 3.0
++ Maps
++ Camera
++ File System
 + Dapper 2.0.1
 + sql-net-pcl 1.8
 + MVVM design pattern.
@@ -30,8 +33,12 @@ A planned web side application will follow in due course consisting of
 
 My [LinkedIn Profile](https://www.linkedin.com/in/raymond-b-76779866/) 
 
+Note: You will require your own API Keys to make this application work and interact with online components and services.
+
+Note: This is not the finished application, mearly a sample demonstration of skills and competency.
 
 APRIL 2022
 Added Connected to The Dog API to download infos and pictures - needs to be paged(if possible and made async).
 Created a picture Downsize function to create icons.
 Dogs from The Dog API are saved locally but are very slow - needs to be paged and made async
+

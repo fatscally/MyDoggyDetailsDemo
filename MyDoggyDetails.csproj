@@ -184,8 +184,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Components\Breeds\Controllers\" />
-	  <Folder Include="Components\Maps\Parks\Models\" />
-	  <Folder Include="Components\Maps\Parks\ViewModels\" />
 	  <Folder Include="Components\Maps\Restaurants\Models\" />
 	  <Folder Include="Components\Maps\Restaurants\ViewModels\" />
 	  <Folder Include="Components\Maps\Vendors\Models\" />
