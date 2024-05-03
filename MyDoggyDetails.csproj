@@ -87,6 +87,9 @@
 		<MauiImage Include="Resources\Images\add_new_dog_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Include="Resources\Images\camera_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Include="Resources\Images\edit.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -103,6 +106,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\parks_icon_128.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Include="Resources\Images\photo_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\promotions_icon_128.png">
@@ -143,10 +149,15 @@
 
 	<ItemGroup>
 	  <Compile Remove="API\Pokemon\**" />
+	  <Compile Remove="Utilities\ImageCropper\**" />
 	  <EmbeddedResource Remove="API\Pokemon\**" />
+	  <EmbeddedResource Remove="Utilities\ImageCropper\**" />
 	  <MauiCss Remove="API\Pokemon\**" />
+	  <MauiCss Remove="Utilities\ImageCropper\**" />
 	  <MauiXaml Remove="API\Pokemon\**" />
+	  <MauiXaml Remove="Utilities\ImageCropper\**" />
 	  <None Remove="API\Pokemon\**" />
+	  <None Remove="Utilities\ImageCropper\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -158,12 +169,14 @@
 	  <None Remove="Database\doggy.db3" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\add_new_dog_icon_128.png" />
+	  <None Remove="Resources\Images\camera_icon_128.png" />
 	  <None Remove="Resources\Images\dog_icon_128.png" />
 	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\female_pink_icon_128.png" />
 	  <None Remove="Resources\Images\info_icon_128.png" />
 	  <None Remove="Resources\Images\male_blue_icon_128.png" />
 	  <None Remove="Resources\Images\parks_icon_128.png" />
+	  <None Remove="Resources\Images\photo_icon_128.png" />
 	  <None Remove="Resources\Images\promotions_icon_128.png" />
 	  <None Remove="Resources\Images\restaurant_icon_128.png" />
 	  <None Remove="Resources\Images\species_icon_128.png" />
@@ -177,6 +190,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="ImageCropper.Maui" Version="1.1.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.20" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
@@ -204,6 +218,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Components\Breeds\Pages\BreedsListPage.xaml.cs">
+	    <DependentUpon>BreedsListPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Components\Doggies\Pages\DoggiesPage.xaml.cs">
 	    <DependentUpon>DoggiesPage.xaml</DependentUpon>
 	  </Compile>
@@ -219,7 +236,7 @@
 	  <MauiXaml Update="Components\Breeds\Pages\BreedDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Breeds\Pages\BreedsPage.xaml">
+	  <MauiXaml Update="Components\Breeds\Pages\BreedsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\Dictionaries\CheckBoxSlider.xaml">
@@ -262,6 +279,6 @@
 	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMyDoggyDetailsHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 
 </Project>

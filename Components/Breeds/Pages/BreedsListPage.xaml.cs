@@ -2,9 +2,9 @@ using MyDoggyDetails.ViewModels;
 
 namespace MyDoggyDetails.Pages;
 
-public partial class BreedsPage : ContentPage
+public partial class BreedsListPage : ContentPage
 {
-	public BreedsPage()
+	public BreedsListPage()
 	{
 		InitializeComponent();
 	}

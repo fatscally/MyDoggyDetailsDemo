@@ -16,8 +16,8 @@
         <ShellContent
             Title="Breeds"
             Icon="species_icon_128.png"
-            ContentTemplate="{DataTemplate local:BreedsPage}"
-            Route="BreedsPage" />
+            ContentTemplate="{DataTemplate local:BreedsListPage}"
+            Route="BreedsListPage" />
         <ShellContent
             Title="Promotions"
             Icon="promotions_icon_128.png"

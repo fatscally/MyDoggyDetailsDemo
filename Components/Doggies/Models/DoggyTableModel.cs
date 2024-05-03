@@ -12,6 +12,9 @@ public partial class DoggyTableModel : BaseTableModel
 {
 
     [ObservableProperty]
+    private string dogGuid;
+
+    [ObservableProperty]
     private int breedId;
     
 

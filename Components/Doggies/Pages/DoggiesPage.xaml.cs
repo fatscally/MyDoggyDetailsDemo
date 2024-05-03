@@ -11,10 +11,11 @@ public partial class DoggiesPage : ContentPage
     }
 
 
-
     private void ContentPage_Appearing(object sender, EventArgs e)
     {
         DoggiesViewmodel viewmodel = this.BindingContext as DoggiesViewmodel;
         viewmodel.LoadUpDoggies();  
     }
+
+
 }

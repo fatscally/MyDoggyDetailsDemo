@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels" 
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="MyDoggyDetails.Pages.BreedsPage"
+             x:Class="MyDoggyDetails.Pages.BreedsListPage"
              BackgroundColor="{Binding BackgroundBrush}"
              Title="Dog Breeds">
 
     <ContentPage.BindingContext>
-        <viewmodels:BreedsViewmodel/>
+        <viewmodels:BreedsListViewmodel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>

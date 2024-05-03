@@ -11,7 +11,11 @@
 
         //https://dogapi.dog/docs/api-v2
         public static string RestUrlDogApi = DeviceInfo.Platform == DevicePlatform.Android ? "https://dogapi.dog/api/v2/" : "https://dogapi.dog/api/v2/";
-        
+
+        public static string BreedsPhotosPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "breedImages");
+
+        public static string MyDoggyPhotosPath { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "doggyImages");
+
 
 
     }

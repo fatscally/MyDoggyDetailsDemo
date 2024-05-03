@@ -47,7 +47,8 @@ public partial class DoggiesViewmodel : BaseViewModel
             return 0;
         }
     }
-    
+
+
 
 
 

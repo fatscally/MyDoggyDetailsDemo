@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.API;
+using MyDoggyDetails.Base;
 using MyDoggyDetails.Data;
 using MyDoggyDetails.Models;
 using MyDoggyDetails.Pages;
@@ -12,7 +13,7 @@ namespace MyDoggyDetails.ViewModels;
 
 [QueryProperty("DogId", "DogId")]
 
-internal partial class BreedsViewmodel : BaseViewModel
+internal partial class BreedsListViewmodel : BaseViewModel
 {
     public int TotalOnlineCount;
 
@@ -41,7 +42,7 @@ internal partial class BreedsViewmodel : BaseViewModel
     private Brush backgroundBrush = Brush.White;
 
 
-    public BreedsViewmodel()
+    public BreedsListViewmodel()
     {
 
 #if (ANDROID)
@@ -177,10 +178,10 @@ internal partial class BreedsViewmodel : BaseViewModel
 
             byte[] imgBytes = await downloadimage;
 
-            await File.WriteAllBytesAsync(Connection.photosPath, imgBytes);
+            await File.WriteAllBytesAsync(Constants.BreedsPhotosPath, imgBytes);
 
             //b.LocalImage = await downloadimage;
-            b.LocalImagePath = Path.Combine(Connection.photosPath, Path.GetFileName(b.Image_url));
+            b.LocalImagePath = Path.Combine(Constants.BreedsPhotosPath, Path.GetFileName(b.Image_url));
 
             b.LocalIcon = pictures.DownsizeImage(imgBytes, 60, 60);
 

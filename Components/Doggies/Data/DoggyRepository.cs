@@ -17,7 +17,20 @@ internal class DoggyRepository : BaseRepository
         if (model.Id == 0)
         {
             return Insert(model);
-        } else
+        }
+        else
+        {
+            return Update(model);
+        }
+    }
+
+    public long Save(DoggyPhotoModel model)
+    {
+        if (model.Id == 0)
+        {
+            return Insert(model);
+        }
+        else
         {
             return Update(model);
         }
@@ -31,6 +44,12 @@ internal class DoggyRepository : BaseRepository
     }
 
 
+    public ObservableCollection<DoggyPhotoModel> SelectPhotosByDoggyId(string dogGuid)
+    {
+        var results = conn.Table<DoggyPhotoModel>().Where(x => x.DogGuid == dogGuid).ToObservableCollection();
+
+        return results;
+    }
 
 
 
@@ -45,8 +64,12 @@ internal class DoggyRepository : BaseRepository
         createTableResult = conn.CreateTable<ParkTableModel>();
         if (createTableResult == CreateTableResult.Created)
             InsertDoggyParkLocations();
-       
-   
+
+
+        createTableResult = conn.CreateTable<DoggyPhotoModel>();
+
+
+
         createTableResult = conn.CreateTable<BreedModel>();
 
 
@@ -61,9 +84,9 @@ internal class DoggyRepository : BaseRepository
     internal void InsertDoggyMetadata()
     {
         //base.Insert(model)
-        Insert(new DoggyTableModel { GivenName = "Nala", DateOfBirth = "2022-06-18 00:00:00", Sex = false, ChipNumber = "abc123" });
-        Insert(new DoggyTableModel { GivenName = "Tiko", DateOfBirth = "2021-10-18 00:00:00", Sex = true, ChipNumber = "abc123" });
-        Insert(new DoggyTableModel { GivenName = "Fido", DateOfBirth = "2020-01-01 00:00:00", Sex = true, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { DogGuid = "0000", GivenName = "Nala", DateOfBirth = "2022-06-18 00:00:00", Sex = false, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { DogGuid = "0001", GivenName = "Tiko", DateOfBirth = "2021-10-18 00:00:00", Sex = true, ChipNumber = "abc123" });
+        Insert(new DoggyTableModel { DogGuid = "0002", GivenName = "Fido", DateOfBirth = "2020-01-01 00:00:00", Sex = true, ChipNumber = "abc123" });
     }
 
 
@@ -74,6 +97,6 @@ internal class DoggyRepository : BaseRepository
         Insert(new ParkTableModel { Latitude = 53.342604703264804, Longitude = -6.440872837563679, Label = "Grifeen Valley Park.", Address = "A doggy park inside a human park", Type = (int)PinType.Generic });
     }
 
-  
+
 
 }

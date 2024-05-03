@@ -8,6 +8,7 @@ So far, on the client side it uses these components:
 + C# 12 (many of it's latest coding features)
 + .Net Core 8.0
 + CommunityToolkit.Maui 3.0
++ ImageCropper.Maui 1.1.0.7
 + Maps
 + Camera
 + File System
@@ -25,7 +26,7 @@ So far, on the client side it uses these components:
 + Release of the application to the Google Play and Apple stores.
 + Conditional compilation.
 
-A planned web side application will follow in due course consisting of 
+A planned web site application will follow in due course consisting of 
 + Angular 
 + C# API and backend. 
 + SQL SERVER database
@@ -34,11 +35,16 @@ A planned web side application will follow in due course consisting of
 My [LinkedIn Profile](https://www.linkedin.com/in/raymond-b-76779866/) 
 
 Note: You will require your own API Keys to make this application work and interact with online components and services.
-
+Note: Certain files will not be updated to protect developer's keys etc.
 Note: This is not the finished application, mearly a sample demonstration of skills and competency.
+
+
 
 APRIL 2022
 Added Connected to The Dog API to download infos and pictures - needs to be paged(if possible and made async).
 Created a picture Downsize function to create icons.
 Dogs from The Dog API are saved locally but are very slow - needs to be paged and made async
 
+
+Thanks to "jbowmanp1107 Jeff" for ImageCropper
+https://github.com/jbowmanp1107/ImageCropper.Maui?tab=readme-ov-file#readme

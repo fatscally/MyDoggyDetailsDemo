@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.OS;
 
 namespace MyDoggyDetails;
+ 
 
 [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, 
                 ConfigurationChanges = ConfigChanges.ScreenSize | 
@@ -15,4 +16,16 @@ namespace MyDoggyDetails;
 
 public class MainActivity : MauiAppCompatActivity
 {
+  
+    protected override void OnCreate(Bundle savedInstanceState)
+    {
+
+        base.OnCreate(savedInstanceState);
+
+        new ImageCropper.Maui.Platform().Init(this);
+
+    }
+
 }
+
+    
