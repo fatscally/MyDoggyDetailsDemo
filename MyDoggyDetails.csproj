@@ -129,16 +129,13 @@
 		<MauiImage Include="Resources\Images\vet_icon_128.png" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#512BD4" BaseSize="128,128">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#fff" BaseSize="128,128">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiSplashScreen>
-		<MauiSplashScreen Include="Resources\Splash\splash.psd">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</MauiSplashScreen>
+
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Raw\Images\*" />
-		<MauiImage Update="Resources\Raw\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -148,21 +145,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="API\Pokemon\**" />
+	  <Compile Remove="CustomControls\**" />
+	  <Compile Remove="Models\**" />
 	  <Compile Remove="Utilities\ImageCropper\**" />
-	  <EmbeddedResource Remove="API\Pokemon\**" />
+	  <EmbeddedResource Remove="CustomControls\**" />
+	  <EmbeddedResource Remove="Models\**" />
 	  <EmbeddedResource Remove="Utilities\ImageCropper\**" />
-	  <MauiCss Remove="API\Pokemon\**" />
+	  <MauiCss Remove="CustomControls\**" />
+	  <MauiCss Remove="Models\**" />
 	  <MauiCss Remove="Utilities\ImageCropper\**" />
-	  <MauiXaml Remove="API\Pokemon\**" />
+	  <MauiXaml Remove="CustomControls\**" />
+	  <MauiXaml Remove="Models\**" />
 	  <MauiXaml Remove="Utilities\ImageCropper\**" />
-	  <None Remove="API\Pokemon\**" />
+	  <None Remove="CustomControls\**" />
+	  <None Remove="Models\**" />
 	  <None Remove="Utilities\ImageCropper\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Components\Breeds\Models\BreedTableModel.cs" />
-	  <Compile Remove="Components\Breeds\ViewModels\PokemonViewmodel.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -206,9 +203,7 @@
 	  <Folder Include="Components\Maps\Vets\Data\" />
 	  <Folder Include="Components\Maps\Vets\Models\" />
 	  <Folder Include="Components\Maps\Vets\ViewModels\" />
-	  <Folder Include="CustomControls\" />
 	  <Folder Include="Components\Doggies\Controllers\" />
-	  <Folder Include="Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
