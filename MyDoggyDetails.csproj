@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-maccatalyst;net8.0-android34.0</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -83,7 +83,6 @@
 		  <Pack>True</Pack>
 		  <PackagePath>\</PackagePath>
 		</MauiIcon>
-		<MauiIcon Include="Resources\AppIcon\appiconxx.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 		<MauiImage Include="Resources\Images\add_new_dog_icon_128.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -145,25 +144,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Components\Utilities\ImageCropper\**" />
+	  <Compile Remove="Components\Utilities\ImageCropper\**" />
 	  <Compile Remove="CustomControls\**" />
-	  <Compile Remove="Models\**" />
-	  <Compile Remove="Utilities\ImageCropper\**" />
+	  <Compile Remove="Components\Utilities\ImageCropper\**" />
+	  <EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
 	  <EmbeddedResource Remove="CustomControls\**" />
-	  <EmbeddedResource Remove="Models\**" />
-	  <EmbeddedResource Remove="Utilities\ImageCropper\**" />
+	  <EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
+	  <MauiCss Remove="Components\Utilities\ImageCropper\**" />
 	  <MauiCss Remove="CustomControls\**" />
-	  <MauiCss Remove="Models\**" />
-	  <MauiCss Remove="Utilities\ImageCropper\**" />
+	  <MauiCss Remove="Components\Utilities\ImageCropper\**" />
+	  <MauiXaml Remove="Components\Utilities\ImageCropper\**" />
 	  <MauiXaml Remove="CustomControls\**" />
-	  <MauiXaml Remove="Models\**" />
-	  <MauiXaml Remove="Utilities\ImageCropper\**" />
+	  <MauiXaml Remove="Components\Utilities\ImageCropper\**" />
+	  <None Remove="Components\Utilities\ImageCropper\**" />
 	  <None Remove="CustomControls\**" />
-	  <None Remove="Models\**" />
-	  <None Remove="Utilities\ImageCropper\**" />
+	  <None Remove="Components\Utilities\ImageCropper\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Database\doggy.db3" />
+	  <None Remove="Components\Repository\doggy.db3" />
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\add_new_dog_icon_128.png" />
 	  <None Remove="Resources\Images\camera_icon_128.png" />
@@ -194,74 +194,61 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Components\Breeds\Controllers\" />
-	  <Folder Include="Components\Maps\Restaurants\Models\" />
-	  <Folder Include="Components\Maps\Restaurants\ViewModels\" />
-	  <Folder Include="Components\Maps\Vendors\Models\" />
-	  <Folder Include="Components\Maps\Vendors\ViewModels\" />
-	  <Folder Include="Components\Maps\Vets\Controllers\" />
-	  <Folder Include="Components\Maps\Vets\Data\" />
-	  <Folder Include="Components\Maps\Vets\Models\" />
-	  <Folder Include="Components\Maps\Vets\ViewModels\" />
-	  <Folder Include="Components\Doggies\Controllers\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Database\doggy.db3">
+	  <EmbeddedResource Include="Components\Repository\doggy.db3">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Components\Breeds\Pages\BreedsListPage.xaml.cs">
+	  <Compile Update="Components\Pages\BreedsListPage.xaml.cs">
 	    <DependentUpon>BreedsListPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Components\Doggies\Pages\DoggiesPage.xaml.cs">
+	  <Compile Update="Components\Pages\DoggiesPage.xaml.cs">
 	    <DependentUpon>DoggiesPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Components\Doggies\Pages\MedicalRecordsPage.xaml.cs">
+	  <Compile Update="Components\Pages\MedicalRecordsPage.xaml.cs">
 	    <DependentUpon>MedicalRecordsPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\About\Pages\AboutPage.xaml">
+	  <MauiXaml Update="Components\Pages\AboutPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Breeds\Pages\BreedDetailPage.xaml">
+	  <MauiXaml Update="Components\Pages\BreedDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Breeds\Pages\BreedsListPage.xaml">
+	  <MauiXaml Update="Components\Pages\BreedsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\Dictionaries\CheckBoxSlider.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Doggies\Pages\DogDetailsPage.xaml">
+	  <MauiXaml Update="Components\Pages\DogDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Doggies\Pages\DoggiesPage.xaml">
+	  <MauiXaml Update="Components\Pages\DoggiesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Doggies\Pages\MedicalRecordDetailPage.xaml">
+	  <MauiXaml Update="Components\Pages\MedicalRecordDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Doggies\Pages\MedicalRecordsPage.xaml">
+	  <MauiXaml Update="Components\Pages\MedicalRecordsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Maps\Parks\Pages\ParksPage.xaml">
+	  <MauiXaml Update="Components\Pages\ParksPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Maps\Restaurants\Pages\RestaurantsPage.xaml">
+	  <MauiXaml Update="Components\Pages\RestaurantsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Maps\Vendors\Pages\VendorsPage.xaml">
+	  <MauiXaml Update="Components\Pages\VendorsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Maps\Vets\Pages\VetsPage.xaml">
+	  <MauiXaml Update="Components\Pages\VetsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Components\Promotions\Pages\PromotionsPage.xaml">
+	  <MauiXaml Update="Components\Pages\PromotionsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

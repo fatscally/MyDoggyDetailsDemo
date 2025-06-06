@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyDoggyDetails.Pages.DogDetailsPage"
+             xmlns:viewmodels="clr-namespace:MyDoggyDetails.ViewModels"
+             Title="Dog Details Page"
+             Disappearing="ContentPage_Disappearing">
+
+    <!--<ContentPage.BindingContext>
+        <viewmodels:DogDetailViewModel/>
+    </ContentPage.BindingContext>-->
+
+
+
+    <VerticalStackLayout Padding="10">
+
+        <Grid Padding="20,40,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--<Button Grid.Row="0" Clicked="OnClickedRectangle" Text="Add Image" />-->
+
+            <Image Grid.Row="0" x:Name="imageView"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand" />            
+            
+            <ImageButton Source="photo_icon_128.png" WidthRequest="45" HeightRequest="45" HorizontalOptions="End"
+             Clicked="OnClickedRectangle"/>
+            <!--<ImageButton Source="photo_icon_128.png" WidthRequest="45" HeightRequest="45" HorizontalOptions="End"
+                         Command="{Binding AddImageCommand}" CommandParameter="{x:Type Page:DogDetailsPage}"/>-->
+
+        </Grid>
+        
+        
+
+        <!--<Image
+            HorizontalOptions="StartAndExpand"
+               Aspect="AspectFill" WidthRequest="300" HeightRequest="300" MaximumHeightRequest="200"  >
+            <Image.Source>
+                <FileImageSource File="{Binding SelectedPhotoFilePath}"/>
+            </Image.Source>
+        </Image>
+
+        <HorizontalStackLayout>
+            <ImageButton Source="photo_icon_128.png" WidthRequest="45" HeightRequest="45" HorizontalOptions="End"
+                         Command="{Binding TakePhotoCommand}" CommandParameter="Photo"/>
+
+            <ImageButton Source="camera_icon_128.png" WidthRequest="45" HeightRequest="45" HorizontalOptions="End"
+                         Command="{Binding TakePhotoCommand}" CommandParameter="Camera"/>
+        </HorizontalStackLayout>-->
+
+
+        <Label Text="Name:"/>
+        <Entry Text="{Binding SelectedDoggy.GivenName}" FontSize="Large" />
+
+
+
+        <Label Text="Chip Number:"/>
+        <Entry Text="{Binding SelectedPhotoFilePath}" FontSize="Large" />
+        <Label Text="Breed:"/>
+        <Picker ItemsSource="{Binding Breeds.Name}" SelectedItem="{Binding SelectedDoggy.BreedId}" FontSize="Large" />
+        <Label Text="Colour:" />
+        <Entry Text="{Binding SelectedDoggy.Colour}" FontSize="Large" />
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <VerticalStackLayout HorizontalOptions="StartAndExpand">
+                <Label Text="Date Of Birth:"/>
+                <DatePicker MinimumDate="01/01/1970" FontSize="Large"
+                            MaximumDate="{Binding DatePickerMaxDate}"
+                            Date="{Binding SelectedDoggy.DateOfBirth}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout HorizontalOptions="EndAndExpand">
+                <Label Text="Joined our family:"/>
+                <DatePicker MinimumDate="01/01/1970" FontSize="Large"
+                            MaximumDate="{Binding DatePickerMaxDate}"
+                            Date="{Binding SelectedDoggy.JoinedFamilyDate}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+
+        <Label Text="Gender:"/>
+
+        <HorizontalStackLayout HorizontalOptions="Start">
+
+
+            <Label Text="{Binding SelectedDoggy.Gender}" FontSize="Large" TextColor="Pink" FontAttributes="Bold" HorizontalOptions="Start" MinimumWidthRequest="100">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference styleSwitch}, Path=IsToggled}" Value="true">
+                        <Setter Property="FontAttributes" Value="Bold" />
+                        <Setter Property="FontSize" Value="Large" />
+                        <Setter Property="TextColor" Value="CornflowerBlue" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <Switch x:Name="styleSwitch" IsToggled="{Binding SelectedDoggy.Sex, Mode=TwoWay}" VerticalOptions="Start">
+
+            </Switch>
+
+        </HorizontalStackLayout>
+
+
+        <Button Text="Save" Command="{Binding SaveDogDetailsCommand}"/>
+    </VerticalStackLayout>
+
+</ContentPage>

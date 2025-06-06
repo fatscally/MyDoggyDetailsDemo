@@ -1,7 +1,7 @@
 ﻿using MyDoggyDetails.Base;
 using SQLite;
 
-namespace MyDoggyDetails.Data;
+namespace MyDoggyDetails.Repository;
 
 public class Connection
 {

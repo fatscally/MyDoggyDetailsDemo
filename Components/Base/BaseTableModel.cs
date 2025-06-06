@@ -5,22 +5,12 @@ namespace MyDoggyDetails.Models;
 
 public abstract partial class BaseTableModel : ObservableObject
 {
-
-    [ObservableProperty]
-    [property: PrimaryKey]
-    [property: AutoIncrement]
-    private int id;
-
-    [ObservableProperty]
-    private bool isDirty = false;
-
-    [ObservableProperty]
-    private bool isBusy = false;
-
-    [ObservableProperty]
-    private string title = string.Empty;
-
-
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+    public bool IsDirty { get; set; }
+    public bool IsBusy { get; set; }
+    [MaxLength(100)]
+    public string Title { get; set; } = string.Empty;
 }
 
 

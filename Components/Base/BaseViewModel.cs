@@ -1,13 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-using System.ComponentModel;
-
 
 namespace MyDoggyDetails.ViewModels;
 
 
-[INotifyPropertyChanged]
-public abstract partial class BaseViewModel
+
+public abstract partial class BaseViewModel : ObservableObject
 {
 
     [ObservableProperty]

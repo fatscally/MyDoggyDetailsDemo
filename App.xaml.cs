@@ -1,11 +1,13 @@
-﻿namespace MyDoggyDetails;
+﻿using MyDoggyDetails.Repository;
+
+namespace MyDoggyDetails;
 
 public partial class App : Application
 {
-	public App()
+	public App(DatabaseInitializer initializer)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		MainPage = new AppShell(initializer);
 	}
 }
