@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;</TargetFrameworks>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -33,105 +33,77 @@
 		<PackageTags>Dogs, MAUI, WPF, MVVM</PackageTags>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+	  <CodesignKey>Apple Development: Created via API (PVRHXFJB67)</CodesignKey>
+	  <CodesignProvision>VS: com.quitealrightsolutions.mydoggydetails Development</CodesignProvision>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="ImageCropper.Maui" Version="1.1.0.7" />
+	</ItemGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
-	  <ApplicationTitle>My Doggy Details</ApplicationTitle>
-	  <ApplicationId>com.quitealrightsolutions.mydoggydetails</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup>
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.22621.0</TargetFrameworks>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.png">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
 		</MauiIcon>
 		<MauiImage Include="Resources\Images\add_new_dog_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\camera_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\edit.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\info_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiIcon Include="Resources\Images\male_blue_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiIcon>
 		<MauiImage Include="Resources\Images\dog_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\female_pink_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\parks_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\photo_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\promotions_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\restaurant_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\species_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vendors_icon_128.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vets_icon_128.png">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vet_icon_128.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#fff" BaseSize="128,128">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiSplashScreen>
-
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Raw\Images\*" />
@@ -144,123 +116,110 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Components\Utilities\ImageCropper\**" />
-	  <Compile Remove="Components\Utilities\ImageCropper\**" />
-	  <Compile Remove="CustomControls\**" />
-	  <Compile Remove="Components\Utilities\ImageCropper\**" />
-	  <EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
-	  <EmbeddedResource Remove="CustomControls\**" />
-	  <EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
-	  <MauiCss Remove="Components\Utilities\ImageCropper\**" />
-	  <MauiCss Remove="CustomControls\**" />
-	  <MauiCss Remove="Components\Utilities\ImageCropper\**" />
-	  <MauiXaml Remove="Components\Utilities\ImageCropper\**" />
-	  <MauiXaml Remove="CustomControls\**" />
-	  <MauiXaml Remove="Components\Utilities\ImageCropper\**" />
-	  <None Remove="Components\Utilities\ImageCropper\**" />
-	  <None Remove="CustomControls\**" />
-	  <None Remove="Components\Utilities\ImageCropper\**" />
+		<AndroidResource Remove="Components\Utilities\ImageCropper\**" />
+		<Compile Remove="Components\Utilities\ImageCropper\**" />
+		<Compile Remove="CustomControls\**" />
+		<Compile Remove="Components\Utilities\ImageCropper\**" />
+		<EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
+		<EmbeddedResource Remove="CustomControls\**" />
+		<EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
+		<MauiCss Remove="Components\Utilities\ImageCropper\**" />
+		<MauiCss Remove="CustomControls\**" />
+		<MauiCss Remove="Components\Utilities\ImageCropper\**" />
+		<MauiXaml Remove="Components\Utilities\ImageCropper\**" />
+		<MauiXaml Remove="CustomControls\**" />
+		<MauiXaml Remove="Components\Utilities\ImageCropper\**" />
+		<None Remove="Components\Utilities\ImageCropper\**" />
+		<None Remove="CustomControls\**" />
+		<None Remove="Components\Utilities\ImageCropper\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Components\Repository\doggy.db3" />
-	  <None Remove="Resources\AppIcon\appicon.png" />
-	  <None Remove="Resources\Images\add_new_dog_icon_128.png" />
-	  <None Remove="Resources\Images\camera_icon_128.png" />
-	  <None Remove="Resources\Images\dog_icon_128.png" />
-	  <None Remove="Resources\Images\edit.png" />
-	  <None Remove="Resources\Images\female_pink_icon_128.png" />
-	  <None Remove="Resources\Images\info_icon_128.png" />
-	  <None Remove="Resources\Images\male_blue_icon_128.png" />
-	  <None Remove="Resources\Images\parks_icon_128.png" />
-	  <None Remove="Resources\Images\photo_icon_128.png" />
-	  <None Remove="Resources\Images\promotions_icon_128.png" />
-	  <None Remove="Resources\Images\restaurant_icon_128.png" />
-	  <None Remove="Resources\Images\species_icon_128.png" />
-	  <None Remove="Resources\Images\vendors_icon_128.png" />
-	  <None Remove="Resources\Images\vets_icon_128.png" />
-	  <None Remove="Resources\Images\vet_icon_128.png" />
-	  <None Remove="Resources\Splash\splash.png" />
-	  <None Remove="Resources\Splash\splash.psd" />
+		<None Remove="Components\Repository\doggy.db3" />
+		<None Remove="Resources\AppIcon\appicon.png" />
+		<None Remove="Resources\Images\add_new_dog_icon_128.png" />
+		<None Remove="Resources\Images\camera_icon_128.png" />
+		<None Remove="Resources\Images\dog_icon_128.png" />
+		<None Remove="Resources\Images\edit.png" />
+		<None Remove="Resources\Images\female_pink_icon_128.png" />
+		<None Remove="Resources\Images\info_icon_128.png" />
+		<None Remove="Resources\Images\male_blue_icon_128.png" />
+		<None Remove="Resources\Images\parks_icon_128.png" />
+		<None Remove="Resources\Images\photo_icon_128.png" />
+		<None Remove="Resources\Images\promotions_icon_128.png" />
+		<None Remove="Resources\Images\restaurant_icon_128.png" />
+		<None Remove="Resources\Images\species_icon_128.png" />
+		<None Remove="Resources\Images\vendors_icon_128.png" />
+		<None Remove="Resources\Images\vets_icon_128.png" />
+		<None Remove="Resources\Images\vet_icon_128.png" />
+		<None Remove="Resources\Splash\splash.png" />
+		<None Remove="Resources\Splash\splash.psd" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="3.0.0" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="ImageCropper.Maui" Version="1.1.0.7" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.20" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<EmbeddedResource Include="Components\Repository\doggy.db3">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Components\Repository\doggy.db3">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
+		<Compile Update="Components\Pages\BreedsListPage.xaml.cs">
+			<DependentUpon>BreedsListPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Components\Pages\DoggiesPage.xaml.cs">
+			<DependentUpon>DoggiesPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Components\Pages\MedicalRecordsPage.xaml.cs">
+			<DependentUpon>MedicalRecordsPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Components\Pages\BreedsListPage.xaml.cs">
-	    <DependentUpon>BreedsListPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Components\Pages\DoggiesPage.xaml.cs">
-	    <DependentUpon>DoggiesPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Components\Pages\MedicalRecordsPage.xaml.cs">
-	    <DependentUpon>MedicalRecordsPage.xaml</DependentUpon>
-	  </Compile>
+		<MauiXaml Update="Components\Pages\AboutPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\BreedDetailPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\BreedsListPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Dictionaries\CheckBoxSlider.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\DogDetailsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\DoggiesPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\MedicalRecordDetailPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\MedicalRecordsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\ParksPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\RestaurantsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\VendorsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\VetsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Components\Pages\PromotionsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiXaml Update="Components\Pages\AboutPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\BreedDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\BreedsListPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Dictionaries\CheckBoxSlider.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\DogDetailsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\DoggiesPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\MedicalRecordDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\MedicalRecordsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\ParksPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\RestaurantsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\VendorsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\VetsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Components\Pages\PromotionsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="8.0.14" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
-	</ItemGroup>
-
-	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMyDoggyDetailsHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMyDoggyDetailsHideInfoBar="True" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

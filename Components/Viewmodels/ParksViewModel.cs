@@ -11,6 +11,12 @@ public partial class ParksViewModel : BaseViewModel
 {
 
     private readonly IParkService _parkService;
+    
+    
+    [ObservableProperty] private Microsoft.Maui.Controls.Maps.Map map = new();
+    [ObservableProperty] ObservableCollection<ParkTableModel> parks = new();
+    [ObservableProperty] private List<Pin> pins = [];
+
 
 
     public ParksViewModel(IParkService parkService)
@@ -22,9 +28,7 @@ public partial class ParksViewModel : BaseViewModel
 
     }
 
-    [ObservableProperty] private Microsoft.Maui.Controls.Maps.Map map = new();
-    [ObservableProperty] ObservableCollection<ParkTableModel> parks = new();
-    [ObservableProperty] private List<Pin> pins = [];
+
 
     partial void OnParksChanged(ObservableCollection<ParkTableModel> value)
     {

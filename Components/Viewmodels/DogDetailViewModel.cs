@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.Base;
 using MyDoggyDetails.Interfaces;

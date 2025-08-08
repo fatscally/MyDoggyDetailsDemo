@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
 using MyDoggyDetails.API;
-using MyDoggyDetails.Repository;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Pages;
+using MyDoggyDetails.Repository;
 using MyDoggyDetails.Services;
 using MyDoggyDetails.Utilities.Pictures;
 using MyDoggyDetails.ViewModels;
@@ -64,9 +63,7 @@ public static class MauiProgram
         //builder.Services.AddSingleton<IDoggyPictures, PicturesDefault>();
 #endif
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
+
         return builder.Build();
     }
 }
