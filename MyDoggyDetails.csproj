@@ -62,6 +62,7 @@
 		<MauiImage Include="Resources\Images\camera_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
+		<MauiImage Include="Resources\Images\dog_icon.png" />
 		<MauiImage Include="Resources\Images\edit.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -89,7 +90,7 @@
 		<MauiImage Include="Resources\Images\restaurant_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
-		<MauiImage Include="Resources\Images\species_icon_128.png">
+		<MauiImage Include="Resources\Images\species_icon.png" >
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vendors_icon_128.png">
@@ -139,6 +140,9 @@
 		<None Remove="Resources\AppIcon\appicon.png" />
 		<None Remove="Resources\Images\add_new_dog_icon_128.png" />
 		<None Remove="Resources\Images\camera_icon_128.png" />
+		<None Remove="Resources\Images\dog_icon%402x.png" />
+		<None Remove="Resources\Images\dog_icon%403x.png" />
+		<None Remove="Resources\Images\dog_icon.png" />
 		<None Remove="Resources\Images\dog_icon_128.png" />
 		<None Remove="Resources\Images\edit.png" />
 		<None Remove="Resources\Images\female_pink_icon_128.png" />
@@ -148,6 +152,7 @@
 		<None Remove="Resources\Images\photo_icon_128.png" />
 		<None Remove="Resources\Images\promotions_icon_128.png" />
 		<None Remove="Resources\Images\restaurant_icon_128.png" />
+		<None Remove="Resources\Images\species_icon.png" />
 		<None Remove="Resources\Images\species_icon_128.png" />
 		<None Remove="Resources\Images\vendors_icon_128.png" />
 		<None Remove="Resources\Images\vets_icon_128.png" />

@@ -10,17 +10,17 @@
 
         <ShellContent
             Title="My Doggies"
-            Icon="dog_icon_128.png"
+            Icon="dog_icon.png"
             ContentTemplate="{DataTemplate local:DoggiesPage}"
             Route="DoggiesPage" />
         <ShellContent
             Title="Breeds"
-            Icon="species_icon_128.png"
+            Icon="species_icon.png"
             ContentTemplate="{DataTemplate local:BreedsListPage}"
             Route="BreedsListPage" />
         <ShellContent
             Title="Promotions"
-            Icon="promotions_icon_128.png"
+            Icon="promotions_icon.png"
             ContentTemplate="{DataTemplate local:PromotionsPage}"
             IsVisible="false"
             Route="PromotionsPage" />
