@@ -23,7 +23,9 @@ public class BreedsRepository : BaseRepository, IBreedsRepository
 
     public async Task<long> SaveAsync(BreedModel model)
     {
-        var existingBreed = await Task.Run(() => conn.Table<BreedModel>().FirstOrDefault(x => x.Name == model.Name));
+
+        var existingBreed = await asyncConn.Table<BreedModel>().FirstOrDefaultAsync(x => x.Id == model.Id);
+
         if (existingBreed != null)
         {
             model.Id = existingBreed.Id;
@@ -37,7 +39,7 @@ public class BreedsRepository : BaseRepository, IBreedsRepository
     {
         try
         {
-            await Task.Run(() => conn.CreateTable<BreedModel>());
+            await Task.Run(() => asyncConn.CreateTableAsync<BreedModel>());
         }
         catch (Exception ex)
         {
@@ -49,15 +51,16 @@ public class BreedsRepository : BaseRepository, IBreedsRepository
 
     public async Task<BreedModel> GetByIdAsync(int id)
     {
-        return conn.Table<BreedModel>().FirstOrDefault(b => b.Id == id);
+        return await asyncConn.Table<BreedModel>().FirstOrDefaultAsync(b => b.Id == id);
+        
     }
 
 
     public async Task<IEnumerable<BreedModel>> GetAllBreedsAsync()
     {
-        var breeds = conn.Table<BreedModel>();
+        var breeds = await asyncConn.Table<BreedModel>().ToListAsync();
 
-        return breeds.ToList().AsEnumerable();
+        return breeds;
     }
 
 

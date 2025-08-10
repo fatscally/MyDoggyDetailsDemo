@@ -13,11 +13,13 @@ public class ParkRepository : BaseRepository, IParkRepository
   
     }
 
-    public void CreateDatabase()
+    public async Task CreateDatabase()
     {
-        var result = conn.CreateTable<ParkTableModel>();
+        
+        var result = await asyncConn.CreateTableAsync<ParkTableModel>();
+
         if (result == CreateTableResult.Created)
-            _ = SeedParkDataAsync();
+            await SeedParkDataAsync();
     }
 
     public long Save(ParkTableModel model)
@@ -27,28 +29,14 @@ public class ParkRepository : BaseRepository, IParkRepository
 
     public async Task<IEnumerable<ParkTableModel>> GetAllParksAsync()
     {
-        return conn.Table<ParkTableModel>();
+        return await asyncConn.Table<ParkTableModel>().ToListAsync();
     }
 
 
 
     public async Task CreateDatabaseAsync()
     {
-
-        try
-        {
-
-            if (conn == null)
-            {
-                throw new InvalidOperationException("Database connection is not initialized.");
-            }
-            conn.CreateTable<ParkTableModel>();
-        }
-        catch (Exception ex)
-        {
-            throw;
-        }
-
+            await asyncConn.CreateTableAsync<ParkTableModel>();
     }
 
     public async Task<long> SaveAsync(ParkTableModel model)
@@ -57,9 +45,8 @@ public class ParkRepository : BaseRepository, IParkRepository
         {
             return model.Id == 0 ? await base.InsertAsync(model) : await base.UpdateAsync(model);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-
             throw;
         }
     }
@@ -73,9 +60,8 @@ public class ParkRepository : BaseRepository, IParkRepository
             await SaveAsync(new ParkTableModel { Latitude = 53.342604703264804, Longitude = -6.440872837563679, Label = "Grifeen Valley Park.", Address = "A doggy park inside a human park", Type = (int)PinType.Generic });
 
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-
             throw;
         }
     }

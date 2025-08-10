@@ -13,26 +13,33 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RefreshView IsRefreshing="{Binding IsRefreshing}"
-             Command="{Binding GetBreedsFromWebCommand}">
-        
-    <VerticalStackLayout>
-        <HorizontalStackLayout>
-            <Label  Text="{Binding FeedbackMessage}" HorizontalOptions="Center"  Padding="5"/>
-        </HorizontalStackLayout>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding GetBreedsFromWebCommand}">
+        <CollectionView ItemsSource="{Binding Breeds}" 
+                    VerticalScrollBarVisibility="Always" 
+                    SelectedItem="{Binding SelectedBreed}"
+                    SelectionMode="Single"
+                    SelectionChangedCommandParameter="{Binding SelectedBreed.Id}"
+                    SelectionChangedCommand="{Binding GoToBreedDetailsPageCommand}">
 
+            <CollectionView.Header>
+                <VerticalStackLayout>
+                    <Label Text="{Binding FeedbackMessage}" HorizontalOptions="Center" Padding="5"/>
+                    <!-- Buttons + email label -->
+                    <Label Text="mr.raymond.brennan@outlook.com" TextColor="AliceBlue" BackgroundColor="#2196F3"
+                       FontSize="Medium" HorizontalTextAlignment="Center" Padding="30,10,30,10"/>
+                    <Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalOptions="Center">
+                        <Button Grid.Column="0" Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10"
+                                    Command="{Binding GetBreedsFromWebCommand}" IsVisible="false" />
+                                                <Button Grid.Column="1" Text="SAVE" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
+                                    Command="{Binding SaveBreedsToDbCommand}" IsVisible="false"/>
+                                                <Button Grid.Column="2" Text="Download img" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
+                                    Command="{Binding DownloadImageCommand}" IsVisible="false"/>
+                    </Grid>
 
-            <CollectionView ItemsSource="{Binding Breeds}" 
-                        VerticalScrollBarVisibility="Always" 
-                        MaximumHeightRequest="560"
-                        SelectedItem="{Binding SelectedBreed}"
-                        SelectionMode="Single"
-                        SelectionChangedCommandParameter="{Binding SelectedBreed.Id}"
-                        SelectionChangedCommand="{Binding GoToBreedDetailsPageCommand}">
-                  
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
             <CollectionView.ItemTemplate>
-              
-                
                 <DataTemplate>
                     <Grid Padding="10">
                         <Grid.RowDefinitions>
@@ -42,53 +49,25 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
 
-
-
-                            <Image Grid.RowSpan="2"
-                               Source="{Binding LocalIcon, Mode=OneWay, 
-                                        Converter={StaticResource ByteArrayToImageSourceConverter}}"
-                               
-                               Aspect="AspectFill"
-                               HeightRequest="60"
-                               WidthRequest="60" />
+                        <Image Grid.RowSpan="2"
+                           Source="{Binding LocalIcon, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                           Aspect="AspectFill"
+                           HeightRequest="60"
+                           WidthRequest="60" />
 
                         <HorizontalStackLayout HorizontalOptions="Start" Grid.Column="1" >
                             <Label Grid.Row="1" Padding="10,0,10,0"
-                               Grid.Column="1" 
                                Text="{Binding Id}"/>
-
-                            <Label Grid.Column="1"
-                               Text="{Binding Name}"
-                               FontAttributes="Bold" />
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
                         </HorizontalStackLayout>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-
-        <Label Text="mr.raymond.brennan@outlook.com"  TextColor="AliceBlue" BackgroundColor="#2196F3" FontSize="Medium" HorizontalTextAlignment="Center" Padding="30,10,30,10"/>
-
-        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <!--   <Button Text="Refresh Catalog" BackgroundColor="Pink" Padding="30,10,30,10" 
-                    Command="{Binding RefreshFromWeb_CommandClick}" />-->
-
-            <Button Text="{Binding GetButtonText}" BackgroundColor="Pink" Padding="30,10,30,10" 
-                    Command="{Binding GetBreedsFromWebCommand}" IsVisible="false" />
-
-            <Button Text="SAVE" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
-                    Command="{Binding SaveBreedsToDbCommand}" IsVisible="false"/>
-
-            <Button Text="Download img" BackgroundColor="CadetBlue" Padding="30,10,30,10" 
-                    Command="{Binding DownloadImageCommand}" IsVisible="false"/>
-
-        </StackLayout>
-
-    </VerticalStackLayout>
-
     </RefreshView>
-    
-    
+
+
+
 </ContentPage>

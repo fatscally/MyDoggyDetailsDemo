@@ -1,5 +1,6 @@
 ﻿using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
+using System.Threading.Tasks;
 
 namespace MyDoggyDetails.Repository;
 
@@ -14,13 +15,16 @@ public class DoggyPhotoRepository : BaseRepository, IDoggyPhotoRepository
         return model.Id == 0 ? await InsertAsync(model) : await UpdateAsync(model);
     }
 
-    public IEnumerable<DoggyPhotoModel> SelectPhotosByDoggyId(string dogGuid)
+
+    public async Task CreateDatabase()
     {
-        return conn.Table<DoggyPhotoModel>().Where(x => x.DogGuid == dogGuid);
+        await asyncConn.CreateTableAsync<DoggyPhotoModel>();
     }
 
-    public void CreateDatabase()
+    public async Task<IEnumerable<DoggyPhotoModel>> SelectPhotosByDoggyId(string dogGuid)
     {
-        conn.CreateTable<DoggyPhotoModel>();
+        return await asyncConn.Table<DoggyPhotoModel>().Where(x => x.DogGuid == dogGuid).ToListAsync();
     }
+
+
 }

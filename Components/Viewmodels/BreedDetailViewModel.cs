@@ -11,8 +11,10 @@ public partial class BreedDetailViewModel : BaseViewModel
 {
 
     private readonly IBreedsRepository _breedsRepository;
-    IDoggyPictures pictures;
 
+#if ANDROID
+    IDoggyPictures pictures;
+#endif
 
     [ObservableProperty] private BreedModel selectedBreed;
 

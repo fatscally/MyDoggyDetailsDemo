@@ -32,9 +32,9 @@ public class BreedService : IBreedService
     {
         Breeds = _dogItemManager.GetAllBreeds();
 
-        _ = _breedsRepository.InsertListAsync(Breeds);
+        await _breedsRepository.InsertListAsync(Breeds);
 
-        _ = DownloadBreedImagesAsync(Breeds);
+        await DownloadBreedImagesAsync(Breeds);
 
         return Breeds;
     }

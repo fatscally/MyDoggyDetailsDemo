@@ -54,7 +54,7 @@
         /// <summary>
         /// Return the String or Null for the database
         /// </summary>
-        public static string AsValidatedString(this string? str)
+        public static string AsValidatedString(this string str)
         {
 
             if (str == null)

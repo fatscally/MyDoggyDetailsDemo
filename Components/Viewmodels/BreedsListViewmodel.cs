@@ -19,10 +19,14 @@ public partial class BreedsListViewModel : BaseViewModel
     private readonly IBreedService _breedService;
     public int TotalOnlineCount;
 
+#if ANDROID
     IDoggyPictures pictures;
+#endif
+
+    //private bool waitingForApi;
 
     [ObservableProperty] private string feedbackMessage = "Using Local Doggie Database";
-    [ObservableProperty] private ObservableCollection<BreedModel> breeds = new();
+    [ObservableProperty] private ObservableCollection<BreedModel> breeds = [];
     [ObservableProperty] private BreedModel selectedBreed;
     [ObservableProperty] private Brush backgroundBrush = Brush.White;
     [ObservableProperty] private bool isRefreshing;
@@ -79,7 +83,9 @@ public partial class BreedsListViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            Breeds = _breedService.GetAllBreedsAsync().Result.ToObservableCollection<BreedModel>();
+            //Breeds = _breedService.GetAllBreedsAsync().Result.ToObservableCollection<BreedModel>();
+            Breeds = (await _breedService.GetAllBreedsAsync()).ToObservableCollection();
+
             FeedbackMessage = Breeds.Count == 0
                 ? "No breeds found in local database. Pull down to refresh."
                 : $"Found {Breeds.Count} breeds locally.";
@@ -123,7 +129,8 @@ public partial class BreedsListViewModel : BaseViewModel
         FeedbackMessage = "Refreshing content from API...";
         try
         {
-            Breeds = _breedService.RefreshBreedsFromApiAsync().Result.ToObservableCollection<BreedModel>();
+            //Breeds = _breedService.RefreshBreedsFromApiAsync().Result.ToObservableCollection<BreedModel>();
+            Breeds = (await _breedService.RefreshBreedsFromApiAsync()).ToObservableCollection();
 
 
 
@@ -136,7 +143,7 @@ public partial class BreedsListViewModel : BaseViewModel
         }
         finally
         {
-            _ = SaveBreedsToDb();
+            await SaveBreedsToDb();
             IsRefreshing = false;
         }
     }
@@ -147,7 +154,7 @@ public partial class BreedsListViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            _ = _breedService.SaveBreedsAsync();
+            await _breedService.SaveBreedsAsync();
             FeedbackMessage = "Breeds saved to database.";
         }
         catch (Exception ex)
@@ -182,7 +189,7 @@ public partial class BreedsListViewModel : BaseViewModel
 
 
 
-    private bool waitingForApi;
+    
 
 
 
@@ -250,7 +257,7 @@ public partial class BreedsListViewModel : BaseViewModel
 
 
 
-    [ObservableProperty] private ObservableCollection<BreedModel> webResults = new();
+    [ObservableProperty] private ObservableCollection<BreedModel> webResults = [];
 
     [RelayCommand]
     private async Task GoToBreedDetailsPage(int id)

@@ -1,7 +1,5 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
-using MyDoggyDetails.Interfaces;
+﻿using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
-using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.Services
 {
@@ -33,7 +31,7 @@ namespace MyDoggyDetails.Services
 
         public async Task<IEnumerable<DoggyPhotoModel>> GetPhotosByDoggyIdAsync(string dogGuid)
         {
-            return _photoRepository.SelectPhotosByDoggyId(dogGuid);
+            return await _photoRepository.SelectPhotosByDoggyId(dogGuid);
         }
     }
 }

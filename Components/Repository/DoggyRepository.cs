@@ -19,12 +19,13 @@ public class DoggyRepository : BaseRepository, IDoggyRepository
 
     public async Task<IEnumerable<DoggyModel>> GetAllDoggiesAsync()
     {
-            return conn.Table<DoggyModel>();
+        return await asyncConn.Table<DoggyModel>().ToListAsync();
+
     }
 
     public async Task CreateDatabaseAsync()
     {
-        conn.CreateTable<DoggyModel>();
+        await asyncConn.CreateTableAsync<DoggyModel>();
     }
 
     public async Task SeedDoggyDataAsync()

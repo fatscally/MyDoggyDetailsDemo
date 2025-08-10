@@ -55,12 +55,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<IDogsRestService, DogsRestService>();
         builder.Services.AddSingleton<IDogApiService, DogItemManager>();
 
+        AppContext.SetSwitch("System.Globalization.Invariant", true);
+
 
 #if ANDROID
         builder.Services.AddSingleton<IDoggyPictures, PicturesAndroid>();
 #else
         // Add implementations for other platforms
-        //builder.Services.AddSingleton<IDoggyPictures, PicturesDefault>();
+        builder.Services.AddSingleton<IDoggyPictures, PicturesIOS>();
 #endif
 
 

@@ -27,10 +27,6 @@ public partial class DoggyListViewModel : BaseViewModel
     private DoggyModel selectedDoggy;
 
 
-    //public DoggyListViewModel()
-    //{
-        
-    //}
     public DoggyListViewModel(IDoggyService doggyService)
     {
 
@@ -45,7 +41,7 @@ public partial class DoggyListViewModel : BaseViewModel
         if (Doggies != null)
             Doggies.Clear();
 
-        Doggies = _doggyService.GetAllDoggiesAsync().Result.ToObservableCollection<DoggyModel>();
+        Doggies = (await _doggyService.GetAllDoggiesAsync()).ToObservableCollection();
     }
 
 

@@ -73,29 +73,28 @@ public partial class DogDetailViewModel : BaseViewModel
         }
     }
 
-    [ObservableProperty]
-    private Image croppedImage;
+    [ObservableProperty] private Image croppedImage;
 
-    [ObservableProperty]
-    private string datePickerMaxDate = DateTime.Today.ToString();
+    [ObservableProperty] private string datePickerMaxDate = DateTime.Today.ToString();
 
-    [ObservableProperty]
-    int dogId;
+    [ObservableProperty] int dogId;
     partial void OnDogIdChanged(int value)
     {
-        SelectedDoggy = _doggyService.GetAllDoggiesAsync().Result.FirstOrDefault(x => x.Id == value);
+        _ = LoadSelectedDoggyAsync(value);
     }
 
-    [ObservableProperty]
-    private DoggyModel selectedDoggy;
+    private async Task LoadSelectedDoggyAsync(int value)
+    {
+        var allDoggies = await _doggyService.GetAllDoggiesAsync();
+        SelectedDoggy = allDoggies.FirstOrDefault(x => x.Id == value);
+    }
 
-    [ObservableProperty]
-    private ObservableCollection<DoggyPhotoModel> selectedDoggyPhotos;
-    [ObservableProperty]
-    private DoggyPhotoModel selectedDoggyPhoto;
+    [ObservableProperty] private DoggyModel selectedDoggy;
 
-    [ObservableProperty]
-    private string selectedPhotoFilePath;
+    [ObservableProperty] private ObservableCollection<DoggyPhotoModel> selectedDoggyPhotos;
+    [ObservableProperty] private DoggyPhotoModel selectedDoggyPhoto;
+
+    [ObservableProperty] private string selectedPhotoFilePath;
 
 
     [RelayCommand]

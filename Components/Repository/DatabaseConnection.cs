@@ -14,6 +14,13 @@ public class DatabaseConnection : IDatabaseConnection
         Directory.CreateDirectory(Path.GetDirectoryName(_dbPath)); // Ensure directory exists
     }
 
+    public SQLiteAsyncConnection GetAsyncConnection()
+    {
+
+        return new SQLiteAsyncConnection(_dbPath);
+
+    }
+
     public SQLiteConnection GetConnection()
     {
         try
@@ -29,4 +36,6 @@ public class DatabaseConnection : IDatabaseConnection
             throw;
         }
     }
+
+
 }

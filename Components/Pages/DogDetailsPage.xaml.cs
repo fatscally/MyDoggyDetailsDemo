@@ -15,7 +15,7 @@ public partial class DogDetailsPage : ContentPage
     }
 
 
-    protected async void OnClickedRectangle(object sender, EventArgs e)
+    protected void OnClickedRectangle(object sender, EventArgs e)
     {
         //https://github.com/jbowmanp1107/ImageCropper.Maui?tab=readme-ov-file#readme
 
@@ -57,13 +57,6 @@ public partial class DogDetailsPage : ContentPage
     {
 
     }
-
-
-    //protected async void OnClickedRectangle(object sender, EventArgs e)
-    //{
-    //    DogDetailsViewmodel viewmodel = this.BindingContext as DogDetailsViewmodel;
-    //    viewmodel.AddImageCommand.Execute(this);
-    //}
 
 
 
