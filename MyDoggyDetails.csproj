@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
+		<TargetFrameworks>net10.0-ios;net10.0-android36.0</TargetFrameworks>
+
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MyDoggyDetails</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -22,40 +21,37 @@
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">16.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">30.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
 		<Copyright>Raymond Brennan</Copyright>
 		<PackageIcon>appicon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/fatscally/MyDoggyDetails</RepositoryUrl>
 		<PackageTags>Dogs, MAUI, WPF, MVVM</PackageTags>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
 	  <CodesignKey>Apple Development: Created via API (PVRHXFJB67)</CodesignKey>
 	  <CodesignProvision>VS: com.quitealrightsolutions.mydoggydetails Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.2" />
-		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.100" />
-		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
-		<PackageReference Include="ImageCropper.Maui" Version="1.1.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0-preview.7.25406.3" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.0-preview.7.25406.3" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="12.2.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="10.0.0-preview.7.25406.3" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.10.196-beta" />
+		<PackageReference Include="ImageCropper.Maui" Version="1.2.3" />
 	</ItemGroup>
 
 
+	<ItemGroup>
+		<MauiIcon Include="Resources\Assets.xcassets\AppIcon.appiconset\**" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</MauiIcon>
+	
+		
 		<MauiImage Include="Resources\Images\add_new_dog_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -69,9 +65,9 @@
 		<MauiImage Include="Resources\Images\info_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
-		<MauiIcon Include="Resources\Images\male_blue_icon_128.png">
+		<MauiImage Include="Resources\Images\male_blue_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</MauiIcon>
+		</MauiImage>
 		<MauiImage Include="Resources\Images\dog_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
@@ -90,7 +86,7 @@
 		<MauiImage Include="Resources\Images\restaurant_icon_128.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
-		<MauiImage Include="Resources\Images\species_icon.png" >
+		<MauiImage Include="Resources\Images\species_icon.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</MauiImage>
 		<MauiImage Include="Resources\Images\vendors_icon_128.png">
@@ -121,18 +117,26 @@
 		<Compile Remove="Components\Utilities\ImageCropper\**" />
 		<Compile Remove="CustomControls\**" />
 		<Compile Remove="Components\Utilities\ImageCropper\**" />
+		<Compile Remove="Platforms\iOS\NewFolder\**" />
 		<EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
 		<EmbeddedResource Remove="CustomControls\**" />
 		<EmbeddedResource Remove="Components\Utilities\ImageCropper\**" />
+		<EmbeddedResource Remove="Platforms\iOS\NewFolder\**" />
+		<ImageAsset Remove="Platforms\iOS\NewFolder\**" />
+		<InterfaceDefinition Remove="Platforms\iOS\NewFolder\**" />
 		<MauiCss Remove="Components\Utilities\ImageCropper\**" />
 		<MauiCss Remove="CustomControls\**" />
 		<MauiCss Remove="Components\Utilities\ImageCropper\**" />
+		<MauiCss Remove="Platforms\iOS\NewFolder\**" />
 		<MauiXaml Remove="Components\Utilities\ImageCropper\**" />
 		<MauiXaml Remove="CustomControls\**" />
 		<MauiXaml Remove="Components\Utilities\ImageCropper\**" />
+		<MauiXaml Remove="Platforms\iOS\NewFolder\**" />
 		<None Remove="Components\Utilities\ImageCropper\**" />
 		<None Remove="CustomControls\**" />
 		<None Remove="Components\Utilities\ImageCropper\**" />
+		<None Remove="Platforms\iOS\NewFolder\**" />
+		<SceneKitAsset Remove="Platforms\iOS\NewFolder\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -221,10 +225,14 @@
 		</MauiXaml>
 	</ItemGroup>
 
+
+
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties XamarinHotReloadDebuggerTimeoutExceptionMyDoggyDetailsHideInfoBar="True" XamarinHotReloadUnhandledDeviceExceptionMyDoggyDetailsHideInfoBar="True" />
 		</VisualStudio>
 	</ProjectExtensions>
 
+
+	
 </Project>

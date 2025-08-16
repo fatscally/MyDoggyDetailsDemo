@@ -2,13 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>CFBundleDevelopmentRegion</key>
+		<string>en</string>
+		<key>CFBundleDisplayName</key>
+		<string>My Doggy Details</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.quitealrightsolutions.mydoggydetails</string>
+		<key>CFBundleInfoDictionaryVersion</key>
+		<string>6.0</string>
+		<key>CFBundleName</key>
+		<string>My Doggy Details</string>
+		<key>CFBundlePackageType</key>
+		<string>APPL</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0</string>
+		<key>CFBundleSignature</key>
+		<string>????</string>
+		<key>CFBundleVersion</key>
+		<string>1</string>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
-		<key>UIDeviceFamily</key>
-		<array>
-			<integer>1</integer>
-			<integer>2</integer>
-		</array>
+		<key>MinimumOSVersion</key>
+		<string>16.1</string>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
 		<key>UIRequiredDeviceCapabilities</key>
 		<array>
 			<string>arm64</string>
@@ -27,18 +44,13 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>XSAppIconAssets</key>
-		<string>Assets.xcassets/appicon.appiconset</string>
-
+		<string>Assets.xcassets/AppIcon.appiconset</string>
+		<!-- Permissions for camera and photo library (required for MediaPicker) -->
 		<key>NSCameraUsageDescription</key>
-		<string>This app needs camera access to take photos of your dog.</string>
+		<string>This app needs access to your camera to take photos of your dog.</string>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>This app needs photo library access to select photos of your dog.</string>
+		<string>This app needs access to your photo library to select images for your dog profile.</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>This app needs permission to save photos to your photo library.</string>
-
-		<key>UIBackgroundModes</key>
-		<array>
-			<string>fetch</string>
-		</array>
+		<string>This app needs to save photos to your library for doggy details.</string>
 	</dict>
 </plist>
