@@ -103,7 +103,7 @@ public partial class BreedModel : BaseTableModel
         }
     }
 
-    //remappting the json for database simplicity.
+    //remapping the json for database simplicity.
     private BreedHeight height;
     [Ignore]
     public BreedHeight Height

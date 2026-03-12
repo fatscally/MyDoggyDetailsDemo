@@ -13,54 +13,47 @@
     </ContentPage.Resources>
 
 
-    <VerticalStackLayout>
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+      ColumnDefinitions="Auto, *"
+      Padding="24"
+      RowSpacing="12"
+      ColumnSpacing="16">
 
-        <!--<Image  HorizontalOptions="StartAndExpand"
-                Source="{Binding SelectedBreed.Image_url, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}" 
-                Aspect="AspectFill"  MaximumWidthRequest="400"/>-->
+        <Image Grid.Row="0"
+           Grid.Column="0"
+           Grid.ColumnSpan="2"
+           Source="{Binding SelectedBreed.Image_url}"
+           Aspect="AspectFit"
+           HorizontalOptions="Center"
+           MaximumWidthRequest="400"
+           Margin="0,0,0,20"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+           Text="{Binding SelectedBreed.Name}"
+           FontSize="18" FontAttributes="Bold"
+           HorizontalOptions="Center"
+           Margin="0,0,0,16"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Text="Temperament:" FontAttributes="Bold"/>
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding SelectedBreed.Temperament}"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Text="Height:" FontAttributes="Bold"/>
+        <VerticalStackLayout Grid.Row="3" Grid.Column="1" Spacing="6">
+            <Label Text="{Binding SelectedBreed.Imperial_height, StringFormat='{0} in'}"/>
+            <Label Text="{Binding SelectedBreed.Metric_height, StringFormat='{0} cm'}"/>
+        </VerticalStackLayout>
+
+        <Label Grid.Row="4" Grid.Column="0" Text="Weight:" FontAttributes="Bold"/>
+        <VerticalStackLayout Grid.Row="4" Grid.Column="1" Spacing="6">
+            <Label Text="{Binding SelectedBreed.Metric_weight, StringFormat='{0} kg'}" />
+
+            <Label Text="{Binding SelectedBreed.Imperial_weight, StringFormat='{0} lbs'}" />
+
+        </VerticalStackLayout>
+
+        <!-- You can add breed group in row 5 if needed -->
+
+    </Grid>
 
 
-        <Image HorizontalOptions="StartAndExpand"
-               Aspect="AspectFill"  MaximumWidthRequest="400">
-            <Image.Source>
-                <UriImageSource Uri="{Binding SelectedBreed.Image_url}"
-                                CacheValidity="10:00:00:00" />
-            </Image.Source>
-        </Image>
-
-        <Label  Text="{Binding SelectedBreed.Id}" Padding="20,20,0,0"/>
-
-
-
-        <Label  Text="Temperament: " Padding="20,20,0,0"/>
-        <Label  Text="{Binding SelectedBreed.Temperament}" Padding="20,0,0,0"/>
-
-
-        <HorizontalStackLayout Padding="20, 20, 0, 0" >
-            <Label Text="Heigh range: " />
-            <Label Text="{Binding SelectedBreed.Imperial_height}" />
-            <Label Text=" ins." />
-            <Label Padding="30,0,0,0" Text="Weight range: " />
-            <Label Text="{Binding SelectedBreed.Imperial_weight}" />
-            <Label Text=" lbs" />
-        </HorizontalStackLayout>
-
-        <HorizontalStackLayout Padding="20, 0, 0, 0" >
-            <Label Text="Heigh range: " />
-            <Label Text="{Binding SelectedBreed.Metric_height}" />
-            <Label Text=" cms." />
-            <Label Padding="30,0,0,0" Text="Weight range: " />
-            <Label Text="{Binding SelectedBreed.Metric_weight}" />
-            <Label Text=" kgs" />
-        </HorizontalStackLayout>
-
-        <HorizontalStackLayout Padding="20" >
-            <Label Text="Breed Group: " />
-            <Label Text="{Binding SelectedBreed.Breed_group}" />
-        </HorizontalStackLayout>
-        
-
-    </VerticalStackLayout>
-    
-    
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using MyDoggyDetails.API;
+using MyDoggyDetails.Base;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Pages;
 using MyDoggyDetails.Repository;
@@ -52,8 +53,20 @@ public static class MauiProgram
         builder.Services.AddSingleton<VetsPage>();
         builder.Services.AddSingleton<VendorsPage>();
 
-        builder.Services.AddSingleton<IDogsRestService, DogsRestService>();
+
+
+        builder.Services.AddHttpClient<IDogsRestService, DogsRestService>(client =>
+    {
+        client.BaseAddress = new Uri("https://api.thedogapi.com/v1/");
+        client.DefaultRequestHeaders.Add("x-api-key", APIKeys.DogAPIKey); // ← move to config/secrets in production
+        client.Timeout = TimeSpan.FromSeconds(30);
+    });
+
+        // Keep DogItemManager as singleton (or scoped/transient depending on your needs)
         builder.Services.AddSingleton<IDogApiService, DogItemManager>();
+
+
+
 
         AppContext.SetSwitch("System.Globalization.Invariant", true);
 

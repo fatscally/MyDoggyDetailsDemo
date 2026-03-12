@@ -1,65 +1,56 @@
-﻿using MyDoggyDetails.Base;
-using MyDoggyDetails.Interfaces;
+﻿using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MyDoggyDetails.API;
 
-public class DogsRestService : IDogsRestService
+public class DogsRestService(HttpClient httpClient) : IDogsRestService
 {
-    HttpClient client;
-    JsonSerializerOptions serializerOptions;
+
+    private readonly HttpClient _httpClient = httpClient
+        ?? throw new ArgumentNullException(nameof(httpClient));
 
 
-
-    //internal BreedModel[] Breeds { get; set; }
-
-
-    public DogsRestService()
+    private static readonly JsonSerializerOptions SerializerOptions = new()
     {
-        client = new HttpClient();
-        client.DefaultRequestHeaders.Add("x-api-key", APIKeys.DogAPIKey );  //API Key has not been added to GitHub, get your own.
-
-        serializerOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true
-        };
-    }
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        AllowTrailingCommas = true
+    };
 
 
     public async Task<IEnumerable<BreedModel>> GetAllBreedsAsync()
     {
-        var Breeds = new BreedModel[] { };
-
-        Uri uri = new Uri(string.Format("https://api.thedogapi.com/v1/breeds", string.Empty));
-
         try
         {
-            
-            //get just one to find out the count...
-            HttpResponseMessage response = await client.GetAsync(uri).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync("breeds").ConfigureAwait(false);
+            response.EnsureSuccessStatusCode();
 
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                Breeds = JsonSerializer.Deserialize<BreedModel[]>(content, serializerOptions);
+            var content = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            }
+            var x = JsonSerializer.Deserialize<BreedModel[]>(content, SerializerOptions)
+                ?? Array.Empty<BreedModel>();
 
+            return x;
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode != null)
+        {
+            Debug.WriteLine($"HTTP error {ex.StatusCode}: {ex.Message}");
+            return Array.Empty<BreedModel>();
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            Debug.WriteLine($"Unexpected error: {ex}");
+            return Array.Empty<BreedModel>();
         }
-
-        return Breeds;
     }
 
-    public Task<IEnumerable<BreedModel>> GetAllBreeds()
-    {
-        throw new NotImplementedException();
-    }
+
+
+
+
 }
-

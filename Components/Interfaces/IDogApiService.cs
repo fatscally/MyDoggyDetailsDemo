@@ -4,5 +4,5 @@ namespace MyDoggyDetails.Interfaces;
 
 public interface IDogApiService
 {
-    IEnumerable<BreedModel> GetAllBreeds();
+    Task<IEnumerable<BreedModel>> GetAllBreedsAsync();
 }

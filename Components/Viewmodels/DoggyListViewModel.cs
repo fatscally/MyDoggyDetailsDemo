@@ -9,15 +9,12 @@ using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
 
-//passed in from MyDoggiesPage
-//[QueryProperty("DogId", "DogId")]
-
-
 
 public partial class DoggyListViewModel : BaseViewModel
 {
 
     private readonly IDoggyService _doggyService;
+
 
     [ObservableProperty] private ObservableCollection<DoggyModel> doggies;
 
@@ -49,9 +46,6 @@ public partial class DoggyListViewModel : BaseViewModel
 
     public BreedModel Breed { get; set; }
 
-
-
-
     public int UpdateDoggies
     {
         get
@@ -62,15 +56,13 @@ public partial class DoggyListViewModel : BaseViewModel
     }
 
 
-
-
-
     public string FormattedAge
     {
         get
         {
             if (SelectedDoggy == null) return string.Empty;
-            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).FormattedAge();
+            return AgeCalculator.CalculateAge(SelectedDoggy.DateOfBirth.ToDateTime()).ToString();
+
         }
     }
 
@@ -79,7 +71,9 @@ public partial class DoggyListViewModel : BaseViewModel
         get
         {
             if (SelectedDoggy == null) return string.Empty;
-            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).TotalDogDays.ToString();
+
+            return AgeCalculator.CalculateAge(SelectedDoggy.DateOfBirth.ToDateTime()).TotalDays.ToString();
+
         }
     }
 
@@ -88,7 +82,9 @@ public partial class DoggyListViewModel : BaseViewModel
         get
         {
             if (SelectedDoggy == null) return string.Empty;
-            return new AgeCalculator(SelectedDoggy.DateOfBirth.ToDateTime()).FormattedAgeShort();
+
+            return "not implemented yet";
+
         }
     }
 

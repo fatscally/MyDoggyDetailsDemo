@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using MyDoggyDetails.Enums;
-using MyDoggyDetails.Utilities;
-using SQLite;
 
 
 namespace MyDoggyDetails.Models;
@@ -11,15 +9,9 @@ namespace MyDoggyDetails.Models;
 public partial class DoggyModel : BaseTableModel
 {
 
-    [ObservableProperty]
-    private string dogGuid;
-
-    [ObservableProperty]
-    private int breedId;
-    
-
-    [ObservableProperty]
-    public string colour;
+    [ObservableProperty] private string dogGuid;
+    [ObservableProperty] private int breedId;
+    [ObservableProperty] public string colour;
 
     /// <summary>
     /// Name given to the dog
@@ -29,16 +21,13 @@ public partial class DoggyModel : BaseTableModel
     /// The date of birth recorded
     /// </summary>
     [ObservableProperty] private string dateOfBirth;
-
     [ObservableProperty] public string chipNumber;
+    [ObservableProperty]  private string joinedFamilyDate;
 
 
+    [ObservableProperty] private Genders gender;
 
-    [ObservableProperty]
-    private Genders gender;
-
-    [ObservableProperty]
-    public bool sex;
+    [ObservableProperty] public bool sex;
     partial void OnSexChanged(bool value)
     {
         if (value)
@@ -47,34 +36,8 @@ public partial class DoggyModel : BaseTableModel
             Gender = Genders.Female;
     }
 
-    [ObservableProperty]
-    private string joinedFamilyDate;
 
-    [Ignore]
-    public string FormattedAge
-    {
-        get
-        {
-            return new AgeCalculator(DateOfBirth.ToDateTime()).FormattedAge();
-        }
-    }
 
-    [Ignore]
-    public string TotalDogDays
-    {
-        get
-        {
-            return new AgeCalculator(DateOfBirth.ToDateTime()).TotalDogDays.ToString();
-        }
-    }
 
-    [Ignore]
-    public string FormattedAgeShort
-    {
-        get
-        {
-            return new AgeCalculator(DateOfBirth.ToDateTime()).FormattedAgeShort();
-        }
-    }
 
 }

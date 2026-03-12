@@ -1,217 +1,95 @@
-﻿using System.Text;
+﻿using System;
 
-namespace MyDoggyDetails.Utilities
+public class AgeCalculator
 {
-    internal class AgeCalculator
+    /// <summary>
+    /// Calculates detailed age breakdown from date of birth to today.
+    /// Returns years, months, weeks, days (remaining after years/months).
+    /// </summary>
+    public static AgeResult CalculateAge(DateTime dateOfBirth)
     {
+        return CalculateAge(dateOfBirth, DateTime.Today);
+    }
 
-        public AgeCalculator(DateTime dateOfBirth)
+    /// <summary>
+    /// Calculates detailed age breakdown from date of birth to a specific date.
+    /// </summary>
+    public static AgeResult CalculateAge(DateTime dateOfBirth, DateTime referenceDate)
+    {
+        if (dateOfBirth > referenceDate)
         {
-
-            DateOfBirth = dateOfBirth;
-
+            throw new ArgumentException("Date of birth cannot be in the future.");
         }
 
-        private TimeSpan tsDogsAge;
-        //private int TotalDogDays;
-        private int remainderDays; //the remainder after subtracting years, months etc.
+        // Make sure we work with dates only (strip time)
+        dateOfBirth = dateOfBirth.Date;
+        referenceDate = referenceDate.Date;
 
-        private DateTime dob;
+        int years = 0;
+        int months = 0;
+        int days = 0;
 
-        public DateTime DateOfBirth
+        // First calculate full years and months
+        DateTime current = dateOfBirth;
+
+        // Count full years
+        while (current.AddYears(years + 1) <= referenceDate)
         {
-            set
-            {
-                dob = value;
-                tsDogsAge = DateTime.Today.Subtract(dob);
-                totalDogDays = tsDogsAge.Days;
-
-                CalculateAge();
-
-            }
+            years++;
         }
 
+        // Move to the date after full years
+        current = dateOfBirth.AddYears(years);
 
-        /// <returns>Returns and int for every full year</returns>
-        private void CalculateAge()
+        // Count full months
+        while (current.AddMonths(months + 1) <= referenceDate)
         {
-            years = totalDogDays / 365;
-            remainderDays = totalDogDays - (years * 365);   //remove the years
-
-            months = (int)(remainderDays / (365.2425 / 12));
-
-            remainderDays = (int)(remainderDays - (months * 30.25));  //remove the months
-
-            weeks = remainderDays / 7;
-            remainderDays= remainderDays - (weeks * 7);
-
-            days = remainderDays;
-
-
+            months++;
         }
 
-        //private void CalcMonths()
-        //{
-        //    //Remove the days for every year
-        //    //remainder = TotalDogDays - (Years * 365);
-        //    //months = (int)(remainder / (365.2425 / 12));
-        //}
+        // Move to the date after full years + months
+        current = dateOfBirth.AddYears(years).AddMonths(months);
 
+        // Remaining days
+        days = (referenceDate - current).Days;
 
-        //private void CalcWeeks()
-        //{
-        //    //Remove the days for every year
-        //    int remainder = TotalDogDays - (Years * 365);
+        // Now calculate total weeks + remaining days (alternative view)
+        int totalDays = (referenceDate - dateOfBirth).Days;
+        int weeks = totalDays / 7;
+        int remainingDays = totalDays % 7;
 
-        //    days = remainder - (months * 30);
-        //}
-        //private void CalcDays()
-        //{
-        //    //Remove the days for every year
-        //    int remainder = TotalDogDays - (Years * 365);
-
-        //    days = remainder - (months * 30);
-        //}
-
-
-        private int totalDogDays;
-        /// <summary>
-        /// This is the number of days from dob to today converted from the timespan tsDogsAge.
-        /// </summary>
-        public int TotalDogDays
+        return new AgeResult
         {
-            get { return totalDogDays; }
-        }
+            Years = years,
+            Months = months,
+            Days = days,                    // days after full years+months
+            TotalWeeks = weeks,
+            TotalWeeksRemainingDays = remainingDays,
+            TotalDays = totalDays,
+            BirthDate = dateOfBirth,
+            ReferenceDate = referenceDate
+        };
+    }
+}
 
+public class AgeResult
+{
+    public int Years { get; set; }
+    public int Months { get; set; }
+    public int Days { get; set; }                    // remaining days after years+months
+    public int TotalWeeks { get; set; }
+    public int TotalWeeksRemainingDays { get; set; }
+    public int TotalDays { get; set; }
+    public DateTime BirthDate { get; set; }
+    public DateTime ReferenceDate { get; set; }
 
-        private int years;
-        public int Years
-        {
-            //Note: a year has 365 days.  No leap years.
-            get
-            {
-                return years;
-            }
-        }
-
-        private int months;
-        public int Months
-        {
-            //Note: A month has 30 days, never 28/29/31
-            get
-            {
-                return months;
-            }
-        }
-
-        private int weeks;
-        public int Weeks
-        {
-            get
-            {
-                return weeks;
-            }
-        }
-
-        private int days; 
-        public int Days
-        {
-            get
-            {
-                return days;
-            }
-        }
-
-
-        /// <summary>
-        /// This takes the age and tries to format it into readable English text.
-        /// </summary>
-        /// <returns>A string like "1 year, 2 months and 4 days old."</returns>
-        public string FormattedAge()
-        {
-
-            if(totalDogDays <= 0) { return string.Empty; }
-
-            StringBuilder sb = new StringBuilder(32);
-
-            if (years > 0) {
-                sb.Append(years.ToString());
-                sb.Append(" year, ");
-                if (years > 1)
-                    sb.Replace("year, ", "years, ");
-            }
-
-            if (sb.ToString().EndsWith(", ") && days == 0)  //if there are no days we need to remove the comma
-            {
-                sb.Replace(", ", " and ", sb.Length - 2, 2);
-            }
-
-            if (months > 0)
-            {
-                sb.Append(months.ToString());
-                sb.Append(" month, ");
-                if (months > 1)
-                    sb.Replace("month, ", "months, ");
-            }
-
-            if (sb.ToString().EndsWith(", ") && days == 0)  //if there are no days we need to remove the  trailing comma
-            {
-                sb.Replace(", ", " and ", sb.Length-2,2);
-            }
-
-            if (weeks > 0) 
-            {
-                sb.Append(weeks.ToString());
-                sb.Append(" week");
-                if (weeks > 1)
-                    sb.Replace("week", "weeks");
-            }
-
-            if (days > 0)
-            {
-                if(sb.ToString().EndsWith(", "))
-                    sb.Replace(", ","",sb.Length-2,2);
-                if(years>0 || months>0 || weeks>0)
-                    sb.Append(" and ");
-                sb.Append( days.ToString());
-                sb.Append(" day ");
-                if (days > 1)
-                    sb.Replace("day ", "days "); 
-            } 
-            else
-            {
-                sb.Append(" ");
-            }
-
-            sb.Append("old");
-
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// This takes the age and tries to format it into readable English text.
-        /// </summary>
-        /// <returns>A string like "1yr, 2m."</returns>
-        public string FormattedAgeShort()
-        {
-
-            if (totalDogDays <= 0) { return string.Empty; }
-
-            StringBuilder sb = new StringBuilder(32);
-
-
-                sb.Append(years.ToString());
-                sb.Append("yr,");
-
-
-                sb.Append(months.ToString());
-                sb.Append("m.");
-
-
-
-            return sb.ToString();
-        }
-
-
+    public override string ToString()
+    {
+        return $"{Years} year{(Years == 1 ? "" : "s")}, " +
+               $"{Months} month{(Months == 1 ? "" : "s")}, " +
+               $"{Days} day{(Days == 1 ? "" : "s")}\n" +
+               $"or {TotalWeeks} week{(TotalWeeks == 1 ? "" : "s")} " +
+               $"and {TotalWeeksRemainingDays} day{(TotalWeeksRemainingDays == 1 ? "" : "s")}\n" +
+               $"(total {TotalDays} days)";
     }
 }

@@ -30,7 +30,10 @@ public class BreedService : IBreedService
 
     public async Task<IEnumerable<BreedModel>> RefreshBreedsFromApiAsync()
     {
-        Breeds = _dogItemManager.GetAllBreeds();
+        Breeds = await _dogItemManager.GetAllBreedsAsync() ?? Enumerable.Empty<BreedModel>();
+
+        if (Breeds.Any() == false)
+            return Enumerable.Empty<BreedModel>();
 
         await _breedsRepository.InsertListAsync(Breeds);
 

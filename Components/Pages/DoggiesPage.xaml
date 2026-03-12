@@ -7,43 +7,41 @@
              Appearing="ContentPage_Appearing">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="StartAndExpand">
+        <VerticalStackLayout Spacing="20" Padding="20" VerticalOptions="Start">
 
 
             <ImageButton Source="schnauzer.png" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="Start" />
 
 
             <Label Text="My Doggies:" />
-            <ListView  ItemsSource="{Binding Doggies}"  SelectionMode="Single"  SelectedItem="{Binding SelectedDoggy}"  HeightRequest="150" >
-                
-                <ListView.ItemTemplate>
+            <CollectionView ItemsSource="{Binding Doggies}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedDoggy}"
+                >
+
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="200" />
+                        
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="60" />
+                            </Grid.ColumnDefinitions>
 
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="60" />
-                                </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Id}" Grid.Column="0"  />
+                            <Image Grid.Column="1" VerticalOptions="Start" Source="dog_icon_128.png" Aspect="AspectFill" HeightRequest="30"  WidthRequest="30" />
+                            <Label Grid.Column="2" Text="{Binding GivenName}" FontSize="Medium" FontAttributes="Bold"  />
+                            <Label Grid.Column="3" Text="{Binding FormattedAge}" VerticalOptions="Start" HorizontalOptions="Start" />
 
-                                <Label Text="{Binding Id}" Grid.Column="0" />
-                                <Image Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Start"
-                                   Source="dog_icon_128.png"    Aspect="AspectFill"  HeightRequest="30"  WidthRequest="30" />
-
-                                <Label Grid.Column="2" Text="{Binding GivenName}" FontSize="Medium" FontAttributes="Bold"/>
-                                <Label Grid.Column="3" Text="{Binding FormattedAgeShort}" FontAttributes="Italic"   />
-
-                            </Grid>
-                        </ViewCell>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <StackLayout Orientation="Vertical">
 
@@ -52,8 +50,8 @@
                     <Label Text=" days" FontSize="Small" HorizontalOptions="End" />
                 </StackLayout>
 
-                <Label Text="{Binding FormattedAge}" FontSize="Small" HorizontalOptions="StartAndExpand" />
-                <!--<Label Text="approximately" FontSize="Micro" HorizontalOptions="End" />-->
+                <Label Text="{Binding FormattedAge}" FontSize="Small"  />
+
 
 
             </StackLayout>

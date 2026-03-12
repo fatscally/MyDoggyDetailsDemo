@@ -49,9 +49,6 @@ public partial class ParksViewModel : BaseViewModel
 
 
 
-
-
-
     public async Task InitializeAsync()
     {
        

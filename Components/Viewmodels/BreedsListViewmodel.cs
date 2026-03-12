@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MyDoggyDetails.API;
-using MyDoggyDetails.Base;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
 using MyDoggyDetails.Pages;
@@ -129,13 +127,11 @@ public partial class BreedsListViewModel : BaseViewModel
         FeedbackMessage = "Refreshing content from API...";
         try
         {
-            //Breeds = _breedService.RefreshBreedsFromApiAsync().Result.ToObservableCollection<BreedModel>();
+
             Breeds = (await _breedService.RefreshBreedsFromApiAsync()).ToObservableCollection();
 
-
-
-            //Breeds = _breedService.GetAllBreedsAsync().Result.ToObservableCollection<BreedModel>();
             FeedbackMessage = $"Found {Breeds.Count} breeds from API.";
+
         }
         catch (Exception ex)
         {
