@@ -176,6 +176,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiAsset Include="README.md">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiAsset>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Update="Components\Pages\BreedsListPage.xaml.cs">
 			<DependentUpon>BreedsListPage.xaml</DependentUpon>
 		</Compile>

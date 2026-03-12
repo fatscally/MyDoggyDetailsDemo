@@ -18,8 +18,7 @@ public partial class DoggiesPage : ContentPage
 
     private void ContentPage_Appearing(object sender, EventArgs e)
     {
-        //DoggyListViewModel viewmodel = this.BindingContext as DoggyListViewModel;
-        _viewModel.LoadUpDoggies();  
+        _viewModel.LoadUpDoggiesAsync();  
     }
 
 

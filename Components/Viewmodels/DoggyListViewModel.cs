@@ -29,11 +29,11 @@ public partial class DoggyListViewModel : BaseViewModel
 
         _doggyService = doggyService;
 
-        LoadUpDoggies();
+        LoadUpDoggiesAsync();
 
     }
 
-    internal async void LoadUpDoggies()
+    internal async void LoadUpDoggiesAsync()
     {
         if (Doggies != null)
             Doggies.Clear();

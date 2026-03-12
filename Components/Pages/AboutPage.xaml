@@ -9,32 +9,39 @@
         <viewmodels:AboutViewModel/>
     </ContentPage.BindingContext>
 
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
 
-    <VerticalStackLayout Padding="10">
+            <HorizontalStackLayout>
+                <Label Text="App name:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Name }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Package:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Package }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Version:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Version }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Build:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Build }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Author:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Author }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="Email:" HorizontalOptions="Start" WidthRequest="80"/>
+                <Label Text="{Binding Email }" HorizontalOptions="Start" />
+            </HorizontalStackLayout>
 
-        <HorizontalStackLayout>
-            <Label Text="App name:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Name }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Package:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Package }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Version:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Version }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Build:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Build }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Author:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Author }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Email:" HorizontalOptions="Start" WidthRequest="80"/>
-            <Label Text="{Binding Email }" HorizontalOptions="Start" />
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+                <Label Text="Description:" HorizontalOptions="Start" WidthRequest="80"/>
+
+                <Label Text="{Binding Description }" HorizontalOptions="Start" />
+
+            
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
