@@ -1,13 +1,10 @@
-﻿using MyDoggyDetails.Base;
-using MyDoggyDetails.Interfaces;
+﻿using MyDoggyDetails.Interfaces;
 using SQLite;
 
 namespace MyDoggyDetails.Repository;
 
 public abstract class BaseRepository
 {
-    public string dbPath { get; } = Constants.DatabasePath;
-
     protected SQLiteAsyncConnection asyncConn;
 
     protected BaseRepository(IDatabaseConnection connection)

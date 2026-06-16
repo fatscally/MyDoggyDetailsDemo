@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Text;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -24,28 +23,19 @@ public partial class AboutViewModel : BaseViewModel
         Description = await LoadCommentsAsync();
     }
 
-
-
     private async Task<string> LoadCommentsAsync()
     {
-        var sb = new StringBuilder();
-
         try
         {
             using var stream = await FileSystem.OpenAppPackageFileAsync("README.md");
             using var reader = new StreamReader(stream);
-            string? line;
-            while ((line = await reader.ReadLineAsync()) != null)
-            {
-                sb.AppendLine(line);
-            }
+            return await reader.ReadToEndAsync();
         }
-        catch (FileNotFoundException)
+        catch (Exception ex)
         {
-            sb.AppendLine("README.md file not found.");
+            System.Diagnostics.Debug.WriteLine($"Failed to load README: {ex}");
+            return Description;
         }
-
-        return sb.ToString();
     }
 
 }

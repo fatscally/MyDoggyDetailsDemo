@@ -1,6 +1,5 @@
-﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui;
 using MyDoggyDetails.API;
-using MyDoggyDetails.Base;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Pages;
 using MyDoggyDetails.Repository;
@@ -9,6 +8,7 @@ using MyDoggyDetails.Utilities.Pictures;
 using MyDoggyDetails.ViewModels;
 
 namespace MyDoggyDetails;
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
@@ -22,27 +22,35 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .UseMauiMaps();
 
-        // Register services
+        // Infrastructure
         builder.Services.AddSingleton<IDatabaseConnection, DatabaseConnection>();
+        builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+
+        // Repositories
         builder.Services.AddSingleton<IDoggyRepository, DoggyRepository>();
         builder.Services.AddSingleton<IDoggyPhotoRepository, DoggyPhotoRepository>();
         builder.Services.AddSingleton<IBreedsRepository, BreedsRepository>();
         builder.Services.AddSingleton<IParkRepository, ParkRepository>();
+
+        // Initialisation
         builder.Services.AddSingleton<DataSeeder>();
         builder.Services.AddSingleton<DatabaseInitializer>();
+
+        // Services
         builder.Services.AddSingleton<IDoggyService, DoggyService>();
+        builder.Services.AddSingleton<IDoggyPhotoService, DoggyPhotoService>();
         builder.Services.AddSingleton<IParkService, ParkService>();
         builder.Services.AddSingleton<IBreedService, BreedService>();
 
-
-        // Register view models
+        // ViewModels
         builder.Services.AddSingleton<DoggyListViewModel>();
         builder.Services.AddTransient<DogDetailViewModel>();
         builder.Services.AddSingleton<BreedsListViewModel>();
         builder.Services.AddTransient<BreedDetailViewModel>();
         builder.Services.AddSingleton<ParksViewModel>();
 
-        // Register pages
+        // Pages
+        builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<DoggiesPage>();
         builder.Services.AddSingleton<AboutPage>();
         builder.Services.AddTransient<DogDetailsPage>();
@@ -53,31 +61,22 @@ public static class MauiProgram
         builder.Services.AddSingleton<VetsPage>();
         builder.Services.AddSingleton<VendorsPage>();
 
-
-
+        // HTTP clients
         builder.Services.AddHttpClient<IDogsRestService, DogsRestService>(client =>
-    {
-        client.BaseAddress = new Uri("https://api.thedogapi.com/v1/");
-        client.DefaultRequestHeaders.Add("x-api-key", APIKeys.DogAPIKey); // ← move to config/secrets in production
-        client.Timeout = TimeSpan.FromSeconds(30);
-    });
-
-        // Keep DogItemManager as singleton (or scoped/transient depending on your needs)
-        builder.Services.AddSingleton<IDogApiService, DogItemManager>();
-
-
-
+        {
+            client.BaseAddress = new Uri("https://api.thedogapi.com/v1/");
+            client.DefaultRequestHeaders.Add("x-api-key", Base.APIKeys.DogAPIKey);
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
+        builder.Services.AddHttpClient(); // default client for IDoggyPictures
 
         AppContext.SetSwitch("System.Globalization.Invariant", true);
-
 
 #if ANDROID
         builder.Services.AddSingleton<IDoggyPictures, PicturesAndroid>();
 #else
-        // Add implementations for other platforms
         builder.Services.AddSingleton<IDoggyPictures, PicturesIOS>();
 #endif
-
 
         return builder.Build();
     }

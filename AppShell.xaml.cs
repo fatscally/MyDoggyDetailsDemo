@@ -1,16 +1,11 @@
-﻿using MyDoggyDetails.Repository;
-
-namespace MyDoggyDetails;
+﻿namespace MyDoggyDetails;
 
 public partial class AppShell : Shell
 {
-	public AppShell(DatabaseInitializer initializer)
+	public AppShell()
 	{
 		InitializeComponent();
-
         RegisterRoutes();
-        _ = initializer.InitializeAsync();
-
     }
 
     private void RegisterRoutes()

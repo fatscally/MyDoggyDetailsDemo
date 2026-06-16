@@ -1,61 +1,39 @@
-﻿using MyDoggyDetails.Base;
+using MyDoggyDetails.Base;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
 
 namespace MyDoggyDetails.Services;
 
-public class BreedService : IBreedService
+public class BreedService(IBreedsRepository breedsRepository, IDoggyPictures pictures, IDogsRestService restService) : IBreedService
 {
-    private readonly IBreedsRepository _breedsRepository;
-    private readonly IDoggyPictures _pictures;
-    private readonly IDogApiService _dogItemManager;
-    public IEnumerable<BreedModel> Breeds { get; set; }
-
-    public BreedService(IBreedsRepository breedsRepository, IDoggyPictures pictures, IDogApiService dogItemManager)
-    {
-        _breedsRepository = breedsRepository;
-        _pictures = pictures;
-        _dogItemManager = dogItemManager;
-    }
+    private readonly IBreedsRepository _breedsRepository = breedsRepository ?? throw new ArgumentNullException(nameof(breedsRepository));
+    private readonly IDoggyPictures _pictures = pictures ?? throw new ArgumentNullException(nameof(pictures));
+    private readonly IDogsRestService _restService = restService ?? throw new ArgumentNullException(nameof(restService));
 
     public async Task<IEnumerable<BreedModel>> GetAllBreedsAsync()
-    {
-        return await _breedsRepository.GetAllBreedsAsync();
-    }
+        => await _breedsRepository.GetAllBreedsAsync();
 
     public async Task<BreedModel> GetBreedByIdAsync(int id)
-    {
-        return await _breedsRepository.GetByIdAsync(id);
-    }
+        => await _breedsRepository.GetByIdAsync(id);
 
     public async Task<IEnumerable<BreedModel>> RefreshBreedsFromApiAsync()
     {
-        Breeds = await _dogItemManager.GetAllBreedsAsync() ?? Enumerable.Empty<BreedModel>();
+        var breeds = (await _restService.GetAllBreedsAsync() ?? Enumerable.Empty<BreedModel>()).ToList();
 
-        if (Breeds.Any() == false)
+        if (!breeds.Any())
             return Enumerable.Empty<BreedModel>();
 
-        await _breedsRepository.InsertListAsync(Breeds);
+        await _breedsRepository.InsertListAsync(breeds);
+        await DownloadBreedImagesAsync(breeds);
 
-        await DownloadBreedImagesAsync(Breeds);
-
-        return Breeds;
+        return breeds;
     }
 
-    public async Task SaveBreedsAsync()
-    {
-        await _breedsRepository.InsertListAsync(Breeds);
-    }
+    public async Task SaveBreedsAsync(IEnumerable<BreedModel> breeds)
+        => await _breedsRepository.InsertListAsync(breeds);
 
-    public async Task SaveBreedAsync(BreedModel breed)
+    private async Task DownloadBreedImagesAsync(IEnumerable<BreedModel> breeds)
     {
-        await _breedsRepository.SaveAsync(breed);
-    }
-
-    public async Task DownloadBreedImagesAsync(IEnumerable<BreedModel> breeds)
-    {
-        int i = 0;
-
         foreach (var breed in breeds)
         {
             if (breed.LocalIcon != null) continue;
@@ -69,8 +47,6 @@ public class BreedService : IBreedService
             breed.LocalIcon = _pictures.DownsizeImage(imageBytes, 60, 60);
 
             await _breedsRepository.SaveAsync(breed);
-            i++;
         }
     }
-
 }

@@ -1,10 +1,9 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Maui.Core.Extensions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
 using MyDoggyDetails.Pages;
-using MyDoggyDetails.Utilities.Pictures;
 using System.Collections.ObjectModel;
 
 namespace MyDoggyDetails.ViewModels;
@@ -13,15 +12,9 @@ namespace MyDoggyDetails.ViewModels;
 
 public partial class BreedsListViewModel : BaseViewModel
 {
-
     private readonly IBreedService _breedService;
+    private readonly IConnectivity _connectivity;
     public int TotalOnlineCount;
-
-#if ANDROID
-    IDoggyPictures pictures;
-#endif
-
-    //private bool waitingForApi;
 
     [ObservableProperty] private string feedbackMessage = "Using Local Doggie Database";
     [ObservableProperty] private ObservableCollection<BreedModel> breeds = [];
@@ -33,35 +26,16 @@ public partial class BreedsListViewModel : BaseViewModel
     [ObservableProperty] private string getButtonText = "Get API";
     [ObservableProperty] private int counter;
     [ObservableProperty] int dogId;
-    
-    partial void OnDogIdChanged(int value)
-    {
-        _ = GetBreedByIdAsync(value);
-    }
 
-    partial void OnHourglassRunningChanged(bool value)
-    {
-        HourglassVisible = value;
-    }
+    partial void OnDogIdChanged(int value) => _ = GetBreedByIdAsync(value);
 
+    partial void OnHourglassRunningChanged(bool value) => HourglassVisible = value;
 
-
-
-    public BreedsListViewModel(IBreedService breedService)
+    public BreedsListViewModel(IBreedService breedService, IConnectivity connectivity)
     {
         _breedService = breedService;
+        _connectivity = connectivity;
         InitializeAsync();
-
-#if (ANDROID)
-    pictures = new PicturesAndroid();
-
-#elif (WINDOWS)
-
-#elif (__IOS__)
-
-#endif
-
-
     }
 
     private async void InitializeAsync()
@@ -72,8 +46,9 @@ public partial class BreedsListViewModel : BaseViewModel
 
     private void CheckNetworkStatus()
     {
-        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-        BackgroundBrush = accessType == NetworkAccess.Internet ? Brush.Green : Brush.Gray;
+        BackgroundBrush = _connectivity.NetworkAccess == NetworkAccess.Internet
+            ? Brush.Green
+            : Brush.Gray;
     }
 
     private async Task LoadUpBreedsAsync()
@@ -81,7 +56,6 @@ public partial class BreedsListViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            //Breeds = _breedService.GetAllBreedsAsync().Result.ToObservableCollection<BreedModel>();
             Breeds = (await _breedService.GetAllBreedsAsync()).ToObservableCollection();
 
             FeedbackMessage = Breeds.Count == 0
@@ -98,27 +72,7 @@ public partial class BreedsListViewModel : BaseViewModel
         }
     }
 
-
-    partial void OnBreedsChanged(ObservableCollection<BreedModel> value)
-    {
-        //SaveBreedsToDb();
-        //_ = GetImagesForBreedsFromAPI();
-    }
-
-    
-
-
-
-    private void Online()
-    {
-        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
-
-        if (accessType == NetworkAccess.Internet)
-        {
-            BackgroundBrush = Brush.Green;
-        }
-        else { BackgroundBrush = Brush.Gray; }
-    }
+    partial void OnBreedsChanged(ObservableCollection<BreedModel> value) { }
 
     [RelayCommand]
     public async Task GetBreedsFromWeb()
@@ -127,11 +81,8 @@ public partial class BreedsListViewModel : BaseViewModel
         FeedbackMessage = "Refreshing content from API...";
         try
         {
-
             Breeds = (await _breedService.RefreshBreedsFromApiAsync()).ToObservableCollection();
-
             FeedbackMessage = $"Found {Breeds.Count} breeds from API.";
-
         }
         catch (Exception ex)
         {
@@ -139,7 +90,6 @@ public partial class BreedsListViewModel : BaseViewModel
         }
         finally
         {
-            await SaveBreedsToDb();
             IsRefreshing = false;
         }
     }
@@ -150,7 +100,7 @@ public partial class BreedsListViewModel : BaseViewModel
         IsBusy = true;
         try
         {
-            await _breedService.SaveBreedsAsync();
+            await _breedService.SaveBreedsAsync(Breeds);
             FeedbackMessage = "Breeds saved to database.";
         }
         catch (Exception ex)
@@ -162,32 +112,6 @@ public partial class BreedsListViewModel : BaseViewModel
             IsBusy = false;
         }
     }
-
-    //[RelayCommand]
-    //public async Task DownloadImages()
-    //{
-    //    IsBusy = true;
-    //    try
-    //    {
-    //        await _breedService.DownloadBreedImagesAsync(Breeds);
-    //        FeedbackMessage = "Images downloaded successfully.";
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        FeedbackMessage = $"Error downloading images: {ex.Message}";
-    //    }
-    //    finally
-    //    {
-    //        IsBusy = false;
-    //    }
-    //}
-
-
-
-
-    
-
-
 
     private async Task GetBreedByIdAsync(int id)
     {
@@ -201,67 +125,9 @@ public partial class BreedsListViewModel : BaseViewModel
         }
     }
 
-    //private async void GetBreedsFromAPI()
-    //{
-    //    waitingForApi = true;
-
-    //    await Task.Run(() => FeedbackMessage = "Downloading from The Dog API... ");
-
-    //    Breeds.Clear();
-
-    //    DogItemManager http = new(new DogsRestService());
-
-
-    //    Breeds = http.GetAllBreeds().ToObservableCollection<BreedModel>();
-
-
-    //    await Task.Run(() => FeedbackMessage = "Found " + Breeds.Count + " breeds");
-        
-    //    waitingForApi = false;
-
-    //}
-
-    //private async Task GetImagesForBreedsFromAPI()
-    //{
-    //    int i = 0;
-
-
-
-    //    foreach (BreedModel b in Breeds)
-    //    {
-    //        if (b.LocalIcon != null) continue;
-
-    //        Task<byte[]> downloadimage = pictures.DownloadImageFromWeb(new Uri(b.Image_url));
-
-    //        byte[] imgBytes = await downloadimage;
-
-    //        await File.WriteAllBytesAsync(Constants.BreedsPhotosPath, imgBytes);
-
-    //        b.LocalImagePath = Path.Combine(Constants.BreedsPhotosPath, Path.GetFileName(b.Image_url));
-
-    //        b.LocalIcon = pictures.DownsizeImage(imgBytes, 60, 60);
-
-    //        await _breedService.SaveBreedAsync(b);
-
-    //        i++;
-
-    //        await Task.Run(() => FeedbackMessage = "downloading images from Dog API... " + i.ToString());
-
-    //    }
-
-    //}
-
-
-
     [ObservableProperty] private ObservableCollection<BreedModel> webResults = [];
 
     [RelayCommand]
     private async Task GoToBreedDetailsPage(int id)
-    {
-        await Shell.Current.GoToAsync($"{nameof(BreedDetailPage)}?DogId={id}");
-    }
-
-
-
-
+        => await Shell.Current.GoToAsync($"{nameof(BreedDetailPage)}?DogId={id}");
 }

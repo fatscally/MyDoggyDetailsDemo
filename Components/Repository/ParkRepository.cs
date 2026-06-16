@@ -1,68 +1,19 @@
-﻿using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Controls.Maps;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
-using SQLite;
 
 namespace MyDoggyDetails.Repository;
 
 public class ParkRepository : BaseRepository, IParkRepository
 {
-
-    public ParkRepository(IDatabaseConnection connection) : base(connection)
-    {
-  
-    }
-
-    public async Task CreateDatabase()
-    {
-        
-        var result = await asyncConn.CreateTableAsync<ParkTableModel>();
-
-        if (result == CreateTableResult.Created)
-            await SeedParkDataAsync();
-    }
-
-    public long Save(ParkTableModel model)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<ParkTableModel>> GetAllParksAsync()
-    {
-        return await asyncConn.Table<ParkTableModel>().ToListAsync();
-    }
-
-
+    public ParkRepository(IDatabaseConnection connection) : base(connection) { }
 
     public async Task CreateDatabaseAsync()
-    {
-            await asyncConn.CreateTableAsync<ParkTableModel>();
-    }
+        => await asyncConn.CreateTableAsync<ParkTableModel>();
+
+    public async Task<IEnumerable<ParkTableModel>> GetAllParksAsync()
+        => await asyncConn.Table<ParkTableModel>().ToListAsync();
 
     public async Task<long> SaveAsync(ParkTableModel model)
-    {
-        try
-        {
-            return model.Id == 0 ? await base.InsertAsync(model) : await base.UpdateAsync(model);
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
-
-    public async Task SeedParkDataAsync()
-    {
-        try
-        {
-            await SaveAsync(new ParkTableModel { Latitude = 53.372929871499075, Longitude = -6.173369488792618, Label = "St. Anne's Park.", Address = "Two parks for big doggies and little doggies.", Type = (int)PinType.Generic });
-            await SaveAsync(new ParkTableModel { Latitude = 53.30548059641863, Longitude = -6.34339356050867, Label = "Tymon Dog Park.", Address = "One big park for all the doggies.", Type = (int)PinType.Generic });
-            await SaveAsync(new ParkTableModel { Latitude = 53.342604703264804, Longitude = -6.440872837563679, Label = "Grifeen Valley Park.", Address = "A doggy park inside a human park", Type = (int)PinType.Generic });
-
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
+        => model.Id == 0 ? await base.InsertAsync(model) : await base.UpdateAsync(model);
 }

@@ -1,7 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using MyDoggyDetails.Interfaces;
 using MyDoggyDetails.Models;
-using MyDoggyDetails.Utilities.Pictures;
 
 namespace MyDoggyDetails.ViewModels;
 
@@ -9,45 +8,20 @@ namespace MyDoggyDetails.ViewModels;
 
 public partial class BreedDetailViewModel : BaseViewModel
 {
-
-    private readonly IBreedsRepository _breedsRepository;
-
-#if ANDROID
-    IDoggyPictures pictures;
-#endif
+    private readonly IBreedService _breedService;
 
     [ObservableProperty] private BreedModel selectedBreed;
 
     [ObservableProperty] int dogId;
-    partial void OnDogIdChanged(int value)
+    partial void OnDogIdChanged(int value) => _ = GetBreedByIdAsync(value);
+
+    public BreedDetailViewModel(IBreedService breedService)
     {
-        GetBreedById(value);
+        _breedService = breedService ?? throw new ArgumentNullException(nameof(breedService));
     }
 
-
-
-    public BreedDetailViewModel(IBreedsRepository breedsRepository)
+    private async Task GetBreedByIdAsync(int id)
     {
-        _breedsRepository = breedsRepository;
-
-#if (ANDROID)
-                            pictures = new PicturesAndroid();
-
-#elif (WINDOWS)
-
-#elif (__IOS__)
-
-#endif
-
+        SelectedBreed = await _breedService.GetBreedByIdAsync(id);
     }
-
-
-    private async void GetBreedById(int id)
-    {
-        Task<BreedModel> getBreedsById = _breedsRepository.GetByIdAsync(id); //  new BreedsRepository().SelectBreedById(id);
-        SelectedBreed = await getBreedsById;
-
-    }
-
-
 }

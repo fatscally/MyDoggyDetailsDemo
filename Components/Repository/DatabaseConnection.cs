@@ -21,21 +21,4 @@ public class DatabaseConnection : IDatabaseConnection
 
     }
 
-    public SQLiteConnection GetConnection()
-    {
-        try
-        {
-            var connection = new SQLiteConnection(_dbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.SharedCache);
-            if (connection == null)
-                throw new InvalidOperationException("Failed to create SQLite connection.");
-            return connection;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error creating SQLite connection: {ex.Message}");
-            throw;
-        }
-    }
-
-
 }

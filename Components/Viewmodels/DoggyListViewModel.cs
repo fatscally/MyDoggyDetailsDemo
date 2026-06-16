@@ -28,9 +28,6 @@ public partial class DoggyListViewModel : BaseViewModel
     {
 
         _doggyService = doggyService;
-
-        LoadUpDoggiesAsync();
-
     }
 
     internal async void LoadUpDoggiesAsync()
